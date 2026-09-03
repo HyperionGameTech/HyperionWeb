@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hyperion Engine — Open Source C++20 Game Engine</title>
+  <meta name="description" content="Hyperion Engine is an open source, high-performance 3D game engine written in C++20. Clustered rendering, ray tracing, offline lightmapping, and a visual editor. MIT licensed.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">Hyperion Engine</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#rendering">Rendering</a>
+        <a href="#editor">Editor</a>
+        <a href="#platforms">Platforms</a>
+        <a href="#building">Building</a>
+        <a href="https://github.com/ajmd17/hyperion-engine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero wrap">
+      <p class="kicker">Open source &middot; C++20 &middot; MIT License</p>
+      <h1>Hyperion Engine</h1>
+      <p class="lede">High-performance 3D game engine in C++20, focused on modern rendering: clustered shading, GPU-driven rendering, and ray tracing.</p>
+      <div class="actions">
+        <a class="button" href="https://github.com/ajmd17/hyperion-engine" rel="noopener">View source</a>
+        <a class="button secondary" href="#building">Build instructions</a>
+      </div>
+      <figure class="hero-figure">
+        <img src="assets/lightmap-editor.png" alt="Hyperion editor viewport showing a scene with baked lightmaps" width="1600" height="900">
+        <figcaption>Baked lightmaps in the editor viewport.</figcaption>
+      </figure>
+    </section>
+
+    <section id="about" class="wrap section">
+      <h2>About</h2>
+      <p>Hyperion started in 2016 as a fork of an earlier engine project and has since been rewritten and redesigned. It compiles as a shared library (<code>hyperion</code>), with the editor and sample application linking against it.</p>
+    </section>
+
+    <section id="features" class="wrap section">
+      <h2>Features</h2>
+      <ul class="feature-list">
+        <li>
+          <h3>Visual editor</h3>
+          <p>Scene editing, project files, and asset importing. Available on Windows and macOS.</p>
+        </li>
+        <li>
+          <h3>Clustered shading</h3>
+          <p>Clustered deferred shading for many dynamic lights. Forward clustered path for translucent materials.</p>
+        </li>
+        <li>
+          <h3>Offline lightmapper</h3>
+          <p>Bake lightmaps, irradiance / reflection probes for dynamic objects, fog volumes, and static shadow maps.</p>
+        </li>
+        <li>
+          <h3>Global illumination</h3>
+          <p>Real-time GI and reflections via ray tracing, with screen-space options for hardware without RT support.</p>
+        </li>
+        <li>
+          <h3>Shader permutations</h3>
+          <p>HLSL shaders compiled with DXC. Use <code>PERMUTE(...)</code> to declare a permutation set; all combinations are compiled automatically.</p>
+        </li>
+        <li>
+          <h3>Level streaming</h3>
+          <p>Grid-based streaming for large scenes.</p>
+        </li>
+        <li>
+          <h3>Scripting</h3>
+          <p>HypScript (in-house language) with hot reload. C# scripting supported via .NET.</p>
+        </li>
+        <li>
+          <h3>Hot reload</h3>
+          <p>Shaders and scripts reload without restarting.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="rendering" class="wrap section">
+      <h2>Rendering</h2>
+      <div class="media-grid">
+        <figure>
+          <img src="assets/ddgi.gif" alt="Dynamic diffuse global illumination updating in a test scene" loading="lazy" width="800" height="450">
+          <figcaption>Dynamic global illumination.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/particles.gif" alt="GPU particle system running in the engine" loading="lazy" width="800" height="450">
+          <figcaption>Particle system.</figcaption>
+        </figure>
+      </div>
+      <dl class="specs">
+        <div>
+          <dt>Backend</dt>
+          <dd>Vulkan (primary). Metal via MoltenVK on Apple platforms.</dd>
+        </div>
+        <div>
+          <dt>Shading language</dt>
+          <dd>HLSL, compiled with DXC to SPIR-V / DXIL. Mapped in <code>Config/Shaders/Shaders.hmf</code>.</dd>
+        </div>
+        <div>
+          <dt>Physics</dt>
+          <dd>Bullet Physics.</dd>
+        </div>
+        <div>
+          <dt>Audio / Text</dt>
+          <dd>OpenAL Soft for audio. FreeType for text.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="editor" class="wrap section">
+      <h2>Editor</h2>
+      <p>The editor runs on Windows and macOS. It includes a console with commands and console variables (CVars) for controlling rendering, physics, and gameplay at runtime. See <code>Documentation/Console.md</code> in the repository.</p>
+    </section>
+
+    <section id="platforms" class="wrap section">
+      <h2>Platforms</h2>
+      <table class="platform-table">
+        <thead>
+          <tr>
+            <th scope="col">Target</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Windows</td><td>Supported</td></tr>
+          <tr><td>macOS</td><td>Supported</td></tr>
+          <tr><td>Android</td><td>Supported (NDK 29, arm64-v8a, API 28+)</td></tr>
+          <tr><td>iOS</td><td>Supported</td></tr>
+          <tr><td>Steam Deck</td><td>Via Proton</td></tr>
+          <tr><td>Linux</td><td>Planned, not in active development</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">Editor runs on Windows and macOS only.</p>
+    </section>
+
+    <section id="building" class="wrap section">
+      <h2>Building</h2>
+      <p>Requires CMake 3.10+ and the Vulkan SDK. Windows builds require <code>VCPKG_ROOT</code> to be set. macOS dependencies: <code>brew install bullet molten-vk</code>.</p>
+      <div class="code-grid">
+        <div>
+          <h3>Windows</h3>
+          <pre><code>build.bat Release
+build.bat Release Clang
+build.bat Debug</code></pre>
+        </div>
+        <div>
+          <h3>macOS</h3>
+          <pre><code>./build.sh Release
+./build.sh Debug
+./build.sh Xcode Release</code></pre>
+        </div>
+      </div>
+      <p class="muted">Clone with <code>--recursive</code>, or run <code>git submodule update --init --recursive</code>. Full steps: <code>Documentation/CompilingTheEngine.md</code> in the repository.</p>
+    </section>
+
+    <section id="license" class="wrap section">
+      <h2>License and contributing</h2>
+      <p>MIT License, copyright 2026 Andrew J. MacDonald. Pull requests welcome. If a PR contains AI-generated code, note where it was used.</p>
+      <p>The project keeps AI use limited: UI work, bug-fix assistance, and code review. The codebase is written by hand.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine &middot; MIT</span>
+      <a href="https://github.com/ajmd17/hyperion-engine" rel="noopener">github.com/ajmd17/hyperion-engine</a>
+    </div>
+  </footer>
+
+</body>
+</html>
