@@ -139,25 +139,36 @@ int main()
 
     <section class="wrap section" aria-labelledby="engine-heading">
       <h2 id="engine-heading">Talking to the engine</h2>
-      <p>Handles are opaque references to Hyperion engine objects. Extern functions are implemented by the engine in C++. These exact declarations ship with the engine.</p>
-      <pre><code>handle Light;
-handle EngineStats;
+      <p>Handles are opaque types, mirroring Hyperion Engine objects. Extern functions are implemented by the engine in C++. These exact declarations ship with the engine.</p>
+      <p>An <code>impl</code> block attaches functions to a <code>handle</code>, <code>struct</code> or <code>enum</code> type to be used as methods.
+      </p>
+      <pre><code>handle Camera;
 
-extern float Light_GetIntensity(Light self);
-extern void Light_SetIntensity(Light self, float intensity);
-extern float EngineStats_GetFps(EngineStats self);
-
-void dim_when_slow(Light lamp, EngineStats stats)
+impl Camera
 {
-    if (EngineStats_GetFps(stats) &lt; 30.0)
-    {
-        Light_SetIntensity(lamp, 0.5);
-    }
-    else
-    {
-        Light_SetIntensity(lamp, 1.0);
-    }
+    extern float GetFOV(Camera self);
+    extern void SetFOV(Camera self, float v);
+}
+
+void reset_view(Camera cam)
+{
+    cam.SetFOV(60.0);
 }</code></pre>
+
+      <p>Engine side: (C++)</p>
+      <pre><code>HYP_CLASS()
+class Camera : public ObjectBase
+{
+    HYP_OBJECT_BODY(Camera);
+public:
+    HYP_METHOD(Property = "FOV")
+    float GetFOV() const;
+    
+    HYP_METHOD(Property = "FOV")
+    void SetFOV(float v);
+};
+
+/// Hyperion's build tool will automatically set up the mapping from Strata to Hyperion's native runtime.</code></pre>
     </section>
 
     <section class="wrap section" aria-labelledby="boxes-heading">
@@ -190,28 +201,6 @@ int main()
         // You'll need another `if (cur?) { ... }` and use it in that block.
     }
     return total; // 12
-}</code></pre>
-    </section>
-
-    <section class="wrap section" aria-labelledby="impl-heading">
-      <h2 id="impl-heading">impl blocks and methods</h2>
-      <p>An <code>impl</code> block attaches functions to a <code>handle</code>, <code>struct</code> or <code>enum</code> type to be used as methods.
-        <br><br>A call rewrites to the free function, with <code>self</code> passed as the first argument.
-      </p>
-      <pre><code>handle Camera;
-
-impl Camera
-{
-    extern float GetFOV(Camera self);
-    extern void SetFOV(Camera self, float v);
-
-    property float FOV { get = Camera_GetFOV; set = Camera_SetFOV; }
-}
-
-void reset_view(Camera cam)
-{
-    cam.SetFOV(60.0); // Camera_SetFOV(cam, 60.0)
-    float fov = cam.FOV;
 }</code></pre>
     </section>
 
