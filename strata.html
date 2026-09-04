@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strata — Hyperion Engine</title>
+  <meta name="description" content="Strata is the scripting language for gameplay in Hyperion Engine: statically typed, compiled to native code with LLVM, recompiled live on save. Basic examples.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="index.html#building">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="wrap section section-intro">
+      <h1>Strata</h1>
+      <p>Strata is the scripting language for gameplay in Hyperion. It is statically typed, compiles to native code with LLVM, and scripts recompile live when saved.</p>
+      <p>Strata is a separate project from Hyperion: a high-performance, natively compiled language for creating games. Source at <a href="https://github.com/StrataLanguage/stratac" rel="noopener">github.com/StrataLanguage/stratac</a>.</p>
+    </section>
+
+    <section class="wrap section">
+      <h2>Functions</h2>
+      <p>Plain C-like functions with static types. This is a complete program.</p>
+      <pre><code>int add(int a, int b)
+{
+    return a + b;
+}
+
+int main()
+{
+    return add(2, 3); // 5
+}</code></pre>
+    </section>
+
+    <section class="wrap section">
+      <h2>Control flow</h2>
+      <p><code>if</code>, <code>while</code>, <code>for</code>, <code>break</code>, and <code>continue</code> all work as expected.</p>
+      <pre><code>int factorial(int n)
+{
+    int result = 1;
+    int i = 1;
+    while (i &lt;= n)
+    {
+        result = result * i;
+        i = i + 1;
+    }
+    return result;
+}</code></pre>
+    </section>
+
+    <section class="wrap section">
+      <h2>Arrays and strings</h2>
+      <p>Dynamic arrays grow with <code>array_push</code> and report their size with <code>.length</code>.</p>
+      <pre><code>extern int printf(string fmt, ...);
+
+int main()
+{
+    string[] pack = { "torch", "rope" };
+    array_push(pack, "rations");
+    printf("carrying %u items\n", pack.length);
+    return (int)pack.length; // 3
+}</code></pre>
+    </section>
+
+    <section class="wrap section">
+      <h2>Talking to the engine</h2>
+      <p>Handles are opaque references to engine objects. Extern functions are implemented by the engine in C++. These exact declarations ship with the engine.</p>
+      <pre><code>handle Light;
+handle EngineStats;
+
+extern float Light_GetIntensity(Light self);
+extern void Light_SetIntensity(Light self, float intensity);
+extern float EngineStats_GetFps(EngineStats self);
+
+void dim_when_slow(Light lamp, EngineStats stats)
+{
+    if (EngineStats_GetFps(stats) &lt; 30.0)
+    {
+        Light_SetIntensity(lamp, 0.5);
+    }
+    else
+    {
+        Light_SetIntensity(lamp, 1.0);
+    }
+}</code></pre>
+    </section>
+
+    <section class="wrap section">
+      <h2>Boxes and optionals</h2>
+      <p><code>^Crate</code> allocates a value on the heap. Boxes are move-only and are freed when they go out of scope. <code>Crate?</code> is an optional: it may be empty, and testing it with <code>while (cur?)</code> blesses it, proving to the compiler that it holds a value.</p>
+      <pre><code>struct Crate
+{
+    int weight;
+    Crate? next;
+};
+
+int main()
+{
+    ^Crate head = Crate { .weight = 12 };
+
+    Crate? cur = head;
+    int total = 0;
+    while (cur?)
+    {
+        total = total + cur.weight;
+        cur = cur.next;
+    }
+    return total; // 12
+}</code></pre>
+    </section>
+
+    <section class="wrap section">
+      <h2>Methods with impl</h2>
+      <p>An <code>impl</code> block attaches extern functions to a handle as methods. A call rewrites to the plain extern with <code>self</code> passed first, and properties wire getters and setters to field-like syntax. A method without <code>self</code> is static and is called on the type itself, like <code>Camera.New()</code>.</p>
+      <pre><code>handle Camera;
+
+impl Camera
+{
+    extern float GetFOV(Camera self);
+    extern void SetFOV(Camera self, float v);
+    property float FOV { get = Camera_GetFOV; set = Camera_SetFOV; }
+}
+
+void reset_view(Camera cam)
+{
+    cam.SetFOV(60.0); // Camera_SetFOV(cam, 60.0)
+    float fov = cam.FOV;
+}</code></pre>
+      <p>An optional handle must be blessed before calling methods on it:</p>
+      <pre><code>// Camera and its impl from above.
+void reset_view_if_present(Camera? cam)
+{
+    if (cam?)
+    {
+        cam.SetFOV(60.0);
+    }
+}</code></pre>
+    </section>
+
+    <section class="wrap section">
+      <h2>Running scripts</h2>
+      <p>Scripts are plain <code>.strata</code> files. The editor recompiles them on save, so there is no restart or reload step.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine &middot; MIT</span>
+      <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">github.com/HyperionGameTech/HyperionEngine</a>
+    </div>
+  </footer>
+
+</body>
+</html>

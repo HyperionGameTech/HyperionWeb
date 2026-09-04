@@ -4,119 +4,89 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hyperion Engine — Open Source C++20 Game Engine</title>
-  <meta name="description" content="Hyperion Engine is an open source, high-performance 3D game engine written in C++20. Clustered rendering, ray tracing, offline lightmapping, and a visual editor. MIT licensed.">
+  <meta name="description" content="Hyperion Engine is an open-source 3D game engine. Vulkan + DirectX 12, clustered shading, ray-traced global illumination, GPU-driven rendering, scripting, and a visual editor. MIT licensed">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top">Hyperion Engine</a>
       <nav class="nav" aria-label="Primary">
         <a href="#features">Features</a>
-        <a href="#rendering">Rendering</a>
-        <a href="#editor">Editor</a>
-        <a href="#platforms">Platforms</a>
-        <a href="#building">Building</a>
-        <a href="https://github.com/ajmd17/hyperion-engine" rel="noopener">GitHub</a>
+        <a href="#building">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Get the Code</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
 
-    <section class="hero wrap">
-      <p class="kicker">Open source &middot; C++20 &middot; MIT License</p>
+    <section class="hero hero-centered">
+      <div class="wrap wrap-wide">
       <h1>Hyperion Engine</h1>
-      <p class="lede">High-performance 3D game engine in C++20, focused on modern rendering: clustered shading, GPU-driven rendering, and ray tracing.</p>
+      <p class="lede">An open-source 3D game engine written in C++ 20, a decade in the making</p>
       <div class="actions">
-        <a class="button" href="https://github.com/ajmd17/hyperion-engine" rel="noopener">View source</a>
-        <a class="button secondary" href="#building">Build instructions</a>
+        <a class="button" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Get the Code</a>
+        <a class="button secondary" href="#building">Docs</a>
       </div>
-      <figure class="hero-figure">
-        <img src="assets/lightmap-editor.png" alt="Hyperion editor viewport showing a scene with baked lightmaps" width="1600" height="900">
-        <figcaption>Baked lightmaps in the editor viewport.</figcaption>
-      </figure>
+      <p class="proof">MIT</p>
+      </div>
     </section>
 
-    <section id="about" class="wrap section">
-      <h2>About</h2>
-      <p>Hyperion started in 2016 as a fork of an earlier engine project and has since been rewritten and redesigned. It compiles as a shared library (<code>hyperion</code>), with the editor and sample application linking against it.</p>
+    <section id="about" class="wrap section section-intro">
+      <p>Hyperion started as a passion project in 2016, and is still worked on daily.
+        <br><br>
+        Our aim with Hyperion is to offer a high fidelity gaming experience even on a potato by pairing high quality offline baking techniques with modern techniques like GPU driven culling and clustering.
+
+      </p>
     </section>
 
-    <section id="features" class="wrap section">
+    <section id="features" class="section band">
+      <div class="wrap">
       <h2>Features</h2>
       <ul class="feature-list">
         <li>
-          <h3>Visual editor</h3>
-          <p>Scene editing, project files, and asset importing. Available on Windows and macOS.</p>
-        </li>
-        <li>
-          <h3>Clustered shading</h3>
-          <p>Clustered deferred shading for many dynamic lights. Forward clustered path for translucent materials.</p>
-        </li>
-        <li>
-          <h3>Offline lightmapper</h3>
-          <p>Bake lightmaps, irradiance / reflection probes for dynamic objects, fog volumes, and static shadow maps.</p>
-        </li>
-        <li>
           <h3>Global illumination</h3>
-          <p>Real-time GI and reflections via ray tracing, with screen-space options for hardware without RT support.</p>
+          <p><strong>Offline baker</strong> — bake lightmaps ahead of time, so games still run on potato computers.</p>
+          <p><strong>Screen-space</strong> — SSGI, SSR, and HBAO with no precompute.</p>
+          <p><strong>Ray-traced</strong> — DDGI probes and reflections on GPUs that can handle it.</p>
+          <p><strong>Path tracer</strong> — full path tracing for reference-quality results.</p>
         </li>
         <li>
-          <h3>Shader permutations</h3>
-          <p>HLSL shaders compiled with DXC. Use <code>PERMUTE(...)</code> to declare a permutation set; all combinations are compiled automatically.</p>
+          <h3>GPU-driven rendering</h3>
+          <p>Occlusion culling runs in compute and feeds indirect draws directly, including for GPU-simulated particles.</p>
         </li>
         <li>
-          <h3>Level streaming</h3>
-          <p>Grid-based streaming for large scenes.</p>
+          <h3>Strata scripting</h3>
+          <p>Strata is a compiled, LLVM-backed language that recompiles live on save</p>
+          <div class="actions">
+            <a class="button" href="strata.html">Read more about Strata</a>
+          </div>
         </li>
         <li>
-          <h3>Scripting</h3>
-          <p>HypScript (in-house language) with hot reload. C# scripting supported via .NET.</p>
+          <h3>World streaming</h3>
+          <p>Grid layers load cells in and out on a background thread as the player moves, so there are no loading screens between zones.</p>
         </li>
         <li>
-          <h3>Hot reload</h3>
-          <p>Shaders and scripts reload without restarting.</p>
+          <h3>Physics</h3>
+          <p>Rigid bodies run on Jolt. The character controller handles coyote time, jump buffering, slopes, steps, and pushing.</p>
         </li>
       </ul>
+      </div>
     </section>
 
-    <section id="rendering" class="wrap section">
-      <h2>Rendering</h2>
+    <section id="screenshots" class="wrap wrap-wide section">
+      <h2>Screenshots</h2>
       <div class="media-grid">
         <figure>
-          <img src="assets/ddgi.gif" alt="Dynamic diffuse global illumination updating in a test scene" loading="lazy" width="800" height="450">
-          <figcaption>Dynamic global illumination.</figcaption>
+          <a class="zoom" href="assets/screenie2.png"><img src="assets/screenie2.png" alt="Hyperion editor viewport showing the Sponza atrium with sunlight coming through the roof" loading="lazy" width="1907" height="1113"></a>
+          <figcaption>The Sponza atrium in the editor viewport.</figcaption>
         </figure>
         <figure>
-          <img src="assets/particles.gif" alt="GPU particle system running in the engine" loading="lazy" width="800" height="450">
-          <figcaption>Particle system.</figcaption>
+          <a class="zoom" href="assets/screenie.png"><img src="assets/screenie.png" alt="Hyperion editor viewport showing a dark brick test scene with baked lighting" loading="lazy" width="1896" height="1107"></a>
+          <figcaption>Baked lighting in a test scene.</figcaption>
         </figure>
       </div>
-      <dl class="specs">
-        <div>
-          <dt>Backend</dt>
-          <dd>Vulkan (primary). Metal via MoltenVK on Apple platforms.</dd>
-        </div>
-        <div>
-          <dt>Shading language</dt>
-          <dd>HLSL, compiled with DXC to SPIR-V / DXIL. Mapped in <code>Config/Shaders/Shaders.hmf</code>.</dd>
-        </div>
-        <div>
-          <dt>Physics</dt>
-          <dd>Bullet Physics.</dd>
-        </div>
-        <div>
-          <dt>Audio / Text</dt>
-          <dd>OpenAL Soft for audio. FreeType for text.</dd>
-        </div>
-      </dl>
-    </section>
-
-    <section id="editor" class="wrap section">
-      <h2>Editor</h2>
-      <p>The editor runs on Windows and macOS. It includes a console with commands and console variables (CVars) for controlling rendering, physics, and gameplay at runtime. See <code>Documentation/Console.md</code> in the repository.</p>
     </section>
 
     <section id="platforms" class="wrap section">
@@ -141,29 +111,25 @@
     </section>
 
     <section id="building" class="wrap section">
+      <p class="kicker">Get started</p>
       <h2>Building</h2>
-      <p>Requires CMake 3.10+ and the Vulkan SDK. Windows builds require <code>VCPKG_ROOT</code> to be set. macOS dependencies: <code>brew install bullet molten-vk</code>.</p>
-      <div class="code-grid">
-        <div>
-          <h3>Windows</h3>
-          <pre><code>build.bat Release
-build.bat Release Clang
-build.bat Debug</code></pre>
-        </div>
-        <div>
-          <h3>macOS</h3>
-          <pre><code>./build.sh Release
-./build.sh Debug
-./build.sh Xcode Release</code></pre>
-        </div>
-      </div>
-      <p class="muted">Clone with <code>--recursive</code>, or run <code>git submodule update --init --recursive</code>. Full steps: <code>Documentation/CompilingTheEngine.md</code> in the repository.</p>
+      <p>Build steps live in the repository: <a href="https://github.com/HyperionGameTech/HyperionEngine/blob/dev/Documentation/CompilingTheEngine.md" rel="noopener">Documentation/CompilingTheEngine.md</a>.</p>
     </section>
 
     <section id="license" class="wrap section">
-      <h2>License and contributing</h2>
-      <p>MIT License, copyright 2026 Andrew J. MacDonald. Pull requests welcome. If a PR contains AI-generated code, note where it was used.</p>
-      <p>The project keeps AI use limited: UI work, bug-fix assistance, and code review. The codebase is written by hand.</p>
+      <div class="callout">
+      <h2>License</h2>
+      <p>MIT licensed. Copyright The Hyperion Contributors.</p>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+      <h2>Get involved</h2>
+      <p>We welcome contributors of all skill levels. If you find a bug, have an idea, or want to help contribute to the project, we'd love your support!</p>
+      <a class="button" href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">Open an issue</a>
+      <a class="button secondary" href="about:blank" rel="noopener">Join the Discord (soon)</a>
+      </div>
     </section>
 
   </main>
@@ -171,9 +137,31 @@ build.bat Debug</code></pre>
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>Hyperion Engine &middot; MIT</span>
-      <a href="https://github.com/ajmd17/hyperion-engine" rel="noopener">github.com/ajmd17/hyperion-engine</a>
+      <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">github.com/HyperionGameTech/HyperionEngine</a>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="">
+  </div>
+  <script>
+    (function () {
+      var box = document.getElementById('lightbox');
+      var full = box.querySelector('img');
+      document.querySelectorAll('a.zoom').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          full.src = link.href;
+          full.alt = link.querySelector('img').alt;
+          box.classList.add('open');
+        });
+      });
+      box.addEventListener('click', function () { box.classList.remove('open'); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') box.classList.remove('open');
+      });
+    })();
+  </script>
 
 </body>
 </html>
