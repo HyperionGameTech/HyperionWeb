@@ -3,33 +3,100 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Strata — Hyperion Engine</title>
-  <meta name="description" content="Strata is the scripting language for gameplay in Hyperion Engine: statically typed, compiled to native code with LLVM, recompiled live on save. Basic examples.">
+  <title>Strata Scripting Language — Gameplay Scripting for Hyperion Engine</title>
+  <meta name="description" content="Strata is Hyperion Engine's gameplay scripting language: statically typed, LLVM-compiled to native code with live hot-reload on save. Syntax guide.">
+  <link rel="canonical" href="https://hyperionengine.dev/strata.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Strata Scripting Language — Gameplay Scripting for Hyperion Engine">
+  <meta property="og:description" content="Statically typed, LLVM-compiled gameplay scripting for Hyperion Engine with live hot-reload on save. Functions, control flow, boxes, optionals and engine bindings.">
+  <meta property="og:url" content="https://hyperionengine.dev/strata.html">
+  <meta property="og:image" content="https://hyperionengine.dev/assets/screenie2.png">
+  <meta property="og:image:width" content="1907">
+  <meta property="og:image:height" content="1113">
+  <meta property="og:image:alt" content="Hyperion editor viewport showing the Sponza atrium with sunlight coming through the roof">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Strata Scripting Language — Gameplay Scripting for Hyperion Engine">
+  <meta name="twitter:description" content="Statically typed, LLVM-compiled gameplay scripting for Hyperion Engine with live hot-reload on save.">
+  <meta name="twitter:image" content="https://hyperionengine.dev/assets/screenie2.png">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": "https://hyperionengine.dev/strata.html#article",
+        "headline": "Strata Scripting Language — Gameplay Scripting for Hyperion Engine",
+        "description": "Strata is the statically typed, LLVM-compiled scripting language for gameplay in Hyperion Engine, with live recompilation on save.",
+        "inLanguage": "en",
+        "author": {
+          "@type": "Organization",
+          "name": "HyperionGameTech",
+          "url": "https://hyperionengine.dev/"
+        },
+        "about": {
+          "@type": "ComputerLanguage",
+          "name": "Strata",
+          "url": "https://hyperionengine.dev/strata.html"
+        },
+        "mainEntityOfPage": "https://hyperionengine.dev/strata.html",
+        "image": "https://hyperionengine.dev/assets/screenie2.png"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://hyperionengine.dev/strata.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hyperionengine.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Strata", "item": "https://hyperionengine.dev/strata.html" }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home">hyperion</a>
       <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="index.html#building">Docs</a>
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html" aria-current="page">Strata</a>
+        <a href="/#building">Docs</a>
         <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
+    <nav class="wrap breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Strata</li>
+      </ol>
+    </nav>
 
-    <section class="wrap section section-intro">
-      <h1>Strata</h1>
-      <p>Strata is the scripting language for gameplay in Hyperion. It is statically typed, compiles to native code with LLVM, and scripts recompile live when saved.</p>
+    <section class="wrap section section-intro" aria-labelledby="strata-heading">
+      <p class="kicker">Hyperion Engine · Gameplay scripting</p>
+      <h1 id="strata-heading">Strata scripting language</h1>
+      <p>Strata is the scripting language for gameplay in Hyperion Engine. It is statically typed, compiles to native code with LLVM, and scripts recompile live when saved — no restart or reload step.</p>
       <p>Strata is a separate project from Hyperion: a high-performance, natively compiled language for creating games. Source at <a href="https://github.com/StrataLanguage/stratac" rel="noopener">github.com/StrataLanguage/stratac</a>.</p>
     </section>
 
-    <section class="wrap section">
-      <h2>Functions</h2>
-      <p>Plain C-like functions with static types. This is a complete program.</p>
+    <section class="wrap section" aria-labelledby="functions-heading">
+      <h2 id="functions-heading">Functions</h2>
+      <p>Plain C-like functions with static types. This is a complete Strata program.</p>
       <pre><code>int add(int a, int b)
 {
     return a + b;
@@ -41,9 +108,9 @@ int main()
 }</code></pre>
     </section>
 
-    <section class="wrap section">
-      <h2>Control flow</h2>
-      <p><code>if</code>, <code>while</code>, <code>for</code>, <code>break</code>, and <code>continue</code> all work as expected.</p>
+    <section class="wrap section" aria-labelledby="control-flow-heading">
+      <h2 id="control-flow-heading">Control flow</h2>
+      <p><code>if</code>, <code>while</code>, <code>for</code>, <code>break</code>, and <code>continue</code> all work as expected in Strata.</p>
       <pre><code>int factorial(int n)
 {
     int result = 1;
@@ -57,9 +124,9 @@ int main()
 }</code></pre>
     </section>
 
-    <section class="wrap section">
-      <h2>Arrays and strings</h2>
-      <p>Dynamic arrays grow with <code>array_push</code> and report their size with <code>.length</code>.</p>
+    <section class="wrap section" aria-labelledby="arrays-heading">
+      <h2 id="arrays-heading">Arrays and strings</h2>
+      <p>Dynamic arrays in Strata grow with <code>array_push</code> and report their size with <code>.length</code>.</p>
       <pre><code>extern int printf(string fmt, ...);
 
 int main()
@@ -71,9 +138,9 @@ int main()
 }</code></pre>
     </section>
 
-    <section class="wrap section">
-      <h2>Talking to the engine</h2>
-      <p>Handles are opaque references to engine objects. Extern functions are implemented by the engine in C++. These exact declarations ship with the engine.</p>
+    <section class="wrap section" aria-labelledby="engine-heading">
+      <h2 id="engine-heading">Talking to the engine</h2>
+      <p>Handles are opaque references to Hyperion engine objects. Extern functions are implemented by the engine in C++. These exact declarations ship with the engine.</p>
       <pre><code>handle Light;
 handle EngineStats;
 
@@ -94,12 +161,12 @@ void dim_when_slow(Light lamp, EngineStats stats)
 }</code></pre>
     </section>
 
-    <section class="wrap section">
-      <h2>Boxes and optionals</h2>
+    <section class="wrap section" aria-labelledby="boxes-heading">
+      <h2 id="boxes-heading">Boxes and optionals</h2>
       <p>For a given type you defined, say, <code>Foo</code> - <code>^Foo</code> (note the caret) allocates a value on the heap (a "box"). Boxes are move-only, and are freed when they go out of scope. This lets us forego the need for garbage collection, runtime reference counting and manual memory management.
         <br><br><code>Foo?</code> is an optional: it may be empty, and testing it with <code>while (cur?)</code> blesses it, proving to the compiler that it holds a value.
         <br><br>
-        Strata <bold>does not have a "null" or "nil"</bold> keyword or a "null pointer" concept. Instead, optionals are used to represent the absence of a value.
+        Strata <strong>does not have a "null" or "nil"</strong> keyword or a "null pointer" concept. Instead, optionals are used to represent the absence of a value.
         <br><br>
         The compiler prevents you from using an optional that may be empty, so you can't crash the game by forgetting to check.
       </p>
@@ -127,8 +194,8 @@ int main()
 }</code></pre>
     </section>
 
-    <section class="wrap section">
-      <h2>impl</h2>
+    <section class="wrap section" aria-labelledby="impl-heading">
+      <h2 id="impl-heading">impl blocks and methods</h2>
       <p>An <code>impl</code> block attaches functions to a <code>handle</code>, <code>struct</code> or <code>enum</code> type to be used as methods.
         <br><br>A call rewrites to the free function, with <code>self</code> passed as the first argument.
       </p>
@@ -149,9 +216,9 @@ void reset_view(Camera cam)
 }</code></pre>
     </section>
 
-    <section class="wrap section">
-      <h2>Running scripts</h2>
-      <p>Scripts are plain <code>.strata</code> files. The editor recompiles them on save, so there is no restart or reload step.</p>
+    <section class="wrap section" aria-labelledby="running-heading">
+      <h2 id="running-heading">Running Strata scripts</h2>
+      <p>Scripts are plain <code>.strata</code> files. The Hyperion editor recompiles them on save, so there is no restart or reload step. See the <a href="https://github.com/StrataLanguage/stratac" rel="noopener">Strata compiler on GitHub</a> or <a href="/">back to the Hyperion Engine overview</a>.</p>
     </section>
 
   </main>
@@ -159,7 +226,12 @@ void reset_view(Camera cam)
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>Hyperion Engine &middot; MIT</span>
-      <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">https://github.com/HyperionGameTech/HyperionEngine</a>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html" aria-current="page">Strata</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
     </div>
   </footer>
 

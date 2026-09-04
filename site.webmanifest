@@ -1,0 +1,18 @@
+{
+  "name": "Hyperion Engine",
+  "short_name": "Hyperion",
+  "description": "Open-source C++20 3D game engine with Vulkan, DirectX 12, ray-traced GI, GPU-driven rendering and Strata scripting.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

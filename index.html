@@ -3,28 +3,93 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hyperion Engine — Open Source C++20 Game Engine</title>
-  <meta name="description" content="Hyperion Engine is an open-source 3D game engine. Vulkan + DirectX 12, clustered shading, ray-traced global illumination, GPU-driven rendering, scripting, and a visual editor. MIT licensed">
+  <title>Hyperion Engine — Open-Source C++20 3D Game Engine</title>
+  <meta name="description" content="Hyperion Engine is an open-source C++20 3D game engine with Vulkan, DirectX 12, ray-traced GI, GPU-driven rendering and Strata scripting. MIT licensed.">
+  <link rel="canonical" href="https://hyperionengine.dev/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Hyperion Engine — Open-Source C++20 3D Game Engine">
+  <meta property="og:description" content="Open-source C++20 3D game engine: Vulkan + DirectX 12, clustered shading, ray-traced GI, GPU-driven rendering, Strata scripting and a visual editor. MIT licensed.">
+  <meta property="og:url" content="https://hyperionengine.dev/">
+  <meta property="og:image" content="https://hyperionengine.dev/assets/screenie2.png">
+  <meta property="og:image:width" content="1907">
+  <meta property="og:image:height" content="1113">
+  <meta property="og:image:alt" content="Hyperion editor viewport showing the Sponza atrium with sunlight coming through the roof">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hyperion Engine — Open-Source C++20 3D Game Engine">
+  <meta name="twitter:description" content="Open-source C++20 3D game engine: Vulkan + DirectX 12, clustered shading, ray-traced GI, GPU-driven rendering, Strata scripting and a visual editor.">
+  <meta name="twitter:image" content="https://hyperionengine.dev/assets/screenie2.png">
+  <meta name="twitter:image:alt" content="Hyperion editor viewport showing the Sponza atrium with sunlight coming through the roof">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://hyperionengine.dev/#website",
+        "url": "https://hyperionengine.dev/",
+        "name": "Hyperion Engine",
+        "description": "Open-source C++20 3D game engine with Vulkan, DirectX 12, ray-traced global illumination, GPU-driven rendering, Strata scripting and a visual editor.",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://hyperionengine.dev/#organization",
+        "name": "HyperionGameTech",
+        "url": "https://hyperionengine.dev/",
+        "logo": "https://hyperionengine.dev/favicon.svg",
+        "sameAs": ["https://github.com/HyperionGameTech/HyperionEngine"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://hyperionengine.dev/#software",
+        "name": "Hyperion Engine",
+        "applicationCategory": "GameEngine",
+        "operatingSystem": ["Windows", "macOS", "Android", "iOS"],
+        "programmingLanguage": ["C++20", "Strata"],
+        "license": "https://opensource.org/licenses/MIT",
+        "isAccessibleForFree": true,
+        "url": "https://hyperionengine.dev/",
+        "image": "https://hyperionengine.dev/assets/screenie2.png",
+        "description": "Open-source 3D game engine written in C++20. Vulkan + DirectX 12, clustered shading, baked and ray-traced global illumination, GPU-driven rendering, Jolt physics, built-in multiplayer with a dedicated server, Strata scripting and a visual editor.",
+        "codeRepository": "https://github.com/HyperionGameTech/HyperionEngine",
+        "author": { "@id": "https://hyperionengine.dev/#organization" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home">hyperion</a>
       <nav class="nav" aria-label="Primary">
         <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="/strata.html">Strata</a>
         <a href="#building">Docs</a>
         <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Get the Code</a>
       </nav>
     </div>
   </header>
 
-  <main id="top">
+  <main id="main">
 
     <section class="hero hero-centered">
       <div class="wrap wrap-wide">
-      <h1>Hyperion</h1>
-      <p class="lede">An open-source 3D game engine written in C++ 20, a decade in the making</p>
+      <h1>Hyperion Engine</h1>
+      <p class="lede">An open-source 3D game engine written in C++20, a decade in the making — Vulkan and DirectX 12, baked and ray-traced global illumination, GPU-driven rendering and a visual editor</p>
       <div class="actions">
         <a class="button" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Get the Code</a>
         <a class="button secondary" href="#building">Docs</a>
@@ -33,60 +98,68 @@
       </div>
     </section>
 
-    <section id="about" class="wrap section section-intro">
+    <section id="about" class="wrap section section-intro" aria-labelledby="about-heading">
+      <p class="kicker">About Hyperion</p>
+      <h2 id="about-heading">High fidelity, even on low-end hardware</h2>
       <p>Hyperion started as a passion project in 2016, and is still worked on daily.</p>
       <p>Our aim with Hyperion is to offer a high fidelity gaming experience even on low-end hardware using our in-house baking system to prepare as much of the lighting and effects as possible ahead of time.</p>
       <p>That, and the editor shouldn't suck.</p>
     </section>
 
-    <section id="screenshots" class="wrap wrap-wide section">
-      <h2>Screenshots</h2>
+    <section id="screenshots" class="wrap wrap-wide section" aria-labelledby="screenshots-heading">
+      <p class="kicker">In-engine screenshots</p>
+      <h2 id="screenshots-heading">Screenshots</h2>
       <div class="media-grid">
         <figure>
-          <a class="zoom" href="assets/screenie2.png"><img src="assets/screenie2.webp" alt="Hyperion editor viewport showing the Sponza atrium with sunlight coming through the roof" loading="lazy" width="1907" height="1113"></a>
-          <figcaption>The Sponza atrium in the editor viewport.</figcaption>
+          <a class="zoom" href="assets/screenie2.png"><img src="assets/screenie2.webp" alt="Hyperion editor viewport showing the Sponza atrium with sunlight coming through the roof" loading="lazy" decoding="async" width="1907" height="1113"></a>
+          <figcaption>Sponza atrium rendered in the Hyperion editor viewport with baked sunlight.</figcaption>
         </figure>
         <figure>
-          <a class="zoom" href="assets/screenie.png"><img src="assets/screenie.webp" alt="Hyperion editor viewport showing a dark brick test scene with baked lighting" loading="lazy" width="1896" height="1107"></a>
-          <figcaption>Baked lighting in a test scene.</figcaption>
+          <a class="zoom" href="assets/screenie.png"><img src="assets/screenie.webp" alt="Hyperion editor viewport showing a dark brick test scene with baked lighting" loading="lazy" decoding="async" width="1896" height="1107"></a>
+          <figcaption>Baked global illumination in a dark brick test scene.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section id="features" class="section band">
+    <section id="features" class="section band" aria-labelledby="features-heading">
       <div class="wrap">
-      <h2>Features</h2>
+      <p class="kicker">Vulkan · DirectX 12 · C++20</p>
+      <h2 id="features-heading">Features</h2>
       <ul class="feature-list">
         <li>
           <h3>Global illumination</h3>
-          <p><strong>Offline baker</strong> — bake lightmaps ahead of time, so games still run on potato computers.</p>
-          <p><strong>Screen-space</strong> — SSGI, SSR, and HBAO with no precompute.</p>
-          <p><strong>Ray-traced</strong> — DDGI probes and reflections on GPUs that can handle it.</p>
-          <p><strong>Path tracer</strong> — full path tracing for reference-quality results.</p>
+          <p><strong>Offline lightmap baker</strong> : bake lightmaps ahead of time, so games can look good on a potato</p>
+          <p><strong>Screen-space</strong> : SSR, and HBAO are supported with and without baked lighting</p>
+          <p><strong>Ray-traced</strong> : DDGI probes and reflections on RTX / RDNA hardware</p>
         </li>
         <li>
           <h3>GPU-driven rendering</h3>
-          <p>Occlusion culling runs in compute and feeds indirect draws directly, including for GPU-simulated particles.</p>
+          <p>Vulkan and DirectX 12 with clustered shading. Occlusion culling runs in compute and feeds indirect draws directly, including for GPU-simulated particles.</p>
         </li>
         <li>
-          <h3>Strata scripting</h3>
-          <p>Strata is a compiled, LLVM-backed language that recompiles live on save.</p>
-          <p><a href="strata.html">Read more about Strata</a></p>
+          <h3>Strata for scripts</h3>
+          <p>Strata is a statically typed, compiled, LLVM-backed gameplay scripting language that recompiles live on save.</p>
+          <p><a href="/strata.html">Read more about the Strata scripting language</a></p>
         </li>
         <li>
           <h3>World streaming</h3>
           <p>Grid layers load cells in and out on a background thread as the player moves, so there are no loading screens between zones.</p>
         </li>
         <li>
+          <h3>Multiplayer</h3>
+          <p>Multiplayer is built in. The engine includes a dedicated server and clients connect to it.</p>
+        </li>
+        <li>
           <h3>Physics</h3>
-          <p>Rigid bodies run on Jolt. The character controller handles coyote time, jump buffering, slopes, steps, and pushing.</p>
+          <p>Hyperion uses Jolt Physics for rigid bodies, and character controllers. Works over net.</p>
         </li>
       </ul>
       </div>
     </section>
 
-    <section id="platforms" class="wrap section">
-      <h2>Platforms</h2>
+    <section id="platforms" class="wrap section" aria-labelledby="platforms-heading">
+      <p class="kicker">Windows · macOS · Android · iOS</p>
+      <h2 id="platforms-heading">Platforms</h2>
       <table class="platform-table">
         <thead>
           <tr>
@@ -106,26 +179,26 @@
       <p class="muted">Editor runs on Windows and macOS only.</p>
     </section>
 
-    <section id="building" class="wrap section">
+    <section id="building" class="wrap section" aria-labelledby="building-heading">
       <p class="kicker">Get started</p>
-      <h2>Building</h2>
+      <h2 id="building-heading">Building Hyperion Engine</h2>
       <p>Build steps live in the repository: <a href="https://github.com/HyperionGameTech/HyperionEngine/blob/dev/Documentation/CompilingTheEngine.md" rel="noopener">Documentation/CompilingTheEngine.md</a>.</p>
     </section>
 
-    <section id="license" class="wrap section">
+    <section id="license" class="wrap section" aria-labelledby="license-heading">
       <div class="callout">
-      <h2>License</h2>
-      <p>MIT licensed. Copyright The Hyperion Contributors.</p>
+      <h2 id="license-heading">MIT-licensed open source</h2>
+      <p>Hyperion Engine is MIT licensed. Copyright The Hyperion Contributors. Free for commercial and indie.</p>
       </div>
     </section>
 
-    <section class="cta">
+    <section class="cta" aria-labelledby="cta-heading">
       <div class="wrap">
-      <h2>Get involved</h2>
+      <h2 id="cta-heading">Get involved</h2>
       <p>We welcome contributors of all skill levels. If you find a bug, have an idea, or want to help contribute to the project, we'd love your support!</p>
       <div class="actions">
         <a class="button" href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">View open issues</a>
-        <a class="button secondary" href="about:blank" rel="noopener">Join the Discord (soon)</a>
+        <a class="button secondary" href="https://github.com/HyperionGameTech/HyperionEngine/discussions" rel="noopener">Join the discussion</a>
       </div>
       </div>
     </section>
@@ -135,12 +208,17 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>Hyperion Engine &middot; MIT</span>
-      <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">https://github.com/HyperionGameTech/HyperionEngine</a>
+      <nav aria-label="Footer">
+        <a href="/#features">Features</a>
+        <a href="/#screenshots">Screenshots</a>
+        <a href="/strata.html">Strata</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
     </div>
   </footer>
 
   <div class="lightbox" id="lightbox">
-    <img src="" alt="">
+    <img src="" alt="" fetchpriority="low">
   </div>
   <script>
     (function () {
