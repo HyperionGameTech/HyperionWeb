@@ -1,12 +1,12 @@
 /* Hyperion Engine site. Black theme, system sans, no framework. */
 
 :root {
-  --bg: #ffffff;
-  --panel: #f5f6f8;
-  --border: #e4e6ea;
-  --text: #1a1d24;
-  --muted: #5c6370;
-  --accent: #2563eb;
+  --bg: #0b0d10;
+  --panel: #15181d;
+  --border: #262b33;
+  --text: #e8eaed;
+  --muted: #9aa3ad;
+  --accent: #5b8def;
   --max: 880px;
 }
 
@@ -39,7 +39,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(11, 13, 16, 0.92);
   /* border-bottom: 1px solid var(--border); */
 }
 
@@ -59,15 +59,15 @@ body {
   letter-spacing: 0.02em;
 }
 
-.brand:hover { color: #000; }
+.brand:hover { color: #fff; }
 
 .skip-link {
   position: absolute;
   left: 12px;
   top: -48px;
   z-index: 100;
-  background: #1a1d24;
-  color: #fff;
+  background: #e8eaed;
+  color: #0b0d10;
   padding: 8px 14px;
   border-radius: 4px;
   font-size: 14px;
@@ -116,16 +116,16 @@ body {
 .nav a:hover { color: var(--text); }
 
 .nav a.button-small {
-  color: #fff;
-  background: #1a1d24;
-  border: 1px solid #1a1d24;
+  color: #0b0d10;
+  background: #e8eaed;
+  border: 1px solid #e8eaed;
   border-radius: 4px;
   padding: 4px 14px;
   font-size: 13px;
   font-weight: 600;
 }
 
-.nav a.button-small:hover { color: #fff; background: #000; border-color: #000; }
+.nav a.button-small:hover { color: #0b0d10; background: #fff; border-color: #fff; }
 
 /* Hero */
 
@@ -148,8 +148,8 @@ body {
   padding: 110px 24px 96px;
   border-radius: 14px;
   background:
-    radial-gradient(ellipse 75% 85% at 50% 45%, transparent 55%, rgba(255, 255, 255, 0.92) 100%),
-    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.88)),
+    radial-gradient(ellipse 75% 85% at 50% 45%, transparent 55%, rgba(11, 13, 16, 0.92) 100%),
+    linear-gradient(rgba(11, 13, 16, 0.82), rgba(11, 13, 16, 0.88)),
     url("assets/lightmap-editor.webp") center 35% / cover no-repeat;
   -webkit-mask-image:
     linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%),
@@ -163,7 +163,6 @@ body {
 
 .hero-centered h1 {
   font-size: 52px;
-  text-transform:uppercase;
   letter-spacing: -0.02em;
   margin-bottom: 20px;
 }
@@ -226,10 +225,10 @@ h1 {
 .button {
   display: inline-block;
   padding: 9px 18px;
-  border: 1px solid #1a1d24;
+  border: 1px solid #e8eaed;
   border-radius: 4px;
-  background: #1a1d24;
-  color: #fff;
+  background: #e8eaed;
+  color: #0b0d10;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
@@ -240,7 +239,7 @@ h1 {
   color: var(--text);
 }
 
-.button:hover { background: #000; border-color: #000; }
+.button:hover { background: #fff; border-color: #fff; }
 .button.secondary:hover { background: transparent; border-color: var(--muted); }
 
 /* Sections */
@@ -273,7 +272,7 @@ h1 {
 /* Full-bleed band behind one section */
 
 .band {
-  background: #f3f4f6;
+  background: #111418;
   border-bottom: 1px solid var(--border);
 }
 
@@ -425,7 +424,7 @@ figure { margin: 0; }
   height: auto;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: #eef0f3;
+  background: #1c2127;
 }
 
 figcaption {
@@ -533,7 +532,7 @@ figcaption {
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.88em;
-  background: #eef0f3;
+  background: #1c2127;
   border: 1px solid var(--border);
   border-radius: 3px;
   padding: 1px 5px;
