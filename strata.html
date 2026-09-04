@@ -140,35 +140,13 @@ int main()
 
     <section class="wrap section" aria-labelledby="enums-heading">
       <h2 id="enums-heading">The Basics Volume IV: Enums</h2>
-      <p>Scoped enumerations over a scalar integral underlying type. The underlying defaults to <code>int</code>; you can pick any of <code>sbyte</code>, <code>byte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>uint</code>, <code>long</code>, <code>ulong</code>.</p>
+      <p>Enums are scoped. If you've used them in C#, or used <code>enum class</code> in C++, it's that.</p>
       <pre><code>enum Color : int { Red, Green, Blue };
-enum Direction { North, South, East, West }; // defaults to int
 enum Scale : byte { Small = 1, Medium, Large, Huge };
-enum Permission : ulong { Read = 1, Write = 2, Execute = 4 };</code></pre>
-      <p>Members get sequential values starting at 0, continuing from the last explicit <code>= N</code> — so <code>Small = 1, Medium = 2, Large = 3, Huge = 4</code>. Every value must fit the underlying type's range, and negative values are only allowed for signed underlyings.</p>
-      <p>Enums are strong types: access members as <code>Color.Blue</code>, compare same-enum values with <code>==</code>, but convert to/from the underlying only with an explicit cast. Members are compile-time constants, usable in <code>const</code> globals, and enums work as struct fields, params, and array elements.</p>
-      <pre><code>const int kBlueValue = (int)Color.Blue;
 
-struct Tagged
-{
-    Color c;
-    Scale s;
-};
-
-int main()
-{
-    Color c = Color.Blue;
-    if (c != (Color)2) { return 1; }
-
-    ulong p = (ulong)Permission.Read | (ulong)Permission.Execute;
-    // p == 5, bit-flag style
-
-    Tagged t;
-    t.c = c;
-    t.s = Scale.Huge;
-    return (int)t.s; // 4
-}</code></pre>
-      <p><code>impl</code> works on enums too, just like on structs and handles: <code>self</code> crosses as the underlying scalar.</p>
+Color c = Color.Blue;
+int v = (int)c;
+Color back = (Color)2;</code></pre>
     </section>
 
     <section class="wrap section" aria-labelledby="engine-heading">
