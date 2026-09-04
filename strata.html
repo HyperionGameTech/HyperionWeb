@@ -89,8 +89,8 @@
 
     <section class="wrap section section-intro" aria-labelledby="strata-heading">
       <h1 id="strata-heading">Strata scripting language</h1>
-      <p>Strata is the primary scripting language for gameplay in Hyperion Engine.<br><br>It is statically typed, compiles to native code with LLVM, and scripts recompile live when saved.<br><br>None of that <em>restarting the game or editor to see your changes</em> hogwash.</p>
-      <p>Strata is a separate project from Hyperion: a high-performance, natively compiled language for creating games. Source at <a href="https://github.com/StrataLanguage/stratac" rel="noopener">github.com/StrataLanguage/stratac</a>.</p>
+      <p>Strata is the primary scripting language for gameplay in Hyperion Engine.<br><br>It is statically typed, has <em>no GC, ref-counting, or manual memory management.</em>. Compiled via JIT in-editor with live reload, or AOT compiled + linked for shipping builds.<br><br>None of that <em>restarting the game or editor to see your changes</em> hogwash.</p>
+      <p>Note that Strata itself is a separate project from Hyperion; freely usable in other projects. GitHub: <a href="https://github.com/StrataLanguage/stratac" rel="noopener">github.com/StrataLanguage/stratac</a>.</p>
     </section>
 
     <section class="wrap section" aria-labelledby="functions-heading">
