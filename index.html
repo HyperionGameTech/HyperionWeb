@@ -102,7 +102,7 @@
     </section>
 
     <section id="about" class="wrap section section-intro" aria-labelledby="about-heading">
-      <p class="kicker">About Hyperion</p>
+      <h2 class="">About the project</h2>
       <p>Hyperion started as a passion project in 2016, and is still worked on daily.</p>
       <p>Our aim with Hyperion is to offer a high fidelity gaming experience even on low-end hardware using our in-house baking system to prepare as much of the lighting and effects as possible ahead of time.</p>
       <p>That, and the editor shouldn't suck.</p>
@@ -143,8 +143,8 @@
           <p><a href="/strata.html">Read more about the Strata scripting language</a></p>
         </li>
         <li>
-          <h3>World streaming</h3>
-          <p>Grid layers load cells in and out on a background thread as the player moves, so there are no loading screens between zones.</p>
+          <h3>World streaming system</h3>
+          <p>Scenes are assigned to cells that dynamically stream content in and out of the world.</p>
         </li>
         <li>
           <h3>Multiplayer</h3>
@@ -162,21 +162,20 @@
       <h2 id="platforms-heading">Platforms</h2>
       <table class="platform-table">
         <thead>
-          <tr>
-            <th scope="col">Target</th>
-            <th scope="col">Status</th>
-          </tr>
+            <tr>
+              <th>Platform</th>
+              <th>Status</th>
+            </tr>
         </thead>
         <tbody>
-          <tr><td>Windows</td><td>Supported</td></tr>
-          <tr><td>macOS</td><td>Supported</td></tr>
-          <tr><td>Android</td><td>Supported (NDK 29, arm64-v8a, API 28+)</td></tr>
-          <tr><td>iOS</td><td>Supported</td></tr>
-          <tr><td>Steam Deck</td><td>Via Proton</td></tr>
-          <tr><td>Linux</td><td>Planned, not in active development</td></tr>
+          <tr><td>Windows</td><td>yes, runtime + editor</td></tr>
+          <tr><td>macOS</td><td>yes, runtime + editor</td></tr>
+          <tr><td>Android</td><td>supported - (not stable)</td></tr>
+          <tr><td>iOS</td><td>supported - (not stable)</td></tr>
+          <tr><td>Steam Deck</td><td>yes, with Proton - needs some work on input + resolution.</td></tr>
+          <tr><td>Linux</td><td><em>planned</em></td></tr>
         </tbody>
       </table>
-      <p class="muted">Editor runs on Windows and macOS only.</p>
     </section>
 
     <section id="building" class="wrap section" aria-labelledby="building-heading">

@@ -386,18 +386,15 @@ h1 {
   list-style: none;
   margin: 8px 0 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
 }
 
 .feature-list li {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
   margin: 0;
 }
+
+.feature-list li:last-child { border-bottom: none; }
 
 .feature-list h3 {
   font-size: 18px;
@@ -612,10 +609,7 @@ a { color: var(--accent); }
   .split { grid-template-columns: 1fr; gap: 8px; }
   .callout { padding: 24px; }
   .section-intro p { font-size: 18px; }
-  .feature-list li { padding: 22px; }
-  #features { padding-left: 8px; padding-right: 8px; }
-  #features > .wrap { padding-left: 8px; padding-right: 8px; }
-  .feature-list,
+  .feature-list li { padding: 16px 0; }
   .media-grid,
   .code-grid { grid-template-columns: 1fr; }
   .specs div { grid-template-columns: 1fr; gap: 2px; }
