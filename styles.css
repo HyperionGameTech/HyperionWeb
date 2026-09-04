@@ -40,7 +40,7 @@ body {
   top: 0;
   z-index: 10;
   background: rgba(0, 0, 0, 0.92);
-  border-bottom: 1px solid var(--border);
+  /* border-bottom: 1px solid var(--border); */
 }
 
 .header-inner {
@@ -133,8 +133,32 @@ body {
 
 .hero-centered {
   text-align: center;
-  padding: 150px 0 72px;
-  background: radial-gradient(ellipse 70% 55% at 50% 30%, #1e1e1e 0%, #0a0a0a 55%, #000 100%);
+  padding: 28px 20px 72px;
+  background: #000;
+}
+
+.hero-centered .wrap-wide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1400px;
+  min-height: 600px;
+  padding: 170px 24px 140px;
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse 75% 85% at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.6) 100%),
+    linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.84)),
+    url("assets/lightmap-editor.webp") center 35% / cover no-repeat;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 56px, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 56px, #000 100%);
+  mask-composite: intersect;
 }
 
 .hero-centered h1 {
@@ -168,10 +192,6 @@ body {
 .hero-centered .button {
   padding: 12px 28px;
   font-size: 15px;
-}
-
-.hero-centered .hero-figure {
-  margin-top: 8px;
 }
 
 .kicker {
@@ -579,7 +599,17 @@ a { color: var(--accent); }
 
 @media (max-width: 640px) {
   h1 { font-size: 30px; }
-  .hero-centered { padding: 96px 0 48px; }
+  .hero-centered { padding: 16px 12px 40px; }
+  .hero-centered .wrap-wide {
+    min-height: 0;
+    padding: 120px 20px 96px;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 36px, #000 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 36px, #000 100%);
+  }
   .hero-centered h1 { font-size: 44px; }
   .section { padding: 64px 20px; }
   .section h2 { font-size: 24px; }
