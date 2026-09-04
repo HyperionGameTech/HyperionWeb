@@ -96,7 +96,13 @@ void dim_when_slow(Light lamp, EngineStats stats)
 
     <section class="wrap section">
       <h2>Boxes and optionals</h2>
-      <p><code>^Crate</code> allocates a value on the heap. Boxes are move-only and are freed when they go out of scope. <code>Crate?</code> is an optional: it may be empty, and testing it with <code>while (cur?)</code> blesses it, proving to the compiler that it holds a value.</p>
+      <p>For a given type you defined, say, <code>Foo</code> - <code>^Foo</code> (note the caret) allocates a value on the heap (a "box"). Boxes are move-only, and are freed when they go out of scope. This lets us forego the need for garbage collection, runtime reference counting and manual memory management.
+        <br><br><code>Foo?</code> is an optional: it may be empty, and testing it with <code>while (cur?)</code> blesses it, proving to the compiler that it holds a value.
+        <br><br>
+        Strata <bold>does not have a "null" or "nil"</bold> keyword or a "null pointer" concept. Instead, optionals are used to represent the absence of a value.
+        <br><br>
+        The compiler prevents you from using an optional that may be empty, so you can't crash the game by forgetting to check.
+      </p>
       <pre><code>struct Crate
 {
     int weight;
@@ -113,20 +119,26 @@ int main()
     {
         total = total + cur.weight;
         cur = cur.next;
+
+        // You can't use cur again here.
+        // You'll need another `if (cur?) { ... }` and use it in that block.
     }
     return total; // 12
 }</code></pre>
     </section>
 
     <section class="wrap section">
-      <h2>Methods with impl</h2>
-      <p>An <code>impl</code> block attaches extern functions to a handle as methods. A call rewrites to the plain extern with <code>self</code> passed first, and properties wire getters and setters to field-like syntax. A method without <code>self</code> is static and is called on the type itself, like <code>Camera.New()</code>.</p>
+      <h2>impl</h2>
+      <p>An <code>impl</code> block attaches functions to a <code>handle</code>, <code>struct</code> or <code>enum</code> type to be used as methods.
+        <br><br>A call rewrites to the free function, with <code>self</code> passed as the first argument.
+      </p>
       <pre><code>handle Camera;
 
 impl Camera
 {
     extern float GetFOV(Camera self);
     extern void SetFOV(Camera self, float v);
+
     property float FOV { get = Camera_GetFOV; set = Camera_SetFOV; }
 }
 
@@ -134,15 +146,6 @@ void reset_view(Camera cam)
 {
     cam.SetFOV(60.0); // Camera_SetFOV(cam, 60.0)
     float fov = cam.FOV;
-}</code></pre>
-      <p>An optional handle must be blessed before calling methods on it:</p>
-      <pre><code>// Camera and its impl from above.
-void reset_view_if_present(Camera? cam)
-{
-    if (cam?)
-    {
-        cam.SetFOV(60.0);
-    }
 }</code></pre>
     </section>
 
@@ -156,7 +159,7 @@ void reset_view_if_present(Camera? cam)
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>Hyperion Engine &middot; MIT</span>
-      <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">github.com/HyperionGameTech/HyperionEngine</a>
+      <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">https://github.com/HyperionGameTech/HyperionEngine</a>
     </div>
   </footer>
 
