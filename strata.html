@@ -94,22 +94,17 @@
     </section>
 
     <section class="wrap section" aria-labelledby="functions-heading">
-      <h2 id="functions-heading">Functions</h2>
-      <p>Plain C-like functions with static types. This is a complete Strata program.</p>
+      <h2 id="functions-heading">The Basics Volume I: Functions</h2>
+      <p>Functions are C-like, with static types</p>
       <pre><code>int add(int a, int b)
 {
     return a + b;
-}
-
-int main()
-{
-    return add(2, 3); // 5
 }</code></pre>
     </section>
 
     <section class="wrap section" aria-labelledby="control-flow-heading">
-      <h2 id="control-flow-heading">Control flow</h2>
-      <p><code>if</code>, <code>while</code>, <code>for</code>, <code>break</code>, and <code>continue</code> all work as expected in Strata.</p>
+      <h2 id="control-flow-heading">The Basics Volume II: Control flow</h2>
+      <p><code>if</code>, <code>while</code>, <code>for</code>, <code>break</code>, and <code>continue</code> all work as expected in Strata, if you're used to any C-based language</p>
       <pre><code>int factorial(int n)
 {
     int result = 1;
@@ -124,21 +119,60 @@ int main()
     </section>
 
     <section class="wrap section" aria-labelledby="arrays-heading">
-      <h2 id="arrays-heading">Arrays and strings</h2>
+      <h2 id="arrays-heading">The Basics Volume III: Arrays and strings</h2>
       <p>Dynamic arrays in Strata grow with <code>array_push</code> and report their size with <code>.length</code>.</p>
+      <p>Fixed size arrays are supposed as well for struct field members.</p>
       <pre><code>extern int printf(string fmt, ...);
+
+struct Inventory
+{
+    int[8] item_ids; // Fixed size.
+};
 
 int main()
 {
-    string[] pack = { "torch", "rope" };
-    array_push(pack, "rations");
-    printf("carrying %u items\n", pack.length);
-    return (int)pack.length; // 3
+    string[] backpack = { "torch", "rope" };
+    array_push(backpack, "rations");
+    printf("carrying %u items\n", backpack.length);
+    return (int)backpack.length; // 3
 }</code></pre>
     </section>
 
+    <section class="wrap section" aria-labelledby="enums-heading">
+      <h2 id="enums-heading">The Basics Volume IV: Enums</h2>
+      <p>Scoped enumerations over a scalar integral underlying type. The underlying defaults to <code>int</code>; you can pick any of <code>sbyte</code>, <code>byte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>uint</code>, <code>long</code>, <code>ulong</code>.</p>
+      <pre><code>enum Color : int { Red, Green, Blue };
+enum Direction { North, South, East, West }; // defaults to int
+enum Scale : byte { Small = 1, Medium, Large, Huge };
+enum Permission : ulong { Read = 1, Write = 2, Execute = 4 };</code></pre>
+      <p>Members get sequential values starting at 0, continuing from the last explicit <code>= N</code> — so <code>Small = 1, Medium = 2, Large = 3, Huge = 4</code>. Every value must fit the underlying type's range, and negative values are only allowed for signed underlyings.</p>
+      <p>Enums are strong types: access members as <code>Color.Blue</code>, compare same-enum values with <code>==</code>, but convert to/from the underlying only with an explicit cast. Members are compile-time constants, usable in <code>const</code> globals, and enums work as struct fields, params, and array elements.</p>
+      <pre><code>const int kBlueValue = (int)Color.Blue;
+
+struct Tagged
+{
+    Color c;
+    Scale s;
+};
+
+int main()
+{
+    Color c = Color.Blue;
+    if (c != (Color)2) { return 1; }
+
+    ulong p = (ulong)Permission.Read | (ulong)Permission.Execute;
+    // p == 5, bit-flag style
+
+    Tagged t;
+    t.c = c;
+    t.s = Scale.Huge;
+    return (int)t.s; // 4
+}</code></pre>
+      <p><code>impl</code> works on enums too, just like on structs and handles: <code>self</code> crosses as the underlying scalar.</p>
+    </section>
+
     <section class="wrap section" aria-labelledby="engine-heading">
-      <h2 id="engine-heading">Talking to the engine</h2>
+      <h2 id="engine-heading">Now you're cooking: working with engine objects</h2>
       <p>Handles are opaque types, mirroring Hyperion Engine objects. Extern functions are implemented by the engine in C++. These exact declarations ship with the engine.</p>
       <p>An <code>impl</code> block attaches functions to a <code>handle</code>, <code>struct</code> or <code>enum</code> type to be used as methods.
       </p>
@@ -172,7 +206,7 @@ public:
     </section>
 
     <section class="wrap section" aria-labelledby="boxes-heading">
-      <h2 id="boxes-heading">Boxes and optionals</h2>
+      <h2 id="boxes-heading">Advanced Reading: Boxes and optionals</h2>
       <p>For a given type you defined, say, <code>Foo</code> - <code>^Foo</code> (note the caret) allocates a value on the heap (a "box"). Boxes are move-only, and are freed when they go out of scope. This lets us forego the need for garbage collection, runtime reference counting and manual memory management.
         <br><br><code>Foo?</code> is an optional: it may be empty, and testing it with <code>while (cur?)</code> blesses it, proving to the compiler that it holds a value.
         <br><br>
