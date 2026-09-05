@@ -164,7 +164,10 @@ body {
 .hero-centered h1 {
   font-size: 52px;
   letter-spacing: -0.02em;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+
+  /* throw some weird little shadow in there for shits */
+  text-shadow: 3px 3px 10px rgba(50, 128, 255, 0.6);
 }
 
 .hero-centered .lede {
@@ -172,6 +175,11 @@ body {
   margin-right: auto; */
   font-size: 17px;
   margin-bottom: 36px;
+
+  color: var(--text);
+
+  /* throw some weird little shadow in there for shits */
+  text-shadow: 3px 3px 10px rgba(50, 128, 255, 0.6);
 }
 
 .hero-centered .actions {
