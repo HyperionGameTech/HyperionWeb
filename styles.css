@@ -168,17 +168,33 @@ body {
 }
 
 .hero-centered .lede {
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   font-size: 17px;
   margin-bottom: 36px;
 }
 
 .hero-centered .actions {
-  justify-content: center;
+  /* justify-content: center; */
   gap: 16px;
   margin-bottom: 20px;
 }
+
+
+.hero-centered .wrap-wide {
+  flex-direction: row;
+}
+
+.hero-centered .stuff {
+  text-align: left;
+  width: 100%;
+  max-width: var(--max);
+}
+/* Mobile: make stuff bigger */
+/* @media (max-width: 640px) {
+  .hero-centered .stuff { width: 100%; }
+} */
+/* JK */
 
 .hero-centered .proof {
   font-size: 13px;
