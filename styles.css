@@ -148,9 +148,9 @@ body {
   padding: 110px 24px 96px;
   border-radius: 14px;
   background:
-    radial-gradient(ellipse 75% 85% at 50% 45%, transparent 55%, rgba(11, 13, 16, 0.92) 100%),
+    radial-gradient(ellipse 75% 85% at 90% 40%, transparent 55%, rgba(11, 13, 16, 0.92) 100%),
     linear-gradient(rgba(11, 13, 16, 0.82), rgba(11, 13, 16, 0.88)),
-    url("assets/lightmap-editor.webp") center 35% / cover no-repeat;
+    url("assets/lightmap-editor.webp") 68% 31% / 145% auto no-repeat;
   -webkit-mask-image:
     linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%),
     linear-gradient(to bottom, transparent 0, #000 56px, #000 100%);
@@ -620,6 +620,8 @@ a { color: var(--accent); }
   .hero-centered .wrap-wide {
     min-height: 0;
     padding: 84px 20px 64px;
+    background-position: 0 0, 0 0, 68% 45%;
+    background-size: auto, auto, auto 135%;
     -webkit-mask-image:
       linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%),
       linear-gradient(to bottom, transparent 0, #000 36px, #000 100%);
