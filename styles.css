@@ -146,7 +146,7 @@ body {
   padding: 110px 24px 96px;
   border-radius: 14px;
   background:
-    radial-gradient(ellipse 75% 85% at 90% 40%, transparent 55%, rgba(11, 13, 16, 0.92) 100%),
+    radial-gradient(ellipse 75% 85% at 90% 40%, transparent 93%, rgba(11, 13, 16, 0.92) 100%),
     linear-gradient(rgba(11, 13, 16, 0.82), rgba(11, 13, 16, 0.88)),
     url("assets/lightmap-editor.webp") 68% 31% / 145% auto no-repeat;
   -webkit-mask-image:
