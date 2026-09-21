@@ -56,7 +56,7 @@
         <li><a href="/docs/">Overview</a></li>
         <li><a href="/docs/get-started/">Get started</a></li>
         <li><a href="/docs/editor/">Editor</a></li>
-        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/world/">Scene management</a></li>
         <li><a href="/docs/scripting/" aria-current="page">Scripting</a>
           <ul>
             <li><a href="/docs/scripting/first-script.html">Your first script</a></li>
@@ -75,59 +75,14 @@
     <main id="main" class="docs-main">
       <article class="docs-article">
         <h1>Scripting</h1>
-        <p class="lede">Gameplay scripts can be written in Strata or C#. Both attach to entities the same way, share the same lifecycle, and recompile when you save.</p>
+        <p class="lede">Gameplay scripts can be written in Strata or C#</p>
 
-<h2 id="strata-and-c">Strata and C#</h2>
-<div class="docs-table-wrap">
-<table class="docs-table">
-<thead>
-<tr>
-<th></th>
-<th>Strata</th>
-<th>C#</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Files</td>
-<td><code>Scripts/&lt;Name&gt;.strata</code></td>
-<td><code>Scripts/&lt;Name&gt;.cs</code></td>
-</tr>
-<tr>
-<td>Compiled with</td>
-<td>LLVM, just-in-time in the editor</td>
-<td>.NET</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>No garbage collector or ref counting</td>
-<td>.NET garbage collector</td>
-</tr>
-<tr>
-<td>Engine API</td>
-<td><code>import Engine;</code></td>
-<td><code>using Hyperion;</code></td>
-</tr>
-<tr>
-<td>Live reload</td>
-<td>On save</td>
-<td>On save</td>
-</tr>
-<tr>
-<td>Outside the editor</td>
-<td>Needs ahead-of-time compilation, which isn't hooked up yet</td>
-<td>.NET is only enabled in editor builds by default, set by <code>HYP_DOTNET_ONLY_FOR_EDITOR</code> in <code>Source/CMakeLists.txt</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Each script picks its language when you create it, and a project can use both. Code samples in these docs have a tab for each language, and the one you pick is remembered.</p>
-<h2 id="strata">Strata</h2>
-<p>Strata is Hyperion's own scripting language. It's statically typed and compiled, with no garbage collector, ref counting or manual memory management. The <a href="/strata.html">Strata overview</a> covers the syntax.</p>
-<h2 id="c">C#</h2>
-<p>C# scripts are classes that subclass <code>Script</code>. They can also define their own component types; see the <a href="/docs/scripting/samples.html">samples</a>.</p>
+<p>Each script picks its language when you create it, and a project can use both languages - you aren't boxed into just one</p>
+<h2 id="what-is-strata">What is Strata?</h2>
+<p>You probably haven't heard of Strata - because it's a new project aimed at creating a simple, C-type language meant for scripting (separate from Hyperion).</p>
+<p>Strata is statically typed and compiled, with no garbage collector, ref counting or manual memory management - the <a href="/strata.html">Strata overview</a> covers the syntax</p>
 <h2 id="exposing-c-to-scripts">Exposing C++ to scripts</h2>
-<p>Engine types show up in both languages through reflection. Mark up a class with the reflection macros, and CodeGen generates the bindings:</p>
+<p>Engine types show up in both languages through reflection. Add a class in C++ with reflection macros, and Hyperion's CodeGenTool generates binding code so you can use it in scripts.</p>
 <pre><code class="language-cpp">HYP_CLASS()
 class Camera : public ObjectBase
 {
@@ -140,12 +95,11 @@ public:
     void SetFOV(float v);
 };
 </code></pre>
-<p><a href="/docs/scripting/engine-bindings.html">Calling engine code</a> covers what each language gets.</p>
 <h2 id="in-this-section">In this section</h2>
 <ul class="docs-links">
   <li><a href="/docs/scripting/first-script.html">Your first script</a><span>Attach a script to an entity and make it move.</span></li>
   <li><a href="/docs/scripting/engine-bindings.html">Calling engine code</a><span>How engine types show up in Strata and C#, and how to expose your own.</span></li>
-  <li><a href="/docs/scripting/samples.html">Samples</a><span>Example scripts to copy into your project.</span></li>
+  <li><a href="/docs/scripting/samples.html">Samples</a><span>Example scripts</span></li>
 </ul>
 <h2 id="todo">TODO</h2>
 <ul class="docs-soon">
@@ -159,9 +113,7 @@ public:
     <aside class="docs-toc" aria-label="On this page">
       <p class="docs-toc-title">Table of contents</p>
       <ul>
-        <li><a href="#strata-and-c">Strata and C#</a></li>
-        <li><a href="#strata">Strata</a></li>
-        <li><a href="#c">C#</a></li>
+        <li><a href="#what-is-strata">What is Strata?</a></li>
         <li><a href="#exposing-c-to-scripts">Exposing C++ to scripts</a></li>
         <li><a href="#in-this-section">In this section</a></li>
         <li><a href="#todo">TODO</a></li>

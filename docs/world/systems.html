@@ -56,7 +56,7 @@
         <li><a href="/docs/">Overview</a></li>
         <li><a href="/docs/get-started/">Get started</a></li>
         <li><a href="/docs/editor/">Editor</a></li>
-        <li><a href="/docs/world/">Scenes &amp; worlds</a>
+        <li><a href="/docs/world/">Scene management</a>
           <ul>
             <li><a href="/docs/world/entities.html">Entities &amp; components</a></li>
             <li><a href="/docs/world/systems.html" aria-current="page">Writing a system</a></li>
@@ -76,7 +76,7 @@
     <main id="main" class="docs-main">
       <article class="docs-article">
         <h1>Writing a system</h1>
-        <p class="lede">Components hold the data. Systems are the code that does something with it, every frame, for every entity that has the right components.</p>
+        <p class="lede">The &quot;S&quot; in ECS</p>
 
 <h2 id="the-basics">The basics</h2>
 <p>Subclass <code>SystemBase</code>, list the components you care about, and implement <code>Process</code>. This one regenerates health on anything with a <code>HealthComponent</code>:</p>

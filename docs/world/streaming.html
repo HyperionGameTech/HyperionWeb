@@ -56,7 +56,7 @@
         <li><a href="/docs/">Overview</a></li>
         <li><a href="/docs/get-started/">Get started</a></li>
         <li><a href="/docs/editor/">Editor</a></li>
-        <li><a href="/docs/world/">Scenes &amp; worlds</a>
+        <li><a href="/docs/world/">Scene management</a>
           <ul>
             <li><a href="/docs/world/entities.html">Entities &amp; components</a></li>
             <li><a href="/docs/world/systems.html">Writing a system</a></li>
@@ -76,14 +76,13 @@
     <main id="main" class="docs-main">
       <article class="docs-article">
         <h1>World streaming</h1>
-        <p class="lede">Hyperion splits your world into a grid of cells, and streams scenes in and out as the camera moves.</p>
+        <p class="lede">Stream content into the world dynamically</p>
 
 <h2 id="how-it-works">How it works</h2>
 <p>Every world has a <strong>world grid</strong>, made up of one or more <strong>layers</strong>. Each layer is a grid of <strong>streaming cells</strong>.</p>
-<p>Cameras register a streaming volume with the streaming manager. Cells within range of a camera are loaded, and cells out of range are unloaded.</p>
+<p>Cells within range of the player's camera are loaded (and cells out of range are unloaded).</p>
 <h2 id="putting-a-scene-on-the-grid">Putting a scene on the grid</h2>
 <p>Each scene has a <strong>streaming centroid</strong>: the grid cell it belongs to. Set it in the scene's properties in the editor, and when the scene is added to the world, it lands on the built-in scenes layer at that spot.</p>
-<p>Scenes are streamed by default, so setting the centroid is usually all that's needed.</p>
 <h2 id="layer-settings">Layer settings</h2>
 <p>Each layer has these settings:</p>
 <div class="docs-table-wrap">
@@ -105,7 +104,7 @@
 </tr>
 <tr>
 <td>infinite</td>
-<td>Whether the grid goes on forever. On by default.</td>
+<td>Whether the grid goes on forever. Useful for infinite terrain generation</td>
 </tr>
 <tr>
 <td>range</td>

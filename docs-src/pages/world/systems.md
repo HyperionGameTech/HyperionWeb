@@ -1,8 +1,8 @@
 ---
 title: Writing a system
 description: Write a custom system in Hyperion Engine to process entities by component every frame, and add world-wide subsystems.
-lede: Components hold the data. Systems are the code that does something with it, every frame, for every entity that has the right components.
-summary: Code that runs over your components every frame.
+lede: The "S" in ECS
+summary: Write a custom system in Hyperion Engine
 ---
 
 ## The basics

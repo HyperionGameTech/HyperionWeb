@@ -56,7 +56,7 @@
         <li><a href="/docs/">Overview</a></li>
         <li><a href="/docs/get-started/">Get started</a></li>
         <li><a href="/docs/editor/">Editor</a></li>
-        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/world/">Scene management</a></li>
         <li><a href="/docs/scripting/">Scripting</a></li>
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
         <li><a href="/docs/physics/">Physics</a></li>
@@ -82,12 +82,11 @@
 </code></pre>
 <p>It runs headless (no window), and reads console commands from its terminal. Leave off <code>--gameport</code> and it uses the <code>Net.GameServerPort</code> CVar, which defaults to 9192.</p>
 <h2 id="connect-a-client">Connect a client</h2>
-<pre><code class="language-shell">hyperion-sample --host=127.0.0.1 --gameport=9192
+<p>Run the game executable with <code>--host</code> and <code>--autoconnect=true</code> cli args to automatically connect to a host at that address. If you don't pass <code>autoconnect</code> or pass it as <code>false</code>, a prompt screen will be shown that will allow your to change it before connecting or select Single Player instead (NOTE: to be changed - will automatically connect if --host is passed)</p>
+<pre><code class="language-shell">hyperion-sample --host=127.0.0.1 --autoconnect=true --gameport=9192
 </code></pre>
-<p>It connects on startup. Pass <code>--singleplayer</code> to skip connecting.</p>
-<p>The sample game also has a connect screen, with a box for the host address and buttons to <strong>Connect</strong> or <strong>Play Single Player</strong>.</p>
 <h2 id="from-the-editor">From the editor</h2>
-<p>The editor can start a local server and connect to it for you. See <a href="/docs/editor/play-in-editor.html">play-in-editor</a>.</p>
+<p>The editor can start a local server and connect to it for you. See <a href="/docs/editor/play-in-editor.html">play-in-editor</a> for info</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/multiplayer/"><span>Previous</span>Multiplayer</a><a class="next" href="/docs/multiplayer/replication.html"><span>Next</span>Replication &amp; prediction</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/multiplayer/server.md" rel="noopener">Improve this page on GitHub</a></p>

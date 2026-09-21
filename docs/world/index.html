@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Scenes &amp; worlds · Hyperion Docs</title>
-  <meta name="description" content="How a Hyperion Engine game is put together: worlds, scenes, nodes, entities, components, systems and world streaming.">
+  <title>Scene management · Hyperion Docs</title>
+  <meta name="description" content="How a Hyperion Engine game is put together. worlds, scenes, nodes, entities, components, systems and world streaming.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/world/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -18,8 +18,8 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Scenes &amp; worlds · Hyperion Docs">
-  <meta property="og:description" content="How a Hyperion Engine game is put together: worlds, scenes, nodes, entities, components, systems and world streaming.">
+  <meta property="og:title" content="Scene management · Hyperion Docs">
+  <meta property="og:description" content="How a Hyperion Engine game is put together. worlds, scenes, nodes, entities, components, systems and world streaming.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/world/">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -56,7 +56,7 @@
         <li><a href="/docs/">Overview</a></li>
         <li><a href="/docs/get-started/">Get started</a></li>
         <li><a href="/docs/editor/">Editor</a></li>
-        <li><a href="/docs/world/" aria-current="page">Scenes &amp; worlds</a>
+        <li><a href="/docs/world/" aria-current="page">Scene management</a>
           <ul>
             <li><a href="/docs/world/entities.html">Entities &amp; components</a></li>
             <li><a href="/docs/world/systems.html">Writing a system</a></li>
@@ -75,19 +75,19 @@
 
     <main id="main" class="docs-main">
       <article class="docs-article">
-        <h1>Scenes &amp; worlds</h1>
-        <p class="lede">How a Hyperion game is put together: worlds hold scenes, scenes hold nodes and entities, and systems process them.</p>
+        <h1>Scene management</h1>
 
-<h2 id="the-big-picture">The big picture</h2>
+
+<h2 id="the-parts-that-make-up-your-game">The parts that make up your game</h2>
 <p>A <strong>world</strong> is your whole game. It holds one or more <strong>scenes</strong>, which you can think of as levels or regions. Each scene is a tree of <strong>nodes</strong>. <strong>Entities</strong> are nodes with <strong>components</strong> attached, and <strong>systems</strong> process those components every frame.</p>
 <p>Scenes can also be assigned to cells on a grid and streamed in and out as the player moves around.</p>
 <p>The <a href="/docs/get-started/glossary.html">glossary</a> defines each of these terms.</p>
 <h2 id="in-this-section">In this section</h2>
 <ul class="docs-links">
   <li><a href="/docs/world/entities.html">Entities &amp; components</a><span>Creating entities, adding components, and moving them.</span></li>
-  <li><a href="/docs/world/systems.html">Writing a system</a><span>Code that runs over your components every frame.</span></li>
-  <li><a href="/docs/world/streaming.html">World streaming</a><span>Loading and unloading parts of the world by distance.</span></li>
-  <li><a href="/docs/world/swatches.html">Swatches</a><span>Variations of a world, each with its own baked lighting.</span></li>
+  <li><a href="/docs/world/systems.html">Writing a system</a><span>Write a custom system in Hyperion Engine</span></li>
+  <li><a href="/docs/world/streaming.html">World streaming</a><span>Stream content into the world dynamically</span></li>
+  <li><a href="/docs/world/swatches.html">Swatches</a><span>Variations of your world, with different sets for lighting (or other properties)</span></li>
 </ul>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/editor/console.html"><span>Previous</span>Console &amp; CVars</a><a class="next" href="/docs/world/entities.html"><span>Next</span>Entities &amp; components</a></nav>
@@ -97,7 +97,7 @@
     <aside class="docs-toc" aria-label="On this page">
       <p class="docs-toc-title">Table of contents</p>
       <ul>
-        <li><a href="#the-big-picture">The big picture</a></li>
+        <li><a href="#the-parts-that-make-up-your-game">The parts that make up your game</a></li>
         <li><a href="#in-this-section">In this section</a></li>
       </ul>
     </aside>

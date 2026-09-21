@@ -1,15 +1,19 @@
 ---
 title: Samples
 description: Sample scripts for Hyperion Engine in Strata and C#.
-lede: Example scripts to copy into your project.
-summary: Example scripts to copy into your project.
+lede: 
+summary: Example scripts
 ---
 
-To try one, create a script in the sample's language (**Inspector › Script ›** :icon[add]), paste the sample in, and save.
+::: note
+This page is out of date!
+:::
+
+To try one of these - create a script in the sample's language (**Inspector > Script >** :icon[add]), paste the sample in, and save it
 
 ## Health component
 
-A custom component that drains over time. C# only.
+A custom component that drains over time. C# only (for now).
 
 ::: tabs
 ```csharp

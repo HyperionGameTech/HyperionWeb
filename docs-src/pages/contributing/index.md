@@ -1,8 +1,8 @@
 ---
 title: Contributing
-description: How to contribute to Hyperion Engine: finding issues, opening pull requests, and improving the docs.
-lede: Contributions of all kinds are welcome: bug fixes, docs and new features.
-summary: Issues, pull requests and improving these docs.
+description: How to contribute to Hyperion Engine
+lede: Contributions of all kinds are welcome
+summary: Contributing to Hyperion
 ---
 
 ## How to help

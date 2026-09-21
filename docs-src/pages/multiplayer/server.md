@@ -17,14 +17,12 @@ It runs headless (no window), and reads console commands from its terminal. Leav
 
 ## Connect a client
 
+Run the game executable with `--host` and `--autoconnect=true` cli args to automatically connect to a host at that address. If you don't pass `autoconnect` or pass it as `false`, a prompt screen will be shown that will allow your to change it before connecting or select Single Player instead (NOTE: to be changed - will automatically connect if --host is passed)
+
 ```shell
-hyperion-sample --host=127.0.0.1 --gameport=9192
+hyperion-sample --host=127.0.0.1 --autoconnect=true --gameport=9192
 ```
-
-It connects on startup. Pass `--singleplayer` to skip connecting.
-
-The sample game also has a connect screen, with a box for the host address and buttons to **Connect** or **Play Single Player**.
 
 ## From the editor
 
-The editor can start a local server and connect to it for you. See [play-in-editor](/docs/editor/play-in-editor.html).
+The editor can start a local server and connect to it for you. See [play-in-editor](/docs/editor/play-in-editor.html) for info

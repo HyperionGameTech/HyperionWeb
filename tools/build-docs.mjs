@@ -354,7 +354,7 @@ function renderPage(page, ctx) {
     notice: ctx.site.notice
       ? `  <div class="docs-notice"><p>${md.renderInline(substituteVars(ctx.site.notice, ctx.site.vars, 'site.json'), { source: 'site.json' })}</p></div>`
       : '',
-    lede: page.lede ? `        <p class="lede">${md.renderInline(page.lede, { source: page.source })}</p>` : '',
+    lede: page.lede?.length ? `        <p class="lede">${md.renderInline(page.lede, { source: page.source })}</p>` : '',
     hero: renderHero(page),
     content: html.trimEnd(),
     toc: renderToc(toc),

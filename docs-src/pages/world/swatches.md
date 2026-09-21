@@ -1,11 +1,11 @@
 ---
 title: Swatches
 description: Use swatches in Hyperion Engine to keep variations of a world, like different times of day, each with its own baked lighting.
-lede: Swatches are variations of a world, like *Noon* and *Dusk*, each with its own property overrides and baked lighting.
-summary: Variations of a world, each with its own baked lighting.
+lede: Variations of your world, with different sets for lighting (or other properties)
+summary: Variations of your world, with different sets for lighting (or other properties)
 ---
 
-## What's in a swatch
+## High level overview.
 
 Every world starts out with a swatch called *Default*. Additional swatches can override entity properties, such as the sun angle or light colors. Anything that isn't overridden is shared.
 
@@ -15,17 +15,8 @@ Lightmaps and probes are baked per swatch, so each swatch has its own baked ligh
 
 The active swatch is shown in the toolbar, next to :icon[roller]. Add one with **New Swatch...** in that menu and make it active.
 
-With :icon[git-branch] **Override Edits** on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well.
-
-## From code
-
-```cpp
-world->GetOrCreateSwatch(NAME("Dusk"));
-world->SetActiveSwatch(NAME("Dusk"));
-```
-
-Switching applies that swatch's overrides and swaps in its baked lighting. A world can have up to 64 swatches.
+With **Override Edits** on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well.
 
 ::: note
-Properties tagged `NoSwatchOverride` can't be overridden, and are always shared across swatches.
+Missing info on this page on how to dynamically set the World's active Swatch from scripts
 :::

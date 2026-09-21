@@ -91,6 +91,15 @@
   scroll-margin-top: 64px;
 }
 
+/* Pages without a lede: the first heading or hero sits under the title, without the section divider */
+.docs-article h1 + h2 {
+  margin-top: 28px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.docs-article h1 + .docs-hero { margin-top: 20px; }
+
 .docs-article h3 {
   font-size: 16px;
   margin: 28px 0 8px;

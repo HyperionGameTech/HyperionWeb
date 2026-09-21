@@ -1,7 +1,7 @@
 ---
 title: Platforms
-description: Platforms supported by Hyperion Engine: Windows, macOS, Android, iOS, Steam Deck, and plans for Linux.
-lede: Where Hyperion runs today, and where it's headed.
+description: Platforms supported by Hyperion Engine
+lede: But will it Hyperion?
 summary: Supported platforms, packaging and platform notes.
 ---
 
@@ -9,10 +9,10 @@ summary: Supported platforms, packaging and platform notes.
 
 | Platform | Status |
 |---|---|
-| Windows (x64, ARM64) | Yes, runtime and editor. |
-| macOS | Yes, runtime and editor. |
-| Android | Supported, but not stable yet. |
-| iOS | Supported, but not stable yet. |
+| Windows (x64, ARM64) | Yes. Runtime and editor. |
+| macOS | Yes. Runtime and editor. |
+| Android | Supported - not stable yet. |
+| iOS | Supported - not stable yet. |
 | Steam Deck | Yes, through Proton. Input and resolution handling still need work. |
 | Linux | *Planned* |
 
