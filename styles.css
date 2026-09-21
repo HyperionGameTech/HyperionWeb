@@ -484,6 +484,15 @@ h1 {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
+/* Screenshots with a transparent background: no frame, and the shadow follows the opaque pixels */
+.feature-media img.cutout {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45));
+}
+
 /* Specs */
 
 .specs { margin: 0; }

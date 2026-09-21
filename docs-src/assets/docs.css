@@ -129,6 +129,48 @@
   text-align: center;
 }
 
+/* Code tabs: one code block per language. Without JS, every block shows */
+
+.docs-tabs { margin: 0 0 20px; }
+
+.docs-tabs-bar { display: none; }
+
+.js .docs-tabs-bar {
+  display: flex;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 6px 6px 0 0;
+  background: var(--panel);
+}
+
+.docs-tabs-bar button {
+  margin-bottom: -1px;
+  padding: 7px 10px 6px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.docs-tabs-bar button:hover { color: var(--text); }
+
+.docs-tabs-bar button[aria-selected="true"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.docs-tabs-panel pre { margin: 0; }
+.docs-tabs-panel + .docs-tabs-panel { margin-top: 12px; }
+
+.js .docs-tabs-panel { margin-top: 0; }
+.js .docs-tabs-panel:not(.is-active) { display: none; }
+.js .docs-tabs-panel pre { border-radius: 0 0 6px 6px; }
+
 /* Numbered how-to steps, reusing the homepage .steps look */
 
 .docs-article .steps { margin: 0 0 24px; gap: 20px; max-width: 700px; }

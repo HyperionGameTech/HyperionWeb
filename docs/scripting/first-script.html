@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your first script · Hyperion Docs</title>
-  <meta name="description" content="Create your first Strata script in the Hyperion editor, attach it to an entity, and learn the script lifecycle and live reload.">
+  <meta name="description" content="Create your first script in the Hyperion editor, in Strata or C#, attach it to an entity, and learn the script lifecycle and live reload.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/scripting/first-script.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Your first script · Hyperion Docs">
-  <meta property="og:description" content="Create your first Strata script in the Hyperion editor, attach it to an entity, and learn the script lifecycle and live reload.">
+  <meta property="og:description" content="Create your first script in the Hyperion editor, in Strata or C#, attach it to an entity, and learn the script lifecycle and live reload.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/scripting/first-script.html">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -61,7 +61,7 @@
           <ul>
             <li><a href="/docs/scripting/first-script.html" aria-current="page">Your first script</a></li>
             <li><a href="/docs/scripting/engine-bindings.html">Calling engine code</a></li>
-            <li><a href="/docs/scripting/csharp-samples.html">C# samples</a></li>
+            <li><a href="/docs/scripting/samples.html">Samples</a></li>
           </ul>
         </li>
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
@@ -76,7 +76,7 @@
       <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/scripting/">Scripting</a></li><li><span aria-current="page">Your first script</span></li></ol></nav>
       <article class="docs-article">
         <h1>Your first script</h1>
-        <p class="lede">Create a Strata script, attach it to an entity, and make the entity move.</p>
+        <p class="lede">Create a script, attach it to an entity, and make the entity move.</p>
 
 <h2 id="create-a-script">Create a script</h2>
 <ol class="steps">
@@ -87,11 +87,13 @@
 <p>In the <strong>Inspector</strong>, find the <strong>Script</strong> section and hit <strong>New</strong>.</p>
 </li>
 <li>
-<p>Choose <strong>Strata</strong> and give it a name.</p>
+<p>Choose <strong>Strata</strong> or <strong>C#</strong>, and give it a name.</p>
 </li>
 </ol>
-<p>The editor adds a <code>ScriptComponent</code> to the entity for you, and saves the file to <code>Scripts/&lt;Name&gt;.strata</code> in your project. The new script looks like this:</p>
-<pre><code class="language-strata">import Engine;
+<p>The editor adds a <code>ScriptComponent</code> to the entity, and saves the file to <code>Scripts/&lt;Name&gt;.strata</code> or <code>Scripts/&lt;Name&gt;.cs</code> in your project. The new script looks like this:</p>
+<div class="docs-tabs">
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-1-strata-tab" aria-controls="tabs-1-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-1-csharp-tab" aria-controls="tabs-1-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-1-strata" aria-labelledby="tabs-1-strata-tab" data-lang="strata"><pre><code class="language-strata">import Engine;
 
 Entity g_entity;
 
@@ -107,8 +109,28 @@ void Update(float delta)
 void Destroy()
 {
 }
-</code></pre>
+</code></pre></div>
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-1-csharp" aria-labelledby="tabs-1-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">using Hyperion;
+
+public class NewScript : Script
+{
+    public override void OnAdded(Entity entity)
+    {
+    }
+
+    public override void Update(float deltaTime)
+    {
+    }
+
+    public override void Destroy()
+    {
+    }
+}
+</code></pre></div>
+</div>
+<p>In C#, the class is named after the script.</p>
 <h2 id="lifecycle">Lifecycle</h2>
+<p>Both languages use the same three functions. In Strata they're plain functions in the file; in C# they're overrides on <code>Script</code>.</p>
 <div class="docs-table-wrap">
 <table class="docs-table">
 <thead>
@@ -124,7 +146,7 @@ void Destroy()
 </tr>
 <tr>
 <td>Update</td>
-<td>Every frame while the game is running. <code>delta</code> is the time since the last frame.</td>
+<td>Every frame while the game is running, with the time since the last frame.</td>
 </tr>
 <tr>
 <td>Destroy</td>
@@ -133,19 +155,46 @@ void Destroy()
 </tbody>
 </table>
 </div>
-<p>All three are optional. A missing one logs a warning once.</p>
-<p>Each entity gets its own copy of the script's globals, so entities sharing a script don't share state.</p>
+<p>All three are optional.</p>
+<p>Each entity gets its own copy of the script's state: its own Strata globals, or its own instance of the C# class. Entities sharing a script don't share state.</p>
 <h2 id="moving-the-entity">Moving the entity</h2>
-<p>Fill in <code>Update</code>:</p>
-<pre><code class="language-strata">void Update(float delta)
+<p>This moves the entity upward while the game runs:</p>
+<div class="docs-tabs">
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-2-strata-tab" aria-controls="tabs-2-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-2-csharp-tab" aria-controls="tabs-2-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-2-strata" aria-labelledby="tabs-2-strata-tab" data-lang="strata"><pre><code class="language-strata">import Engine;
+
+Entity g_entity;
+
+void OnAdded(const Entity entity)
+{
+    g_entity = entity;
+}
+
+void Update(float delta)
 {
     g_entity.Translate(float3(0.0, delta, 0.0));
 }
-</code></pre>
-<p>Press <strong>Play</strong> and the entity moves upward.</p>
+</code></pre></div>
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-2-csharp" aria-labelledby="tabs-2-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">using Hyperion;
+
+public class NewScript : Script
+{
+    public override void OnAdded(Entity entity)
+    {
+        base.OnAdded(entity);
+    }
+
+    public override void Update(float deltaTime)
+    {
+        Entity.Translate(new Vec3f(0.0f, deltaTime, 0.0f));
+    }
+}
+</code></pre></div>
+</div>
+<p>In C#, calling <code>base.OnAdded(entity)</code> sets the script's <code>Entity</code> property. The editor's template leaves it out, so add it when you want to use <code>Entity</code>.</p>
 <h2 id="live-reload">Live reload</h2>
-<p>Saving the file recompiles it in the editor. Entities using the script get <code>Destroy</code>, the new code is loaded, and <code>OnAdded</code> runs again.</p>
-<p>Globals are reset on reload.</p>
+<p>Saving the file recompiles it in the editor, in either language. Entities using the script get <code>Destroy</code>, the new code is loaded, and <code>OnAdded</code> runs again.</p>
+<p>Script state is reset on reload.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/"><span>Previous</span>Scripting</a><a class="next" href="/docs/scripting/engine-bindings.html"><span>Next</span>Calling engine code</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/scripting/first-script.md" rel="noopener">Improve this page on GitHub</a></p>

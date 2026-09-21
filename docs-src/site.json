@@ -4,11 +4,18 @@
   "vars": {
     "engineRepo": "https://github.com/HyperionGameTech/HyperionEngine"
   },
+  "codeLabels": {
+    "strata": "Strata",
+    "csharp": "C#",
+    "cpp": "C++",
+    "hlsl": "HLSL",
+    "shell": "Shell"
+  },
   "nav": [
     { "section": "get-started", "pages": ["get-the-code", "building", "project-layout", "glossary"] },
     { "section": "editor", "pages": ["tour", "projects", "prefabs", "play-in-editor", "console"] },
     { "section": "world", "pages": ["entities", "systems", "streaming", "swatches"] },
-    { "section": "scripting", "pages": ["first-script", "engine-bindings", "csharp-samples"] },
+    { "section": "scripting", "pages": ["first-script", "engine-bindings", "samples"] },
     { "section": "rendering", "pages": ["materials", "baking", "global-illumination", "shaders", "post-processing"] },
     { "section": "physics", "pages": ["rigid-bodies", "character-controllers"] },
     { "section": "multiplayer", "pages": ["server", "replication"] },

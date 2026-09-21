@@ -148,8 +148,31 @@ function renderCards(inner, page, ctx) {
   return `<ul class="docs-links">\n${items.join('\n')}\n</ul>\n`;
 }
 
+// A set of code blocks in different languages, shown one at a time with a tab per language.
+// docs.js keeps the chosen language in sync across every tab set on the page.
+function renderTabs(inner, page, ctx) {
+  const tokens = md.parse(inner, {});
+  if (!tokens.length || tokens.some((t) => t.type !== 'fence')) fail(`${page.source}: "::: tabs" should only contain code blocks`);
+  const langs = tokens.map((t) => t.info.trim().split(/\s+/)[0]);
+  if (langs.some((lang) => !lang)) fail(`${page.source}: every code block in "::: tabs" needs a language, like \`\`\`csharp`);
+  if (new Set(langs).size !== langs.length) fail(`${page.source}: "::: tabs" has two code blocks in the same language`);
+
+  const group = ++ctx.tabGroups;
+  const id = (lang) => `tabs-${group}-${lang.replace(/[^a-z0-9]/gi, '')}`;
+  const label = (lang) => esc((ctx.site.codeLabels || {})[lang] || lang);
+  const buttons = langs.map((lang, i) => `<button type="button" role="tab" id="${id(lang)}-tab" aria-controls="${id(lang)}"`
+    + ` aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-lang="${esc(lang)}">${label(lang)}</button>`);
+  const panels = tokens.map((token, i) => `<div class="docs-tabs-panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="${id(langs[i])}"`
+    + ` aria-labelledby="${id(langs[i])}-tab" data-lang="${esc(langs[i])}"><pre><code class="language-${esc(langs[i])}">`
+    + `${md.utils.escapeHtml(token.content)}</code></pre></div>`);
+  return `<div class="docs-tabs">\n<div class="docs-tabs-bar" role="tablist" aria-label="Language">${buttons.join('')}</div>\n`
+    + `${panels.join('\n')}\n</div>\n`;
+}
+
 function renderContainer(type, inner, page, ctx) {
   switch (type) {
+    case 'tabs':
+      return renderTabs(inner, page, ctx);
     case 'note':
       return `<div class="docs-note">\n${md.render(inner)}</div>\n`;
     case 'steps': {
@@ -165,7 +188,7 @@ function renderContainer(type, inner, page, ctx) {
     case 'cards':
       return renderCards(inner, page, ctx);
     default:
-      return fail(`${page.source}: unknown block "::: ${type}" (use note, steps, soon or cards)`);
+      return fail(`${page.source}: unknown block "::: ${type}" (use note, steps, soon, cards or tabs)`);
   }
 }
 
@@ -408,7 +431,7 @@ function build({ sitemap }) {
   const template = fs.readFileSync(path.join(SRC, 'template.html'), 'utf8').replace(/\r\n/g, '\n');
   const pages = loadPages(site);
   const { order, childrenOf } = buildNav(site, pages);
-  const ctx = { site, template, pages, order, childrenOf };
+  const ctx = { site, template, pages, order, childrenOf, tabGroups: 0 };
 
   const rendered = new Map(order.map((slug) => [slug, renderPage(pages.get(slug), ctx)]));
   checkLinks(ctx, rendered);

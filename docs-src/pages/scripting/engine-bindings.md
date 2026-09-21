@@ -1,24 +1,31 @@
 ---
 title: Calling engine code
-description: How Hyperion Engine types and methods are exposed to Strata scripts through CodeGen, and how to expose your own C++ classes.
-lede: Scripts call into the engine through bindings that CodeGen generates from reflected C++ types.
-summary: How engine types show up in Strata, and how to expose your own.
+description: How Hyperion Engine types and methods are exposed to Strata and C# scripts through CodeGen, and how to expose your own C++ classes.
+lede: Scripts call into the engine through bindings that CodeGen generates from reflected C++ types, for both Strata and C#.
+summary: How engine types show up in Strata and C#, and how to expose your own.
 ---
 
-## import Engine
+## The engine API
 
-Every script starts with `import Engine;`. That pulls in the generated bindings: handles for engine types, their methods, plus structs and enums.
+In Strata, `import Engine;` pulls in the generated bindings: handles for engine types, their methods, plus structs and enums. They're written to `Data/Scripts/Strata/Engine.strata` when you build, which is the quickest way to see what's available.
 
-They live in `Data/Scripts/Strata/Engine.strata` once you've built. It's the quickest way to see what's available.
+In C#, `using Hyperion;` brings in the engine's C# classes. Their methods come from extension methods that CodeGen writes to `Source/Generated/CSharp/`.
 
-## Methods
+## Calling methods
 
-Engine objects are handles, and methods are called with dot syntax. Methods from parent types work too, so an `Entity` can do anything a `Node` can:
+Methods are called with dot syntax. Methods from parent types work too, so an `Entity` can do anything a `Node` can:
 
+::: tabs
 ```strata
 float3 position = g_entity.GetWorldTranslation();
 g_entity.Translate(float3(1.0, 0.0, 0.0));
 ```
+
+```csharp
+Vec3f position = Entity.GetWorldTranslation();
+Entity.Translate(new Vec3f(1.0f, 0.0f, 0.0f));
+```
+:::
 
 ## Exposing your own C++
 
@@ -42,8 +49,9 @@ public:
 };
 ```
 
-The next CodeGen run generates roughly this on the Strata side:
+The next CodeGen run generates roughly this for each language:
 
+::: tabs
 ```strata
 handle Door extends Entity;
 
@@ -57,7 +65,26 @@ impl Door
 }
 ```
 
-A getter and setter that share a `Property` name turn into a Strata property.
+```csharp
+public static class DoorExtensions
+{
+    public static void Open(this Door obj) { ... }
+    public static bool IsLocked(this Door obj) { ... }
+    public static void SetLocked(this Door obj, bool locked) { ... }
+}
+```
+:::
+
+In Strata, a getter and setter that share a `Property` name become a property. In C# they stay as methods.
+
+For C#, CodeGen only writes the extension methods. The `Door` class itself is declared by hand, with a `[ClassBinding]` attribute naming the C++ class, like the engine's classes in `Source/Engine/DotNET/Runtime/`:
+
+```csharp
+[ClassBinding(Name = "Door")]
+public class Door : Entity
+{
+}
+```
 
 ## Hiding things from scripts
 
@@ -66,4 +93,11 @@ To keep a type or method out of scripts, add `NoScriptBindings`:
 ```cpp
 HYP_METHOD(NoScriptBindings)
 void InternalOnly();
+```
+
+To expose a type or method to one language only, use `OnlyLanguages` with `"strata"` or `"csharp"`:
+
+```cpp
+HYP_METHOD(OnlyLanguages = "csharp")
+void ForCSharpOnly();
 ```

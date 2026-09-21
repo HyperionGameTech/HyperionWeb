@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calling engine code · Hyperion Docs</title>
-  <meta name="description" content="How Hyperion Engine types and methods are exposed to Strata scripts through CodeGen, and how to expose your own C++ classes.">
+  <meta name="description" content="How Hyperion Engine types and methods are exposed to Strata and C# scripts through CodeGen, and how to expose your own C++ classes.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/scripting/engine-bindings.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Calling engine code · Hyperion Docs">
-  <meta property="og:description" content="How Hyperion Engine types and methods are exposed to Strata scripts through CodeGen, and how to expose your own C++ classes.">
+  <meta property="og:description" content="How Hyperion Engine types and methods are exposed to Strata and C# scripts through CodeGen, and how to expose your own C++ classes.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/scripting/engine-bindings.html">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -61,7 +61,7 @@
           <ul>
             <li><a href="/docs/scripting/first-script.html">Your first script</a></li>
             <li><a href="/docs/scripting/engine-bindings.html" aria-current="page">Calling engine code</a></li>
-            <li><a href="/docs/scripting/csharp-samples.html">C# samples</a></li>
+            <li><a href="/docs/scripting/samples.html">Samples</a></li>
           </ul>
         </li>
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
@@ -76,16 +76,22 @@
       <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/scripting/">Scripting</a></li><li><span aria-current="page">Calling engine code</span></li></ol></nav>
       <article class="docs-article">
         <h1>Calling engine code</h1>
-        <p class="lede">Scripts call into the engine through bindings that CodeGen generates from reflected C++ types.</p>
+        <p class="lede">Scripts call into the engine through bindings that CodeGen generates from reflected C++ types, for both Strata and C#.</p>
 
-<h2 id="import-engine">import Engine</h2>
-<p>Every script starts with <code>import Engine;</code>. That pulls in the generated bindings: handles for engine types, their methods, plus structs and enums.</p>
-<p>They live in <code>Data/Scripts/Strata/Engine.strata</code> once you've built. It's the quickest way to see what's available.</p>
-<h2 id="methods">Methods</h2>
-<p>Engine objects are handles, and methods are called with dot syntax. Methods from parent types work too, so an <code>Entity</code> can do anything a <code>Node</code> can:</p>
-<pre><code class="language-strata">float3 position = g_entity.GetWorldTranslation();
+<h2 id="the-engine-api">The engine API</h2>
+<p>In Strata, <code>import Engine;</code> pulls in the generated bindings: handles for engine types, their methods, plus structs and enums. They're written to <code>Data/Scripts/Strata/Engine.strata</code> when you build, which is the quickest way to see what's available.</p>
+<p>In C#, <code>using Hyperion;</code> brings in the engine's C# classes. Their methods come from extension methods that CodeGen writes to <code>Source/Generated/CSharp/</code>.</p>
+<h2 id="calling-methods">Calling methods</h2>
+<p>Methods are called with dot syntax. Methods from parent types work too, so an <code>Entity</code> can do anything a <code>Node</code> can:</p>
+<div class="docs-tabs">
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-3-strata-tab" aria-controls="tabs-3-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-3-csharp-tab" aria-controls="tabs-3-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-3-strata" aria-labelledby="tabs-3-strata-tab" data-lang="strata"><pre><code class="language-strata">float3 position = g_entity.GetWorldTranslation();
 g_entity.Translate(float3(1.0, 0.0, 0.0));
-</code></pre>
+</code></pre></div>
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-3-csharp" aria-labelledby="tabs-3-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">Vec3f position = Entity.GetWorldTranslation();
+Entity.Translate(new Vec3f(1.0f, 0.0f, 0.0f));
+</code></pre></div>
+</div>
 <h2 id="exposing-your-own-c">Exposing your own C++</h2>
 <p>Anything reflected is exposed by default. That's <code>HYP_CLASS</code>, <code>HYP_STRUCT</code> and <code>HYP_ENUM</code> types, and <code>HYP_METHOD</code> methods:</p>
 <pre><code class="language-cpp">HYP_CLASS()
@@ -104,8 +110,10 @@ public:
     void SetLocked(bool locked);
 };
 </code></pre>
-<p>The next CodeGen run generates roughly this on the Strata side:</p>
-<pre><code class="language-strata">handle Door extends Entity;
+<p>The next CodeGen run generates roughly this for each language:</p>
+<div class="docs-tabs">
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-4-strata-tab" aria-controls="tabs-4-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-4-csharp-tab" aria-controls="tabs-4-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-4-strata" aria-labelledby="tabs-4-strata-tab" data-lang="strata"><pre><code class="language-strata">handle Door extends Entity;
 
 impl Door
 {
@@ -115,23 +123,41 @@ impl Door
 
     property bool Locked { get = Door_IsLocked; set = Door_SetLocked; }
 }
+</code></pre></div>
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-4-csharp" aria-labelledby="tabs-4-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">public static class DoorExtensions
+{
+    public static void Open(this Door obj) { ... }
+    public static bool IsLocked(this Door obj) { ... }
+    public static void SetLocked(this Door obj, bool locked) { ... }
+}
+</code></pre></div>
+</div>
+<p>In Strata, a getter and setter that share a <code>Property</code> name become a property. In C# they stay as methods.</p>
+<p>For C#, CodeGen only writes the extension methods. The <code>Door</code> class itself is declared by hand, with a <code>[ClassBinding]</code> attribute naming the C++ class, like the engine's classes in <code>Source/Engine/DotNET/Runtime/</code>:</p>
+<pre><code class="language-csharp">[ClassBinding(Name = &quot;Door&quot;)]
+public class Door : Entity
+{
+}
 </code></pre>
-<p>A getter and setter that share a <code>Property</code> name turn into a Strata property.</p>
 <h2 id="hiding-things-from-scripts">Hiding things from scripts</h2>
 <p>To keep a type or method out of scripts, add <code>NoScriptBindings</code>:</p>
 <pre><code class="language-cpp">HYP_METHOD(NoScriptBindings)
 void InternalOnly();
 </code></pre>
+<p>To expose a type or method to one language only, use <code>OnlyLanguages</code> with <code>&quot;strata&quot;</code> or <code>&quot;csharp&quot;</code>:</p>
+<pre><code class="language-cpp">HYP_METHOD(OnlyLanguages = &quot;csharp&quot;)
+void ForCSharpOnly();
+</code></pre>
       </article>
-      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/first-script.html"><span>Previous</span>Your first script</a><a class="next" href="/docs/scripting/csharp-samples.html"><span>Next</span>C# samples</a></nav>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/first-script.html"><span>Previous</span>Your first script</a><a class="next" href="/docs/scripting/samples.html"><span>Next</span>Samples</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/scripting/engine-bindings.md" rel="noopener">Improve this page on GitHub</a></p>
     </main>
 
     <aside class="docs-toc" aria-label="On this page">
       <p class="docs-toc-title">On this page</p>
       <ul>
-        <li><a href="#import-engine">import Engine</a></li>
-        <li><a href="#methods">Methods</a></li>
+        <li><a href="#the-engine-api">The engine API</a></li>
+        <li><a href="#calling-methods">Calling methods</a></li>
         <li><a href="#exposing-your-own-c">Exposing your own C++</a></li>
         <li><a href="#hiding-things-from-scripts">Hiding things from scripts</a></li>
       </ul>

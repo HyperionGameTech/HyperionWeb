@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>C# samples · Hyperion Docs</title>
-  <meta name="description" content="Sample C# scripts for Hyperion Engine, starting with a custom component that's added to an entity and updated every frame.">
-  <link rel="canonical" href="https://hyperionengine.dev/docs/scripting/csharp-samples.html">
+  <title>Samples · Hyperion Docs</title>
+  <meta name="description" content="Sample scripts for Hyperion Engine in Strata and C#.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/scripting/samples.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
   <meta name="theme-color" content="#0b0d10">
@@ -18,9 +18,9 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="C# samples · Hyperion Docs">
-  <meta property="og:description" content="Sample C# scripts for Hyperion Engine, starting with a custom component that's added to an entity and updated every frame.">
-  <meta property="og:url" content="https://hyperionengine.dev/docs/scripting/csharp-samples.html">
+  <meta property="og:title" content="Samples · Hyperion Docs">
+  <meta property="og:description" content="Sample scripts for Hyperion Engine in Strata and C#.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/scripting/samples.html">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/docs/docs.css">
   <script>document.documentElement.classList.add('js');</script>
   <script src="/docs/docs.js" defer></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Scripting","item":"https://hyperionengine.dev/docs/scripting/"},{"@type":"ListItem","position":3,"name":"C# samples","item":"https://hyperionengine.dev/docs/scripting/csharp-samples.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Scripting","item":"https://hyperionengine.dev/docs/scripting/"},{"@type":"ListItem","position":3,"name":"Samples","item":"https://hyperionengine.dev/docs/scripting/samples.html"}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -61,7 +61,7 @@
           <ul>
             <li><a href="/docs/scripting/first-script.html">Your first script</a></li>
             <li><a href="/docs/scripting/engine-bindings.html">Calling engine code</a></li>
-            <li><a href="/docs/scripting/csharp-samples.html" aria-current="page">C# samples</a></li>
+            <li><a href="/docs/scripting/samples.html" aria-current="page">Samples</a></li>
           </ul>
         </li>
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
@@ -73,30 +73,17 @@
     </aside>
 
     <main id="main" class="docs-main">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/scripting/">Scripting</a></li><li><span aria-current="page">C# samples</span></li></ol></nav>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/scripting/">Scripting</a></li><li><span aria-current="page">Samples</span></li></ol></nav>
       <article class="docs-article">
-        <h1>C# samples</h1>
-        <p class="lede">Example C# scripts, with notes on the parts of the API each one uses.</p>
+        <h1>Samples</h1>
+        <p class="lede">Example scripts to copy into your project.</p>
 
-<div class="docs-note">
-<p>C# scripts currently only run in editor builds.</p>
-</div>
-<h2 id="running-a-sample">Running a sample</h2>
-<ol class="steps">
-<li>
-<p>Select an entity in the <strong>Scene</strong> panel.</p>
-</li>
-<li>
-<p>In the <strong>Inspector</strong>, find the <strong>Script</strong> section, hit <strong>New</strong> and choose <strong>C#</strong>. The editor saves the script as <code>Scripts/&lt;Name&gt;.cs</code> in your project.</p>
-</li>
-<li>
-<p>Replace the contents of the file with the sample and save. The editor recompiles C# scripts when they change, the same as Strata scripts.</p>
-</li>
-</ol>
-<p>The script project the editor generates allows <code>unsafe</code> code, which the samples use.</p>
+<p>To try one, create a script in the sample's language (<strong>Inspector › Script › New</strong>), paste the sample in, and save.</p>
 <h2 id="health-component">Health component</h2>
-<p>Defines a <code>Health</code> component, adds it to the script's entity, and drains it over time, logging the value every frame.</p>
-<pre><code class="language-csharp">using Hyperion;
+<p>A custom component that drains over time. C# only.</p>
+<div class="docs-tabs">
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-5-csharp-tab" aria-controls="tabs-5-csharp" aria-selected="true" tabindex="0" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-5-csharp" aria-labelledby="tabs-5-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">using Hyperion;
 using System;
 using System.Runtime.InteropServices;
 
@@ -156,36 +143,43 @@ public class NewScript : Script
         this.entity = null;
     }
 }
-</code></pre>
-<h3 id="the-component">The component</h3>
-<ul>
-<li>Components are structs that implement <code>IComponent</code>. They have to be blittable, meaning the struct has the same layout in managed and native memory. That's why <code>Health</code> uses <code>[StructLayout(LayoutKind.Sequential)]</code> and only has plain <code>float</code> fields. Registering a struct that isn't blittable throws an exception.</li>
-<li><code>IComponent</code> requires a static <code>Class</code> property, which returns the type's reflection info, and <code>NativeAddress</code>, which returns a pointer to the struct's data.</li>
-<li><code>IComponent</code> extends <code>IDisposable</code>. <code>Dispose</code> is where a component releases anything it owns. <code>Health</code> doesn't own anything, so it's empty.</li>
-</ul>
-<h3 id="the-script">The script</h3>
-<ul>
-<li>Scripts subclass <code>Script</code> and override <code>OnAdded</code>, <code>Update</code> and <code>Destroy</code>. They're called at the same points as in Strata; see the <a href="/docs/scripting/first-script.html#lifecycle">lifecycle</a>.</li>
-<li><code>ComponentRegistry.RegisterComponent&lt;Health&gt;()</code> registers the struct as a component type. By default the component is saved with the scene and shown in the editor. Pass <code>ComponentFlags</code> to change that.</li>
-<li><code>AddComponent&lt;Health&gt;(ref health)</code> adds the component to the entity.</li>
-<li><code>GetComponent&lt;Health&gt;()</code> returns a <code>ref</code> to the entity's component, so <code>health.Current -= deltaTime</code> changes it directly. There's no need to write it back.</li>
-<li><code>Logger.Log(LogLevel.Info, ...)</code> writes to the log, which shows up in the editor's console.</li>
-<li><code>Script</code> also has <code>World</code>, <code>Scene</code> and <code>Entity</code> properties. The base <code>OnAdded</code> is what sets <code>Entity</code>, so call <code>base.OnAdded(entity)</code> in your override if you want to use that property instead of your own field.</li>
-</ul>
+</code></pre></div>
+</div>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Call</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RegisterComponent&lt;Health&gt;()</code></td>
+<td>Registers the struct as a component type</td>
+</tr>
+<tr>
+<td><code>AddComponent(ref health)</code></td>
+<td>Adds it to the entity</td>
+</tr>
+<tr>
+<td><code>GetComponent&lt;Health&gt;()</code></td>
+<td>Returns a <code>ref</code>, so changes apply directly</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Component structs must be blittable: plain fields, sequential layout.</p>
 <div class="docs-note">
-<p><code>RegisterComponent</code> throws if the type is already registered. This sample registers <code>Health</code> in <code>OnAdded</code>, which works while only one entity uses the script. If several do, register the component once, for example behind a static flag.</p>
+<p><code>RegisterComponent</code> throws if the type is already registered, so if several entities use this script, register it once.</p>
 </div>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/engine-bindings.html"><span>Previous</span>Calling engine code</a><a class="next" href="/docs/rendering/"><span>Next</span>Rendering &amp; lighting</a></nav>
-      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/scripting/csharp-samples.md" rel="noopener">Improve this page on GitHub</a></p>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/scripting/samples.md" rel="noopener">Improve this page on GitHub</a></p>
     </main>
 
     <aside class="docs-toc" aria-label="On this page">
-      <p class="docs-toc-title">On this page</p>
-      <ul>
-        <li><a href="#running-a-sample">Running a sample</a></li>
-        <li><a href="#health-component">Health component</a></li>
-      </ul>
+
     </aside>
   </div>
 

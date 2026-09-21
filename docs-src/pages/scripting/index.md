@@ -1,19 +1,34 @@
 ---
 title: Scripting
-description: Writing gameplay code for Hyperion Engine in the Strata scripting language, and exposing C++ types to scripts.
-lede: Gameplay code in Hyperion is written in Strata, a statically typed, compiled language that recompiles live when you save.
-summary: Gameplay code in Strata, and exposing your C++ to it.
+description: Writing gameplay scripts for Hyperion Engine in Strata or C#, and exposing C++ types to them.
+lede: Gameplay scripts can be written in Strata or C#. Both attach to entities the same way, share the same lifecycle, and recompile when you save.
+summary: Gameplay scripts in Strata or C#, and exposing C++ to them.
 ---
+
+## Strata and C#
+
+| | Strata | C# |
+|---|---|---|
+| Files | `Scripts/<Name>.strata` | `Scripts/<Name>.cs` |
+| Compiled with | LLVM, just-in-time in the editor | .NET |
+| Memory | No garbage collector or ref counting | .NET garbage collector |
+| Engine API | `import Engine;` | `using Hyperion;` |
+| Live reload | On save | On save |
+| Outside the editor | Needs ahead-of-time compilation, which isn't hooked up yet | .NET is only enabled in editor builds by default, set by `HYP_DOTNET_ONLY_FOR_EDITOR` in `Source/CMakeLists.txt` |
+
+Each script picks its language when you create it, and a project can use both. Code samples in these docs have a tab for each language, and the one you pick is remembered.
 
 ## Strata
 
-It has no garbage collector, ref counting or manual memory management, and scripts reload without restarting the editor.
+Strata is Hyperion's own scripting language. It's statically typed and compiled, with no garbage collector, ref counting or manual memory management. The [Strata overview](/strata.html) covers the syntax.
 
-The [Strata overview](/strata.html) covers the syntax: functions, control flow, enums, boxes and optionals.
+## C#
+
+C# scripts are classes that subclass `Script`. They can also define their own component types; see the [samples](/docs/scripting/samples.html).
 
 ## Exposing C++ to scripts
 
-Engine types show up in scripts through reflection. Mark up a class with the reflection macros, and CodeGen generates the bindings:
+Engine types show up in both languages through reflection. Mark up a class with the reflection macros, and CodeGen generates the bindings:
 
 ```cpp
 HYP_CLASS()
@@ -29,15 +44,13 @@ public:
 };
 ```
 
+[Calling engine code](/docs/scripting/engine-bindings.html) covers what each language gets.
+
 ## In this section
 
 ::: cards
 children
 :::
-
-## C#
-
-The editor can also create C# scripts. They currently only run in editor builds. See the [C# samples](/docs/scripting/csharp-samples.html) for how they're put together.
 
 ## TODO
 
