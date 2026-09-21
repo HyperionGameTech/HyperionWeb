@@ -5,7 +5,7 @@ lede: The console lets you change engine settings and run tasks while the engine
 summary: Change engine settings and run tasks at runtime.
 ---
 
-## Console variables (CVars)
+# Console variables (CVars)
 
 CVars are global settings you can change on the fly. Most of them start out with values from `Config/EngineConfig.json`, and can be changed from the editor's console.
 
@@ -22,7 +22,7 @@ Bools take `true` / `false` (or `1` / `0`), numbers and strings work as well
 There's no full list yet. To find them all, search the codebase for the regex `^CVar<([A-Za-z_]+)>`.
 :::
 
-## Commandlets
+# Commandlets
 
 Commandlets are self-contained tasks, like precompiling shaders, building lighting, baking textures, etc... 
 Even our "Cache server" is a standalone commandlet application.

@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Finding your way around · Hyperion Docs</title>
-  <meta name="description" content="A quick tour of the Hyperion Engine repository: where the source, config, content, tools and build output live.">
+  <title>A tour of the codebase · Hyperion Docs</title>
+  <meta name="description" content="A quick tour of the Hyperion Engine repository">
   <link rel="canonical" href="https://hyperionengine.dev/docs/get-started/project-layout.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -18,8 +18,8 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Finding your way around · Hyperion Docs">
-  <meta property="og:description" content="A quick tour of the Hyperion Engine repository: where the source, config, content, tools and build output live.">
+  <meta property="og:title" content="A tour of the codebase · Hyperion Docs">
+  <meta property="og:description" content="A quick tour of the Hyperion Engine repository">
   <meta property="og:url" content="https://hyperionengine.dev/docs/get-started/project-layout.html">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/docs/docs.css">
   <script>document.documentElement.classList.add('js');</script>
   <script src="/docs/docs.js" defer></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Get started","item":"https://hyperionengine.dev/docs/get-started/"},{"@type":"ListItem","position":3,"name":"Finding your way around","item":"https://hyperionengine.dev/docs/get-started/project-layout.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Get started","item":"https://hyperionengine.dev/docs/get-started/"},{"@type":"ListItem","position":3,"name":"A tour of the codebase","item":"https://hyperionengine.dev/docs/get-started/project-layout.html"}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -58,7 +58,7 @@
           <ul>
             <li><a href="/docs/get-started/get-the-code.html">Get the code</a></li>
             <li><a href="/docs/get-started/building.html">Build the engine</a></li>
-            <li><a href="/docs/get-started/project-layout.html" aria-current="page">Finding your way around</a></li>
+            <li><a href="/docs/get-started/project-layout.html" aria-current="page">A tour of the codebase</a></li>
             <li><a href="/docs/get-started/glossary.html">Glossary</a></li>
           </ul>
         </li>
@@ -74,12 +74,12 @@
     </aside>
 
     <main id="main" class="docs-main">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/get-started/">Get started</a></li><li><span aria-current="page">Finding your way around</span></li></ol></nav>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/get-started/">Get started</a></li><li><span aria-current="page">A tour of the codebase</span></li></ol></nav>
       <article class="docs-article">
-        <h1>Finding your way around</h1>
-        <p class="lede">What's in each folder of the engine repo.</p>
+        <h1>A tour of the codebase</h1>
+        <p class="lede">What goes where?</p>
 
-<h2 id="the-top-level">The top level</h2>
+<h2 id="top-level-directories">Top-level directories</h2>
 <div class="docs-table-wrap">
 <table class="docs-table">
 <thead>
@@ -91,7 +91,7 @@
 <tbody>
 <tr>
 <td>Source</td>
-<td>All the C++, plus shaders.</td>
+<td>All the engine and editor code</td>
 </tr>
 <tr>
 <td>Config</td>
@@ -99,7 +99,7 @@
 </tr>
 <tr>
 <td>Content</td>
-<td>Assets for the engine, the editor and the game.</td>
+<td>Assets for the core engine and editor</td>
 </tr>
 <tr>
 <td>External</td>
@@ -107,20 +107,20 @@
 </tr>
 <tr>
 <td>Tools</td>
-<td>Build scripts, CodeGen and other tools.</td>
+<td>Build scripts, CodeGenTool source and other misc tools</td>
 </tr>
 <tr>
 <td>Documentation</td>
-<td>Markdown docs that live alongside the code.</td>
+<td></td>
 </tr>
 <tr>
 <td>Build, Binaries</td>
-<td>Where your build output goes. Not checked in.</td>
+<td>Where your build output goes <strong>Not committed, these are excluded via .gitignore</strong></td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="inside-source">Inside Source</h2>
+<h2 id="source-structure"><code>Source</code> structure</h2>
 <div class="docs-table-wrap">
 <table class="docs-table">
 <thead>
@@ -132,7 +132,7 @@
 <tbody>
 <tr>
 <td>Core</td>
-<td>The base library: containers, memory, reflection and so on. Keeps its dependencies to a minimum.</td>
+<td>containers, memory, reflection and so on. Keeps its dependencies to a minimum. This is also re-used in our CodeGenTool, not tied to the engine</td>
 </tr>
 <tr>
 <td>Engine</td>
@@ -140,7 +140,7 @@
 </tr>
 <tr>
 <td>Editor</td>
-<td>The editor.</td>
+<td>The editor's code. C++ and C# mixed (bindings are C++, actual editor UI is C#)</td>
 </tr>
 <tr>
 <td>Shaders</td>
@@ -148,15 +148,15 @@
 </tr>
 <tr>
 <td>Commandlets</td>
-<td>Standalone tasks, like precompiling shaders or cooking assets.</td>
+<td>See <a href="/docs/editor/console.html#commandlets">console</a></td>
 </tr>
 <tr>
 <td>Sample</td>
-<td>The sample app's entry point.</td>
+<td>The sample app's entry point</td>
 </tr>
 <tr>
 <td>Generated</td>
-<td>CodeGen output. Don't edit by hand.</td>
+<td>CodeGen output. Don't edit by hand, it'll be overwritten on  next cmake configure!</td>
 </tr>
 </tbody>
 </table>
@@ -169,8 +169,8 @@
     <aside class="docs-toc" aria-label="On this page">
       <p class="docs-toc-title">On this page</p>
       <ul>
-        <li><a href="#the-top-level">The top level</a></li>
-        <li><a href="#inside-source">Inside Source</a></li>
+        <li><a href="#top-level-directories">Top-level directories</a></li>
+        <li><a href="#source-structure">Source structure</a></li>
       </ul>
     </aside>
   </div>

@@ -1,7 +1,7 @@
 ---
 title: Glossary
-description: Plain-English definitions of the terms used across Hyperion Engine: objects, handles, worlds, scenes, nodes, entities, components, systems and more.
-lede: Definitions of the terms used throughout the engine and these docs.
+description: Definitions of the terms used throughout the engine and docs
+lede:
 summary: Definitions of common engine terms.
 ---
 

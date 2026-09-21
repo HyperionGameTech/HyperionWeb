@@ -390,7 +390,10 @@ function checkLinks(ctx, rendered) {
           targetHtml = null;
         }
       }
-      if (hash && targetHtml && !targetHtml.includes(`id="${hash}"`)) problems.push(`${page.source}: no heading "#${hash}" at ${urlPath || 'this page'}`);
+      if (hash && targetHtml && !targetHtml.includes(`id="${hash}"`)) {
+        const close = targetHtml.includes(`id="${hash.toLowerCase()}"`) ? ` (heading ids are lowercase: #${hash.toLowerCase()})` : '';
+        problems.push(`${page.source}: no heading "#${hash}" at ${urlPath || 'this page'}${close}`);
+      }
     }
   }
   if (problems.length) fail(`link check failed:\n  ${problems.join('\n  ')}`);

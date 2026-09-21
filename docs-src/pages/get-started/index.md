@@ -1,7 +1,7 @@
 ---
 title: Get started
-description: Get started with Hyperion Engine: clone the repository, build the engine and editor, and learn the basic terms and project layout.
-lede: Getting the engine built and running, and the basic concepts.
+description: Get started with Hyperion Engine. clone the repository, build the engine and editor, and learn the basic terms and project layout.
+lede: 
 summary: Getting the code, building the engine, and the basics.
 ---
 

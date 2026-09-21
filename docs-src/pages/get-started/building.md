@@ -1,7 +1,7 @@
 ---
 title: Build the engine
 description: Install the prerequisites and build Hyperion Engine and its editor on Windows or macOS.
-lede: Install the prerequisites, then build with one script.
+lede: Installing prerequisites and getting the build going
 summary: Prerequisites and build commands.
 ---
 

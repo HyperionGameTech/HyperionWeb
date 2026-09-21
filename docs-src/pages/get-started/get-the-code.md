@@ -1,7 +1,7 @@
 ---
 title: Get the code
 description: Clone the Hyperion Engine repository from GitHub, including its Git submodules.
-lede: Hyperion is open source under the MIT license, and hosted on GitHub.
+lede: 
 summary: Clone the repo (and its submodules).
 ---
 
