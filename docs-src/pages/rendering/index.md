@@ -1,10 +1,11 @@
 ---
 title: Rendering & lighting
 description: An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, ray-traced GI and HLSL shaders.
-lede: Hyperion aims to look good on low-end hardware by baking as much lighting as possible ahead of time, and using realtime techniques where they're needed.
+lede: 
 summary: Materials, baked lighting, GI, shaders and post-processing.
-hero: /assets/screenie.webp
-hero_alt: Hyperion editor viewport showing a dark brick test scene with baked lighting
+hero: /assets/editor-scene.jpg
+hero_alt: A brick-walled room with a red sphere, coloured boxes and a pillar, in the Hyperion editor viewport
+hero_crop: 717 232 1830 773
 ---
 
 ## Overview

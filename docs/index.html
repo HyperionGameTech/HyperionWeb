@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Documentation · Hyperion Docs</title>
-  <meta name="description" content="Hyperion Engine documentation: get the code, build the engine, and learn how the editor, scenes, scripting, rendering, physics and multiplayer fit together.">
+  <title>Docs · Hyperion Docs</title>
+  <meta name="description" content="Hyperion Engine documentation">
   <link rel="canonical" href="https://hyperionengine.dev/docs/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -18,8 +18,8 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Documentation · Hyperion Docs">
-  <meta property="og:description" content="Hyperion Engine documentation: get the code, build the engine, and learn how the editor, scenes, scripting, rendering, physics and multiplayer fit together.">
+  <meta property="og:title" content="Docs · Hyperion Docs">
+  <meta property="og:description" content="Hyperion Engine documentation">
   <meta property="og:url" content="https://hyperionengine.dev/docs/">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="/docs/docs.css">
   <script>document.documentElement.classList.add('js');</script>
   <script src="/docs/docs.js" defer></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -43,14 +42,15 @@
         <a href="/#features">Features</a>
         <a href="/strata.html">Strata</a>
         <a href="/docs/" aria-current="page">Docs</a>
-        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+        <a class="nav-github" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener" aria-label="Hyperion Engine on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
       </nav>
     </div>
   </header>
 
+  <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
   <div class="docs-layout">
     <aside class="docs-sidebar" aria-label="Documentation">
-      <p class="docs-nav-label">Documentation</p>
+      <p class="docs-nav-label">Docs</p>
       <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
       <ul class="docs-nav" id="docs-nav">
         <li><a href="/docs/" aria-current="page">Overview</a></li>
@@ -67,15 +67,10 @@
     </aside>
 
     <main id="main" class="docs-main">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"></nav>
       <article class="docs-article">
         <h1>Overview</h1>
         <p class="lede">How to build the engine from source and get started making your first Hyperion game</p>
         <figure class="docs-hero docs-hero-crop" style="aspect-ratio: 1615 / 650"><img src="/assets/terrain.png" alt="Hyperion Editor viewport" width="1962" height="1084" style="width: 121.4861%; left: -17.3375%; top: -18.4615%" fetchpriority="high"></figure>
-<div class="docs-note">
-<p>These docs are brand new and are likely missing a lot of info.
-If something you notice something, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p>
-</div>
 <h2 id="where-to-start">Where to start</h2>
 <p><a href="/docs/get-started/">Get started</a> covers getting the code, building the engine, and the basic terms.</p>
 <h2 id="sections">Sections</h2>
@@ -96,7 +91,7 @@ If something you notice something, <a href="https://github.com/HyperionGameTech/
     </main>
 
     <aside class="docs-toc" aria-label="On this page">
-      <p class="docs-toc-title">On this page</p>
+      <p class="docs-toc-title">Table of contents</p>
       <ul>
         <li><a href="#where-to-start">Where to start</a></li>
         <li><a href="#sections">Sections</a></li>

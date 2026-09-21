@@ -1,8 +1,8 @@
 ---
 title: Running a server
 description: Run a Hyperion Engine dedicated server from the command line and connect clients to it.
-lede: Starting a dedicated server, and connecting clients to it.
-summary: Starting a dedicated server and connecting clients.
+lede: Starting a dedicated server
+summary: Starting a dedicated server
 ---
 
 ## Start a server
@@ -28,7 +28,3 @@ The sample game also has a connect screen, with a box for the host address and b
 ## From the editor
 
 The editor can start a local server and connect to it for you. See [play-in-editor](/docs/editor/play-in-editor.html).
-
-## Under the hood
-
-Networking uses a custom UDP transport, with reliable and unreliable channels.

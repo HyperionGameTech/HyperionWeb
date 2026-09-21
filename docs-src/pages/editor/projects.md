@@ -9,11 +9,11 @@ summary: Making, opening and saving projects, and what's inside.
 
 The editor opens with a new, unsaved project containing a main scene, a sun, and a player with a camera.
 
-Use **Save** (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and pick a folder to keep it. Until the first save, it lives in a temporary folder.
+Use :icon[save] **Save** (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and pick a folder to keep it. Until the first save, it lives in a temporary folder.
 
 ## Opening a project
 
-Use **Open** in the toolbar and pick a `.hypproject` file.
+Use :icon[folder-opened] **Open** in the toolbar and pick a `.hypproject` file.
 
 ## What's inside
 

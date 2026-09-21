@@ -13,7 +13,9 @@ Lightmaps and probes are baked per swatch, so each swatch has its own baked ligh
 
 ## In the editor
 
-The active swatch is shown in the toolbar. Add a new swatch, make it active, then edit the scene. Changes you make while a swatch is active are saved as overrides for that swatch.
+The active swatch is shown in the toolbar, next to :icon[roller]. Add one with **New Swatch...** in that menu and make it active.
+
+With :icon[git-branch] **Override Edits** on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well.
 
 ## From code
 

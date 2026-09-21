@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "node tools/build-docs.mjs",
-    "watch": "node tools/build-docs.mjs --watch"
+    "watch": "node tools/build-docs.mjs --watch",
+    "sync-icons": "node tools/sync-icons.mjs"
   },
   "devDependencies": {
     "markdown-it": "^14.1.0",

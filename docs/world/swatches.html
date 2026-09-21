@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="/docs/docs.css">
   <script>document.documentElement.classList.add('js');</script>
   <script src="/docs/docs.js" defer></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Scenes & worlds","item":"https://hyperionengine.dev/docs/world/"},{"@type":"ListItem","position":3,"name":"Swatches","item":"https://hyperionengine.dev/docs/world/swatches.html"}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -43,14 +42,15 @@
         <a href="/#features">Features</a>
         <a href="/strata.html">Strata</a>
         <a href="/docs/" aria-current="true">Docs</a>
-        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+        <a class="nav-github" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener" aria-label="Hyperion Engine on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
       </nav>
     </div>
   </header>
 
+  <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
   <div class="docs-layout">
     <aside class="docs-sidebar" aria-label="Documentation">
-      <p class="docs-nav-label">Documentation</p>
+      <p class="docs-nav-label">Docs</p>
       <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
       <ul class="docs-nav" id="docs-nav">
         <li><a href="/docs/">Overview</a></li>
@@ -74,7 +74,6 @@
     </aside>
 
     <main id="main" class="docs-main">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/world/">Scenes &amp; worlds</a></li><li><span aria-current="page">Swatches</span></li></ol></nav>
       <article class="docs-article">
         <h1>Swatches</h1>
         <p class="lede">Swatches are variations of a world, like <em>Noon</em> and <em>Dusk</em>, each with its own property overrides and baked lighting.</p>
@@ -83,7 +82,8 @@
 <p>Every world starts out with a swatch called <em>Default</em>. Additional swatches can override entity properties, such as the sun angle or light colors. Anything that isn't overridden is shared.</p>
 <p>Lightmaps and probes are baked per swatch, so each swatch has its own baked lighting rather than relying on realtime lighting when the time of day changes.</p>
 <h2 id="in-the-editor">In the editor</h2>
-<p>The active swatch is shown in the toolbar. Add a new swatch, make it active, then edit the scene. Changes you make while a swatch is active are saved as overrides for that swatch.</p>
+<p>The active swatch is shown in the toolbar, next to <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M600-40H440q-17 0-28.5-11.5T400-80v-240q0-17 11.5-28.5T440-360h40v-120H160q-33 0-56.5-23.5T80-560v-160q0-33 23.5-56.5T160-800h80v-40q0-17 11.5-28.5T280-880h480q17 0 28.5 11.5T800-840v160q0 17-11.5 28.5T760-640H280q-17 0-28.5-11.5T240-680v-40h-80v160h320q33 0 56.5 23.5T560-480v120h40q17 0 28.5 11.5T640-320v240q0 17-11.5 28.5T600-40Zm-120-80h80v-160h-80v160ZM320-720h400v-80H320v80Zm160 600h80-80ZM320-720v-80 80Z"/></svg>. Add one with <strong>New Swatch...</strong> in that menu and make it active.</p>
+<p>With <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14 5.5C14 4.121 12.879 3 11.5 3C10.121 3 9 4.121 9 5.5C9 6.682 9.826 7.669 10.93 7.928C10.744 8.546 10.177 9 9.5 9H6.5C5.935 9 5.419 9.195 5 9.512V4.949C6.14 4.717 7 3.707 7 2.5C7 1.121 5.879 0 4.5 0C3.121 0 2 1.121 2 2.5C2 3.708 2.86 4.717 4 4.949V11.05C2.86 11.282 2 12.292 2 13.499C2 14.878 3.121 15.999 4.5 15.999C5.879 15.999 7 14.878 7 13.499C7 12.317 6.174 11.33 5.07 11.071C5.256 10.453 5.823 9.999 6.5 9.999H9.5C10.723 9.999 11.74 9.115 11.954 7.953C13.116 7.738 14 6.723 14 5.5ZM3 2.5C3 1.673 3.673 1 4.5 1C5.327 1 6 1.673 6 2.5C6 3.327 5.327 4 4.5 4C3.673 4 3 3.327 3 2.5ZM6 13.5C6 14.327 5.327 15 4.5 15C3.673 15 3 14.327 3 13.5C3 12.673 3.673 12 4.5 12C5.327 12 6 12.673 6 13.5ZM11.5 7C10.673 7 10 6.327 10 5.5C10 4.673 10.673 4 11.5 4C12.327 4 13 4.673 13 5.5C13 6.327 12.327 7 11.5 7Z"/></svg> <strong>Override Edits</strong> on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well.</p>
 <h2 id="from-code">From code</h2>
 <pre><code class="language-cpp">world-&gt;GetOrCreateSwatch(NAME(&quot;Dusk&quot;));
 world-&gt;SetActiveSwatch(NAME(&quot;Dusk&quot;));
@@ -98,7 +98,7 @@ world-&gt;SetActiveSwatch(NAME(&quot;Dusk&quot;));
     </main>
 
     <aside class="docs-toc" aria-label="On this page">
-      <p class="docs-toc-title">On this page</p>
+      <p class="docs-toc-title">Table of contents</p>
       <ul>
         <li><a href="#what-s-in-a-swatch">What's in a swatch</a></li>
         <li><a href="#in-the-editor">In the editor</a></li>

@@ -25,10 +25,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Content column: --max wide, or the window minus 20px each side on smaller screens */
 .wrap {
-  max-width: var(--max);
+  width: min(100% - 40px, var(--max));
   margin: 0 auto;
-  padding: 0; /*20px;*/
+  padding: 0;
 }
 
 /* Header */
@@ -132,6 +133,17 @@ body {
 
 .nav a.button-small:hover { color: #0b0d10; background: #fff; border-color: #fff; }
 
+.nav a.nav-github {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-github svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
 /* Hero */
 
 .hero { padding: 64px 20px 8px; }
@@ -148,6 +160,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: auto;
   max-width: 1400px;
   min-height: 460px;
   padding: 110px 24px 96px;
@@ -385,7 +398,7 @@ h1 {
 
 .cta {
   text-align: center;
-  padding: 110px 20px;
+  padding: 110px 0;
   border-top: 1px solid var(--border);
 }
 
@@ -627,7 +640,7 @@ a { color: var(--accent); }
   }
   .hero-centered h1 { font-size: 44px; }
   .hero-logo img { width: 260px; }
-  .section { padding: 64px 20px; }
+  .section { padding: 64px 0; }
   .section h2 { font-size: 24px; }
   .split { grid-template-columns: 1fr; gap: 8px; }
   .callout { padding: 24px; }
@@ -639,6 +652,7 @@ a { color: var(--accent); }
   .feature-row-reverse .feature-media { order: initial; }
   .feature-row + .feature-row { margin-top: 28px; padding-top: 28px; }
   .specs div { grid-template-columns: 1fr; gap: 2px; }
-  .header-inner { padding: 12px 20px; }
-  .nav { justify-content: flex-end; gap: 14px; }
+  .header-inner { padding: 12px 0; gap: 12px; }
+  .nav { justify-content: flex-end; gap: 10px; }
+  .nav a { font-size: 13px; }
 }

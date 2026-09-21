@@ -5,7 +5,7 @@ lede: Example scripts to copy into your project.
 summary: Example scripts to copy into your project.
 ---
 
-To try one, create a script in the sample's language (**Inspector › Script › New**), paste the sample in, and save.
+To try one, create a script in the sample's language (**Inspector › Script ›** :icon[add]), paste the sample in, and save.
 
 ## Health component
 

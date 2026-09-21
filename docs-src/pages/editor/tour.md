@@ -15,19 +15,20 @@ summary: The panels, the toolbar, and getting around the viewport.
 | Assets | Your project's content. Search it, **Import** things, or make something with **New...**. |
 | Console | Logs, plus a spot to type commands. See [Console & CVars](/docs/editor/console.html). |
 
-Asset editors open as panels on the right. To restore the default layout, use **Layout › Reset Layout** in the gear menu.
+Asset editors open as panels on the right. To restore the default layout, use **Layout › Reset Layout** in the :icon[settings-gear] gear menu.
 
 ## The toolbar
 
 There's no menu bar. Everything lives in the toolbar, roughly left to right:
 
-- **New Project**, **Open** and **Save**.
-- Undo, redo, copy and paste.
-- **Add**, for putting new things in your scene: lights, probes, volumes and more.
-- **Bake**, for [baking lighting](/docs/rendering/baking.html).
-- **Translate**, **Rotate** and **Scale**, to pick what the gizmo does, plus grid snapping.
-- The gear menu, with **World Settings**, stats and layout options.
-- **Play**, **Pause** and **Stop**. More in [play-in-editor](/docs/editor/play-in-editor.html).
+- :icon[file] **New Project**, :icon[folder-opened] **Open** and :icon[save] **Save**.
+- :icon[discard] Undo, :icon[redo] redo, :icon[copy] copy and :icon[clippy] paste.
+- :icon[layers] **Layers**, and :icon[roller] the active [swatch](/docs/world/swatches.html).
+- :icon[add] **Add**, for putting new things in your scene: lights, probes, volumes and more.
+- :icon[heat] **Bake**, for [baking lighting](/docs/rendering/baking.html).
+- :icon[move] **Translate**, :icon[refresh] **Rotate** and :icon[screen-full] **Scale**, to pick what the gizmo does, plus :icon[magnet] grid snapping.
+- The :icon[settings-gear] gear menu, with **World Settings**, stats and layout options.
+- :icon[play] **Play**, :icon[debug-pause] **Pause** and :icon[debug-stop] **Stop**. More in [play-in-editor](/docs/editor/play-in-editor.html).
 
 ## Viewport controls
 

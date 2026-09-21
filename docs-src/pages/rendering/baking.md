@@ -8,11 +8,11 @@ summary: Baking lightmaps and probes in the editor.
 ## How to bake
 
 ::: steps
-1. Add a **Lightmap Volume** around the area you want baked: **Add › Lighting › Lightmap Volume**.
+1. Add a **Lightmap Volume** around the area you want baked: :icon[add] **Add › Lighting › Lightmap Volume**.
 
 2. For lighting and reflections on moving objects, add **Reflection Probes** and **Irradiance Probes** from the same menu.
 
-3. Click **Bake** in the toolbar and pick what to bake: **Lightmaps**, **Reflection Probes** or **Irradiance Probes**.
+3. Click :icon[heat] **Bake** in the toolbar and pick what to bake: **Lightmaps**, **Reflection Probes** or **Irradiance Probes**.
 :::
 
 Progress is shown in an overlay while the bake runs.

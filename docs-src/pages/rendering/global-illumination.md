@@ -31,4 +31,4 @@ Each has a console variable. Toggle them from the [console](/docs/editor/console
 | Rendering.DDGI | DDGI |
 | Rendering.RayTracing.RayTracedReflections | RT reflections |
 
-DDGI and ray-traced reflections also have to be enabled per world, under **World Settings** in the gear menu.
+DDGI and ray-traced reflections also have to be enabled per world, under **World Settings** in the :icon[settings-gear] gear menu.

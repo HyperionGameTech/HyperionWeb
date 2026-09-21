@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="/docs/docs.css">
   <script>document.documentElement.classList.add('js');</script>
   <script src="/docs/docs.js" defer></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Editor","item":"https://hyperionengine.dev/docs/editor/"},{"@type":"ListItem","position":3,"name":"Working with projects","item":"https://hyperionengine.dev/docs/editor/projects.html"}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -43,14 +42,15 @@
         <a href="/#features">Features</a>
         <a href="/strata.html">Strata</a>
         <a href="/docs/" aria-current="true">Docs</a>
-        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+        <a class="nav-github" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener" aria-label="Hyperion Engine on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
       </nav>
     </div>
   </header>
 
+  <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
   <div class="docs-layout">
     <aside class="docs-sidebar" aria-label="Documentation">
-      <p class="docs-nav-label">Documentation</p>
+      <p class="docs-nav-label">Docs</p>
       <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
       <ul class="docs-nav" id="docs-nav">
         <li><a href="/docs/">Overview</a></li>
@@ -75,16 +75,15 @@
     </aside>
 
     <main id="main" class="docs-main">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/editor/">Editor</a></li><li><span aria-current="page">Working with projects</span></li></ol></nav>
       <article class="docs-article">
         <h1>Working with projects</h1>
         <p class="lede">A project holds your game's scenes, assets, scripts and settings in one folder.</p>
 
 <h2 id="new-projects">New projects</h2>
 <p>The editor opens with a new, unsaved project containing a main scene, a sun, and a player with a camera.</p>
-<p>Use <strong>Save</strong> (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and pick a folder to keep it. Until the first save, it lives in a temporary folder.</p>
+<p>Use <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14.414 3.207L12.793 1.586C12.421 1.213 11.905 1 11.379 1H3C1.897 1 1 1.897 1 3V13C1 14.103 1.897 15 3 15H13C14.103 15 15 14.103 15 13V4.621C15 4.095 14.787 3.579 14.414 3.207ZM9 2V3.5C9 3.776 8.776 4 8.5 4H6.5C6.224 4 6 3.776 6 3.5V2H9ZM5 14V9.5C5 9.224 5.224 9 5.5 9H10.5C10.776 9 11 9.224 11 9.5V14H5ZM14 13C14 13.551 13.551 14 13 14H12V9.5C12 8.673 11.327 8 10.5 8H5.5C4.673 8 4 8.673 4 9.5V14H3C2.449 14 2 13.551 2 13V3C2 2.449 2.449 2 3 2H5V3.5C5 4.327 5.673 5 6.5 5H8.5C9.327 5 10 4.327 10 3.5V2H11.379C11.642 2 11.9 2.107 12.086 2.293L13.707 3.914C13.893 4.1 14 4.358 14 4.621V13Z"/></svg> <strong>Save</strong> (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and pick a folder to keep it. Until the first save, it lives in a temporary folder.</p>
 <h2 id="opening-a-project">Opening a project</h2>
-<p>Use <strong>Open</strong> in the toolbar and pick a <code>.hypproject</code> file.</p>
+<p>Use <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2 4.5V9.10022L2.92389 7.5C3.45979 6.5718 4.45017 6 5.52196 6L11.9146 6C11.7087 5.4174 11.1531 5 10.5 5H7C6.86739 5 6.74021 4.94732 6.64645 4.85355L4.93934 3.14645C4.84557 3.05268 4.71839 3 4.58579 3H3.5C2.67157 3 2 3.67157 2 4.5ZM7.06895 13.9953C7.04641 13.9984 7.02339 14 7 14H3.5C2.11929 14 1 12.8807 1 11.5V4.5C1 3.11929 2.11929 2 3.5 2H4.58579C4.98361 2 5.36514 2.15804 5.64645 2.43934L7.20711 4H10.5C11.724 4 12.7426 4.87965 12.958 6.04127C14.605 6.34148 15.5443 8.22106 14.6616 9.75L13.0766 12.4953C12.5407 13.4235 11.5503 13.9953 10.4785 13.9953H7.06895ZM5.52196 7C4.80743 7 4.14718 7.3812 3.78991 8L2.20492 10.7453C1.62757 11.7453 2.34926 12.9953 3.50396 12.9953L10.4785 12.9953C11.193 12.9953 11.8533 12.6141 12.2105 11.9953L13.7955 9.25C14.3729 8.25 13.6512 7 12.4965 7L5.52196 7Z"/></svg> <strong>Open</strong> in the toolbar and pick a <code>.hypproject</code> file.</p>
 <h2 id="what-s-inside">What's inside</h2>
 <pre><code>Projects/MyGame/
   MyGame.hypproject
@@ -106,7 +105,7 @@
     </main>
 
     <aside class="docs-toc" aria-label="On this page">
-      <p class="docs-toc-title">On this page</p>
+      <p class="docs-toc-title">Table of contents</p>
       <ul>
         <li><a href="#new-projects">New projects</a></li>
         <li><a href="#opening-a-project">Opening a project</a></li>

@@ -1,6 +1,7 @@
 {
   "siteUrl": "https://hyperionengine.dev",
   "editUrl": "https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages",
+  "notice": "**Work in progress.** These docs are new and are likely missing a lot of info. If you notice something wrong or missing, [open an issue]({{engineRepo}}/issues). PRs are welcome as well.",
   "vars": {
     "engineRepo": "https://github.com/HyperionGameTech/HyperionEngine"
   },

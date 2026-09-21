@@ -17,7 +17,7 @@ summary: Bloom, TAA, tonemapping, exposure and fog.
 
 ## Per-world settings
 
-Tonemapping, exposure, color, fog and clouds are per-world settings, under **World Settings** in the gear menu.
+Tonemapping, exposure, color, fog and clouds are per-world settings, under **World Settings** in the :icon[settings-gear] gear menu.
 
 ## Toggles
 

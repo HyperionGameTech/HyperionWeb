@@ -1,7 +1,7 @@
 ---
 title: Multiplayer
 description: Built-in multiplayer in Hyperion Engine: a dedicated server, replication, client-side prediction and multiplayer testing in the editor.
-lede: Multiplayer is built into the engine. It includes a dedicated server that clients connect to.
+lede: 
 summary: Dedicated servers, replication and prediction.
 ---
 

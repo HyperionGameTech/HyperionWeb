@@ -10,7 +10,7 @@ summary: Attach a script to an entity and make it move.
 ::: steps
 1. Select an entity in the **Scene** panel.
 
-2. In the **Inspector**, find the **Script** section and hit **New**.
+2. In the **Inspector**, find the **Script** section and click :icon[add] (**Create new script**).
 
 3. Choose **Strata** or **C#**, and give it a name.
 :::

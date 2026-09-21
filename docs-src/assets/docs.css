@@ -71,13 +71,7 @@
 
 .docs-main {
   min-width: 0;
-  padding-bottom: 64px;
-}
-
-.docs-main .breadcrumbs {
-  padding-top: 32px;
-  min-height: 20px;
-  margin-bottom: 20px;
+  padding: 32px 0 64px;
 }
 
 .docs-article h1 {
@@ -127,6 +121,15 @@
   font-size: 0.82em;
   line-height: 1.6;
   text-align: center;
+}
+
+/* Editor icons inline with text (:icon[name] in Markdown) */
+
+.docs-icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
 }
 
 /* Code tabs: one code block per language. Without JS, every block shows */
@@ -236,6 +239,27 @@
 
 .docs-note p { margin: 0; }
 .docs-note p + p { margin-top: 8px; }
+
+/* Site-wide notice: a thin strip under the header (notice in site.json) */
+
+.docs-notice {
+  background: #111418;
+  border-bottom: 1px solid var(--border);
+}
+
+.docs-notice p {
+  max-width: calc(var(--max) + 40px);
+  margin: 0 auto;
+  padding: 8px 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.docs-notice strong {
+  color: var(--text);
+  font-weight: 600;
+}
 
 /* Page lists (docs index + section pages): title, then summary */
 
@@ -424,7 +448,7 @@
   .docs-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
-    padding: 0 16px;
+    padding: 0 20px;
   }
   .docs-sidebar {
     position: static;
@@ -452,7 +476,7 @@
   .docs-sidebar.is-open .docs-nav-toggle::after { content: "\2013"; }
   .js .docs-sidebar .docs-nav { display: none; margin-top: 12px; }
   .js .docs-sidebar.is-open .docs-nav { display: block; }
-  .docs-main .breadcrumbs { padding-top: 20px; }
+  .docs-main { padding-top: 20px; }
   .docs-article h1 { font-size: 28px; }
   .docs-table td:first-child { white-space: normal; }
   .docs-article .steps > li { grid-template-columns: 36px minmax(0, 1fr); }

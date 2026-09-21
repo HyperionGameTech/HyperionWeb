@@ -9,8 +9,7 @@ summary: Supported platforms, packaging and platform notes.
 
 | Platform | Status |
 |---|---|
-| Windows | Yes, runtime and editor. |
-| Windows on ARM | Runtime and editor. See below. |
+| Windows (x64, ARM64) | Yes, runtime and editor. |
 | macOS | Yes, runtime and editor. |
 | Android | Supported, but not stable yet. |
 | iOS | Supported, but not stable yet. |
@@ -25,13 +24,6 @@ Linux is planned, but not in active development. [Contributions](/docs/contribut
 children
 :::
 
-## Windows on ARM
-
-Build with the `arm64` flag:
-
-```shell
-build.bat Release arm64
-```
 
 ## Steam Deck
 

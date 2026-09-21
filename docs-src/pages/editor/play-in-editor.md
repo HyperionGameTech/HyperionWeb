@@ -7,15 +7,15 @@ summary: Run the game in the editor, standalone or networked.
 
 ## Play, pause, stop
 
-The **Play**, **Pause** and **Stop** buttons are at the right end of the toolbar.
+The :icon[play] **Play**, :icon[debug-pause] **Pause** and :icon[debug-stop] **Stop** buttons are at the right end of the toolbar.
 
 Play saves your project first, and Stop restores that saved state, so changes made while playing are discarded.
 
-**Ghost Mode** (in the gear menu) gives you a free camera while playing. Move it with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>, <kbd>Space</kbd> and <kbd>Ctrl</kbd>.
+**Ghost Mode** (in the :icon[settings-gear] gear menu) gives you a free camera while playing. Move it with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>, <kbd>Space</kbd> and <kbd>Ctrl</kbd>.
 
 ## Network modes
 
-The arrow next to **Play** picks how you play:
+The :icon[chevron-down] arrow next to **Play** picks how you play:
 
 | Mode | What it does |
 |---|---|

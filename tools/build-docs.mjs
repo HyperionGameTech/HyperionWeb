@@ -22,6 +22,36 @@ md.renderer.rules.link_open = (tokens, i, options, env, self) => {
   return self.renderToken(tokens, i, options);
 };
 
+// :icon[name] inlines docs-src/icons/<name>.svg (the editor's icons; refresh with npm run sync-icons)
+let icons = new Map();
+md.inline.ruler.before('text', 'docs_icon', (state, silent) => {
+  const match = /^:icon\[([a-z0-9-]+)\]/.exec(state.src.slice(state.pos));
+  if (!match) return false;
+  if (!silent) state.push('docs_icon', '', 0).meta = { name: match[1] };
+  state.pos += match[0].length;
+  return true;
+});
+md.renderer.rules.docs_icon = (tokens, i, options, env) => {
+  const { name } = tokens[i].meta;
+  if (!icons.has(name)) fail(`${env.source || 'docs'}: unknown icon "${name}" (the icons are in docs-src/icons/)`);
+  return icons.get(name);
+};
+
+function loadIcons() {
+  const dir = path.join(SRC, 'icons');
+  const loaded = new Map();
+  if (!fs.existsSync(dir)) return loaded;
+  for (const file of fs.readdirSync(dir).filter((name) => name.endsWith('.svg'))) {
+    const svg = fs.readFileSync(path.join(dir, file), 'utf8')
+      .replace(/<\?xml[^>]*>|<!--[\s\S]*?-->/g, '')
+      .trim()
+      .replace(/<svg\b([^>]*)>/, (_, attrs) => `<svg${attrs.replace(/\s(width|height|fill|class)="[^"]*"/g, '')}`
+        + ' class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false">');
+    loaded.set(file.slice(0, -4), svg);
+  }
+  return loaded;
+}
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 class BuildError extends Error {}
@@ -143,7 +173,7 @@ function renderCards(inner, page, ctx) {
   const items = slugs.map((slug) => {
     const target = ctx.pages.get(slug);
     if (!target) fail(`${page.source}: list points at unknown page "${slug}"`);
-    return `  <li><a href="${target.url}">${esc(target.navTitle)}</a><span>${md.renderInline(target.summary)}</span></li>`;
+    return `  <li><a href="${target.url}">${esc(target.navTitle)}</a><span>${md.renderInline(target.summary, { source: target.source })}</span></li>`;
   });
   return `<ul class="docs-links">\n${items.join('\n')}\n</ul>\n`;
 }
@@ -174,14 +204,14 @@ function renderContainer(type, inner, page, ctx) {
     case 'tabs':
       return renderTabs(inner, page, ctx);
     case 'note':
-      return `<div class="docs-note">\n${md.render(inner)}</div>\n`;
+      return `<div class="docs-note">\n${md.render(inner, { source: page.source })}</div>\n`;
     case 'steps': {
-      const html = md.render(inner);
+      const html = md.render(inner, { source: page.source });
       if (!html.startsWith('<ol')) fail(`${page.source}: "::: steps" should contain a numbered list`);
       return html.replace(/^<ol/, '<ol class="steps"');
     }
     case 'soon': {
-      const html = md.render(inner);
+      const html = md.render(inner, { source: page.source });
       if (!html.startsWith('<ul>')) fail(`${page.source}: "::: soon" should contain a bullet list`);
       return html.replace(/^<ul>/, '<ul class="docs-soon">');
     }
@@ -199,7 +229,7 @@ function renderBody(page, ctx) {
     return `\n\nDOCSBLOCK${blocks.length - 1}\n\n`;
   });
 
-  const env = {};
+  const env = { source: page.source };
   const tokens = md.parse(src, env);
   const toc = [];
   const used = new Set();
@@ -219,41 +249,10 @@ function renderBody(page, ctx) {
   return { html, toc };
 }
 
-function trailFor(page, ctx) {
-  const trail = [{ label: 'Docs', url: '/docs/' }];
-  if (page.slug === 'index') return trail;
-  if (page.section && page.section !== page.slug) {
-    const section = ctx.pages.get(page.section);
-    trail.push({ label: section.navTitle, url: section.url });
-  }
-  trail.push({ label: page.navTitle, url: page.url });
-  return trail;
-}
-
-function renderBreadcrumbs(page, ctx) {
-  if (page.slug === 'index') return '      <nav class="breadcrumbs" aria-label="Breadcrumb"></nav>';
-  const trail = trailFor(page, ctx);
-  const items = trail.map((crumb, i) => (i === trail.length - 1
-    ? `<li><span aria-current="page">${esc(crumb.label)}</span></li>`
-    : `<li><a href="${crumb.url}">${esc(crumb.label)}</a></li>`));
-  return `      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol>${items.join('')}</ol></nav>`;
-}
-
-function renderJsonLd(page, ctx) {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: trailFor(page, ctx).map((crumb, i) => ({
-      '@type': 'ListItem', position: i + 1, name: crumb.label, item: ctx.site.siteUrl + crumb.url,
-    })),
-  };
-  return JSON.stringify(data).replace(/</g, '\\u003c');
-}
-
 function renderSidebar(page, ctx) {
   const link = (target) => `<a href="${target.url}"${target === page ? ' aria-current="page"' : ''}>${esc(target.navTitle)}</a>`;
   const lines = [
-    '      <p class="docs-nav-label">Documentation</p>',
+    '      <p class="docs-nav-label">Docs</p>',
     '      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>',
     '      <ul class="docs-nav" id="docs-nav">',
     `        <li>${link(ctx.pages.get('index'))}</li>`,
@@ -275,7 +274,7 @@ function renderSidebar(page, ctx) {
 function renderToc(toc) {
   if (toc.length < 2) return '';
   return [
-    '      <p class="docs-toc-title">On this page</p>',
+    '      <p class="docs-toc-title">Table of contents</p>',
     '      <ul>',
     ...toc.map((h) => `        <li><a href="#${h.id}">${esc(h.text)}</a></li>`),
     '      </ul>',
@@ -351,10 +350,11 @@ function renderPage(page, ctx) {
     url: ctx.site.siteUrl + page.url,
     docsNavCurrent: page.slug === 'index' ? 'page' : 'true',
     engineRepo: ctx.site.vars.engineRepo,
-    jsonLd: renderJsonLd(page, ctx),
     sidebar: renderSidebar(page, ctx),
-    breadcrumbs: renderBreadcrumbs(page, ctx),
-    lede: page.lede ? `        <p class="lede">${md.renderInline(page.lede)}</p>` : '',
+    notice: ctx.site.notice
+      ? `  <div class="docs-notice"><p>${md.renderInline(substituteVars(ctx.site.notice, ctx.site.vars, 'site.json'), { source: 'site.json' })}</p></div>`
+      : '',
+    lede: page.lede ? `        <p class="lede">${md.renderInline(page.lede, { source: page.source })}</p>` : '',
     hero: renderHero(page),
     content: html.trimEnd(),
     toc: renderToc(toc),
@@ -432,6 +432,7 @@ function updateSitemap(ctx) {
 function build({ sitemap }) {
   const site = JSON.parse(fs.readFileSync(path.join(SRC, 'site.json'), 'utf8'));
   const template = fs.readFileSync(path.join(SRC, 'template.html'), 'utf8').replace(/\r\n/g, '\n');
+  icons = loadIcons();
   const pages = loadPages(site);
   const { order, childrenOf } = buildNav(site, pages);
   const ctx = { site, template, pages, order, childrenOf, tabGroups: 0 };

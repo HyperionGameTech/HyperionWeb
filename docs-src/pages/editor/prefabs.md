@@ -13,7 +13,7 @@ summary: Creating, placing and updating prefabs.
 2. Give it a name (no spaces) and hit **Create**.
 :::
 
-The node you started with becomes an instance of your new prefab. It's marked with a prefab icon in the Scene panel.
+The node you started with becomes an instance of your new prefab. It's marked with :icon[prefab] in the Scene panel.
 
 To create an empty prefab: **Assets › New... › Prefab**.
 
