@@ -1,0 +1,18 @@
+{
+  "siteUrl": "https://hyperionengine.dev",
+  "editUrl": "https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages",
+  "vars": {
+    "engineRepo": "https://github.com/HyperionGameTech/HyperionEngine"
+  },
+  "nav": [
+    { "section": "get-started", "pages": ["get-the-code", "building", "project-layout", "glossary"] },
+    { "section": "editor", "pages": ["tour", "projects", "prefabs", "play-in-editor", "console"] },
+    { "section": "world", "pages": ["entities", "systems", "streaming", "swatches"] },
+    { "section": "scripting", "pages": ["first-script", "engine-bindings", "csharp-samples"] },
+    { "section": "rendering", "pages": ["materials", "baking", "global-illumination", "shaders", "post-processing"] },
+    { "section": "physics", "pages": ["rigid-bodies", "character-controllers"] },
+    { "section": "multiplayer", "pages": ["server", "replication"] },
+    { "section": "platforms", "pages": ["packaging", "android", "ios"] },
+    { "section": "contributing", "pages": [] }
+  ]
+}

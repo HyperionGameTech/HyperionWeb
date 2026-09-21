@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing shaders · Hyperion Docs</title>
+  <meta name="description" content="Write HLSL shaders for Hyperion Engine. registering shaders in Shaders.hmf, permutations, live reload and precompiling.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/rendering/shaders.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Writing shaders · Hyperion Docs">
+  <meta property="og:description" content="Write HLSL shaders for Hyperion Engine. registering shaders in Shaders.hmf, permutations, live reload and precompiling.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/rendering/shaders.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Rendering & lighting","item":"https://hyperionengine.dev/docs/rendering/"},{"@type":"ListItem","position":3,"name":"Writing shaders","item":"https://hyperionengine.dev/docs/rendering/shaders.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a>
+          <ul>
+            <li><a href="/docs/rendering/materials.html">Materials</a></li>
+            <li><a href="/docs/rendering/baking.html">Baking lighting</a></li>
+            <li><a href="/docs/rendering/global-illumination.html">Global illumination</a></li>
+            <li><a href="/docs/rendering/shaders.html" aria-current="page">Writing shaders</a></li>
+            <li><a href="/docs/rendering/post-processing.html">Post-processing</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/rendering/">Rendering &amp; lighting</a></li><li><span aria-current="page">Writing shaders</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Writing shaders</h1>
+        <p class="lede">Shaders are written in HLSL and compiled with DXC for every backend. The editor reloads them automatically when they change.</p>
+
+<h2 id="adding-a-shader">Adding a shader</h2>
+<p>Shaders live in <code>Source/Shaders/</code>. Write your <code>.hlsl</code> file, then register it in <code>Config/Shaders.hmf</code>:</p>
+<pre><code>ShaderDefinition &quot;MyEffect&quot; {
+    VS = &quot;MyEffect/MyEffect.hlsl&quot;
+    PS = &quot;MyEffect/MyEffect.hlsl&quot;
+}
+</code></pre>
+<p>Paths are relative to <code>Source/Shaders/</code>. The keys are the stages:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Key</th>
+<th>Stage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS</td>
+<td>Vertex shader</td>
+</tr>
+<tr>
+<td>PS</td>
+<td>Pixel shader</td>
+</tr>
+<tr>
+<td>CS</td>
+<td>Compute shader</td>
+</tr>
+<tr>
+<td>RGS, CHS, MS</td>
+<td>Ray tracing: ray generation, closest hit, and miss</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="permutations">Permutations</h2>
+<p>Shader variants are declared at the top of the file:</p>
+<pre><code class="language-hlsl">PERMUTE(HBAO_ENABLED)
+PERMUTE(LIGHT_TYPE, CLUSTERED, DIRECTIONAL, POINT, SPOT, AREA_RECT);
+</code></pre>
+<p>With just a name, it's an on/off variant. With a list of values, each variant defines one of them, such as <code>LIGHT_TYPE_POINT</code>:</p>
+<pre><code class="language-hlsl">#ifdef LIGHT_TYPE_DIRECTIONAL
+    // directional light only
+#endif
+</code></pre>
+<p><code>STATIC(NAME, value)</code> sets a fixed define.</p>
+<h2 id="precompiling">Precompiling</h2>
+<p>Shipping builds use precompiled shaders. <a href="/docs/platforms/packaging.html">Packaging</a> does this automatically. To run it yourself:</p>
+<pre><code class="language-shell">PrecompileShaders.exe --platform=windows
+</code></pre>
+<p>Add <code>--api=vulkan</code> or <code>--api=dx12</code> to pick a backend, or <code>--filter=MyEffect</code> to limit it to matching shaders.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/rendering/global-illumination.html"><span>Previous</span>Global illumination</a><a class="next" href="/docs/rendering/post-processing.html"><span>Next</span>Post-processing</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/rendering/shaders.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#adding-a-shader">Adding a shader</a></li>
+        <li><a href="#permutations">Permutations</a></li>
+        <li><a href="#precompiling">Precompiling</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

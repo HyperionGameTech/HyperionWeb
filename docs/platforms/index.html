@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Platforms · Hyperion Docs</title>
+  <meta name="description" content="Platforms supported by Hyperion Engine: Windows, macOS, Android, iOS, Steam Deck, and plans for Linux.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/platforms/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Platforms · Hyperion Docs">
+  <meta property="og:description" content="Platforms supported by Hyperion Engine: Windows, macOS, Android, iOS, Steam Deck, and plans for Linux.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/platforms/">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Platforms","item":"https://hyperionengine.dev/docs/platforms/"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/" aria-current="page">Platforms</a>
+          <ul>
+            <li><a href="/docs/platforms/packaging.html">Packaging a build</a></li>
+            <li><a href="/docs/platforms/android.html">Android</a></li>
+            <li><a href="/docs/platforms/ios.html">iOS</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><span aria-current="page">Platforms</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Platforms</h1>
+        <p class="lede">Where Hyperion runs today, and where it's headed.</p>
+
+<h2 id="where-it-runs">Where it runs</h2>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Platform</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>Yes, runtime and editor.</td>
+</tr>
+<tr>
+<td>Windows on ARM</td>
+<td>Runtime and editor. See below.</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Yes, runtime and editor.</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>Supported, but not stable yet.</td>
+</tr>
+<tr>
+<td>iOS</td>
+<td>Supported, but not stable yet.</td>
+</tr>
+<tr>
+<td>Steam Deck</td>
+<td>Yes, through Proton. Input and resolution handling still need work.</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><em>Planned</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Linux is planned, but not in active development. <a href="/docs/contributing/">Contributions</a> are welcome on this front (as well as anywhere else)</p>
+<h2 id="in-this-section">In this section</h2>
+<ul class="docs-links">
+  <li><a href="/docs/platforms/packaging.html">Packaging a build</a><span>Build a standalone copy of your game to distribute.</span></li>
+  <li><a href="/docs/platforms/android.html">Android</a><span>Building and installing on Android devices.</span></li>
+  <li><a href="/docs/platforms/ios.html">iOS</a><span>Build for iPhone and iPad through Xcode.</span></li>
+</ul>
+<h2 id="windows-on-arm">Windows on ARM</h2>
+<p>Build with the <code>arm64</code> flag:</p>
+<pre><code class="language-shell">build.bat Release arm64
+</code></pre>
+<h2 id="steam-deck">Steam Deck</h2>
+<p>There's no native Linux build yet, so on the Deck you run the Windows build through Proton. Controller input and resolution handling still need work here</p>
+<h2 id="per-platform-settings">Per-platform settings</h2>
+<p>Each platform can have its own config, like <code>Config/EngineConfig.Android.json</code>. If a platform file exists it <em>replaces</em> the regular one, rather than merging with it, so it needs every setting.</p>
+<p>The mobile configs, for example, turn off ray tracing, DDGI, SSGI and TAA.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/multiplayer/replication.html"><span>Previous</span>Replication &amp; prediction</a><a class="next" href="/docs/platforms/packaging.html"><span>Next</span>Packaging a build</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/platforms/index.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#where-it-runs">Where it runs</a></li>
+        <li><a href="#in-this-section">In this section</a></li>
+        <li><a href="#windows-on-arm">Windows on ARM</a></li>
+        <li><a href="#steam-deck">Steam Deck</a></li>
+        <li><a href="#per-platform-settings">Per-platform settings</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

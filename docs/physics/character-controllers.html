@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Character controllers · Hyperion Docs</title>
+  <meta name="description" content="Use the character controller component in Hyperion Engine for player movement: movement and jump settings, input, and network prediction.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/physics/character-controllers.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Character controllers · Hyperion Docs">
+  <meta property="og:description" content="Use the character controller component in Hyperion Engine for player movement: movement and jump settings, input, and network prediction.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/physics/character-controllers.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Physics","item":"https://hyperionengine.dev/docs/physics/"},{"@type":"ListItem","position":3,"name":"Character controllers","item":"https://hyperionengine.dev/docs/physics/character-controllers.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a>
+          <ul>
+            <li><a href="/docs/physics/rigid-bodies.html">Rigid bodies</a></li>
+            <li><a href="/docs/physics/character-controllers.html" aria-current="page">Character controllers</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/physics/">Physics</a></li><li><span aria-current="page">Character controllers</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Character controllers</h1>
+        <p class="lede">The character controller handles walking, running and jumping, with collision against the world.</p>
+
+<h2 id="adding-one">Adding one</h2>
+<p>Add a <code>CharacterControllerComponent</code> to an entity. By default it's driven by keyboard input:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Action</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Move</td>
+<td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></td>
+</tr>
+<tr>
+<td>Sprint</td>
+<td><kbd>Shift</kbd></td>
+</tr>
+<tr>
+<td>Jump</td>
+<td><kbd>Space</kbd></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>isOnGround</code> is true while it's standing on something.</p>
+<h2 id="movement-settings">Movement settings</h2>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>moveSpeed</td>
+<td>Walking speed. Starts at 5.</td>
+</tr>
+<tr>
+<td>sprintSpeed</td>
+<td>Running speed. Starts at 7.5.</td>
+</tr>
+<tr>
+<td>stepHeight</td>
+<td>The tallest step it can walk straight up.</td>
+</tr>
+<tr>
+<td>maxSlopeAngle</td>
+<td>The steepest slope it can walk up, in degrees. Starts at 45.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="jump-settings">Jump settings</h2>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>speed</td>
+<td>Initial jump speed.</td>
+</tr>
+<tr>
+<td>coyoteTime</td>
+<td>Grace period for jumping after leaving a ledge.</td>
+</tr>
+<tr>
+<td>bufferTime</td>
+<td>How early before landing a jump press still counts.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="in-multiplayer">In multiplayer</h2>
+<p>The local player's movement is predicted on the client, so input responds immediately. The server validates each move and corrects the client if they disagree. More in <a href="/docs/multiplayer/replication.html">replication</a>.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/physics/rigid-bodies.html"><span>Previous</span>Rigid bodies</a><a class="next" href="/docs/multiplayer/"><span>Next</span>Multiplayer</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/physics/character-controllers.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#adding-one">Adding one</a></li>
+        <li><a href="#movement-settings">Movement settings</a></li>
+        <li><a href="#jump-settings">Jump settings</a></li>
+        <li><a href="#in-multiplayer">In multiplayer</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

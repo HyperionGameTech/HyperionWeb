@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing a system · Hyperion Docs</title>
+  <meta name="description" content="Write a custom system in Hyperion Engine to process entities by component every frame, and add world-wide subsystems.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/world/systems.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Writing a system · Hyperion Docs">
+  <meta property="og:description" content="Write a custom system in Hyperion Engine to process entities by component every frame, and add world-wide subsystems.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/world/systems.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Scenes & worlds","item":"https://hyperionengine.dev/docs/world/"},{"@type":"ListItem","position":3,"name":"Writing a system","item":"https://hyperionengine.dev/docs/world/systems.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a>
+          <ul>
+            <li><a href="/docs/world/entities.html">Entities &amp; components</a></li>
+            <li><a href="/docs/world/systems.html" aria-current="page">Writing a system</a></li>
+            <li><a href="/docs/world/streaming.html">World streaming</a></li>
+            <li><a href="/docs/world/swatches.html">Swatches</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/world/">Scenes &amp; worlds</a></li><li><span aria-current="page">Writing a system</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Writing a system</h1>
+        <p class="lede">Components hold the data. Systems are the code that does something with it, every frame, for every entity that has the right components.</p>
+
+<h2 id="the-basics">The basics</h2>
+<p>Subclass <code>SystemBase</code>, list the components you care about, and implement <code>Process</code>. This one regenerates health on anything with a <code>HealthComponent</code>:</p>
+<pre><code class="language-cpp">HYP_CLASS(NoScriptBindings, Serialize = false)
+class RegenSystem final : public SystemBase
+{
+    HYP_OBJECT_BODY(RegenSystem);
+
+public:
+    void Process(float delta, Span&lt;Handle&lt;Scene&gt;&gt; scenes) override;
+
+private:
+    SystemComponentDescriptors GetComponentDescriptors() const override
+    {
+        return {
+            ComponentDescriptor&lt;HealthComponent, ComponentAccess::READ_WRITE&gt; {}
+        };
+    }
+};
+</code></pre>
+<p>The implementation:</p>
+<pre><code class="language-cpp">void RegenSystem::Process(float delta, Span&lt;Handle&lt;Scene&gt;&gt; scenes)
+{
+    if (!GetWorld()-&gt;GetGameState().IsSimulating())
+    {
+        return;
+    }
+
+    for (Scene* scene : scenes)
+    {
+        for (auto [entity, healthComponent] : scene-&gt;GetEntityManager()-&gt;GetEntitySet&lt;HealthComponent&gt;().GetScopedView(GetComponentInfos()))
+        {
+            if (healthComponent.health &lt; 100.0f)
+            {
+                healthComponent.health += 5.0f * delta;
+            }
+        }
+    }
+}
+</code></pre>
+<p>The <code>IsSimulating()</code> check skips processing while editing, so it only runs during play.</p>
+<h2 id="component-access">Component access</h2>
+<p>Systems can run in parallel. Saying which components you only <code>READ</code> and which you <code>WRITE</code> lets the engine work out what's safe to run at the same time. Only ask for <code>WRITE</code> access where you need it.</p>
+<h2 id="adding-it-to-the-world">Adding it to the world</h2>
+<p>Systems live on the world, not on a scene, and run over every scene in it:</p>
+<pre><code class="language-cpp">GetWorld()-&gt;AddSystemT&lt;RegenSystem&gt;();
+</code></pre>
+<h2 id="subsystems">Subsystems</h2>
+<p>For world-wide logic that isn't tied to entities, like a day/night clock or a matchmaking queue, use a subsystem. Subclass <code>Subsystem</code>, fill in <code>OnAddedToWorld()</code>, <code>OnRemovedFromWorld()</code> and <code>Update(float delta)</code>, then:</p>
+<pre><code class="language-cpp">GetWorld()-&gt;AddSubsystem&lt;MySubsystem&gt;();
+</code></pre>
+<p>A world has at most one of each subsystem type. Retrieve it with <code>GetSubsystem&lt;MySubsystem&gt;()</code>.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/world/entities.html"><span>Previous</span>Entities &amp; components</a><a class="next" href="/docs/world/streaming.html"><span>Next</span>World streaming</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/world/systems.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#the-basics">The basics</a></li>
+        <li><a href="#component-access">Component access</a></li>
+        <li><a href="#adding-it-to-the-world">Adding it to the world</a></li>
+        <li><a href="#subsystems">Subsystems</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

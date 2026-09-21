@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play-in-editor · Hyperion Docs</title>
+  <meta name="description" content="Play your game inside the Hyperion editor, including as a client or dedicated server for multiplayer testing.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/editor/play-in-editor.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Play-in-editor · Hyperion Docs">
+  <meta property="og:description" content="Play your game inside the Hyperion editor, including as a client or dedicated server for multiplayer testing.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/editor/play-in-editor.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Editor","item":"https://hyperionengine.dev/docs/editor/"},{"@type":"ListItem","position":3,"name":"Play-in-editor","item":"https://hyperionengine.dev/docs/editor/play-in-editor.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a>
+          <ul>
+            <li><a href="/docs/editor/tour.html">A tour of the editor</a></li>
+            <li><a href="/docs/editor/projects.html">Working with projects</a></li>
+            <li><a href="/docs/editor/prefabs.html">Prefabs</a></li>
+            <li><a href="/docs/editor/play-in-editor.html" aria-current="page">Play-in-editor</a></li>
+            <li><a href="/docs/editor/console.html">Console &amp; CVars</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/editor/">Editor</a></li><li><span aria-current="page">Play-in-editor</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Play-in-editor</h1>
+        <p class="lede">Run your game inside the editor, without making a separate build.</p>
+
+<h2 id="play-pause-stop">Play, pause, stop</h2>
+<p>The <strong>Play</strong>, <strong>Pause</strong> and <strong>Stop</strong> buttons are at the right end of the toolbar.</p>
+<p>Play saves your project first, and Stop restores that saved state, so changes made while playing are discarded.</p>
+<p><strong>Ghost Mode</strong> (in the gear menu) gives you a free camera while playing. Move it with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>, <kbd>Space</kbd> and <kbd>Ctrl</kbd>.</p>
+<h2 id="network-modes">Network modes</h2>
+<p>The arrow next to <strong>Play</strong> picks how you play:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Mode</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standalone</td>
+<td>Single player. No networking.</td>
+</tr>
+<tr>
+<td>Play As Client</td>
+<td>Connects to a server. If the host is your own machine and auto-launch is on, the editor starts a local server in the background.</td>
+</tr>
+<tr>
+<td>Play As Dedicated Server</td>
+<td>The editor itself is the server.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Host, port and the auto-launch option live under <strong>Network Settings...</strong>. The defaults are <code>127.0.0.1</code> on port <code>9192</code>.</p>
+<div class="docs-note">
+<p>The editor runs one client at a time. To test with more players, start extra clients yourself. See <a href="/docs/multiplayer/server.html">running a server</a>.</p>
+</div>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/editor/prefabs.html"><span>Previous</span>Prefabs</a><a class="next" href="/docs/editor/console.html"><span>Next</span>Console &amp; CVars</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/editor/play-in-editor.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#play-pause-stop">Play, pause, stop</a></li>
+        <li><a href="#network-modes">Network modes</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

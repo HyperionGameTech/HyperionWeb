@@ -117,7 +117,8 @@ body {
   font-size: 14px;
 }
 
-.nav a:hover { color: var(--text); }
+.nav a:hover,
+.nav a[aria-current] { color: var(--text); }
 
 .nav a.button-small {
   color: #0b0d10;

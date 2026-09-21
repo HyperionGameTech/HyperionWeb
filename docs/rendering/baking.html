@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baking lighting · Hyperion Docs</title>
+  <meta name="description" content="Bake lightmaps, reflection probes and irradiance probes in the Hyperion editor, and tune the baker settings.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/rendering/baking.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Baking lighting · Hyperion Docs">
+  <meta property="og:description" content="Bake lightmaps, reflection probes and irradiance probes in the Hyperion editor, and tune the baker settings.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/rendering/baking.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Rendering & lighting","item":"https://hyperionengine.dev/docs/rendering/"},{"@type":"ListItem","position":3,"name":"Baking lighting","item":"https://hyperionengine.dev/docs/rendering/baking.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a>
+          <ul>
+            <li><a href="/docs/rendering/materials.html">Materials</a></li>
+            <li><a href="/docs/rendering/baking.html" aria-current="page">Baking lighting</a></li>
+            <li><a href="/docs/rendering/global-illumination.html">Global illumination</a></li>
+            <li><a href="/docs/rendering/shaders.html">Writing shaders</a></li>
+            <li><a href="/docs/rendering/post-processing.html">Post-processing</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/rendering/">Rendering &amp; lighting</a></li><li><span aria-current="page">Baking lighting</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Baking lighting</h1>
+        <p class="lede">Baking computes lighting ahead of time, so it doesn't have to be calculated while the game runs. It's the main way to get good lighting on lower-end hardware.</p>
+
+<h2 id="how-to-bake">How to bake</h2>
+<ol class="steps">
+<li>
+<p>Add a <strong>Lightmap Volume</strong> around the area you want baked: <strong>Add › Lighting › Lightmap Volume</strong>.</p>
+</li>
+<li>
+<p>For lighting and reflections on moving objects, add <strong>Reflection Probes</strong> and <strong>Irradiance Probes</strong> from the same menu.</p>
+</li>
+<li>
+<p>Click <strong>Bake</strong> in the toolbar and pick what to bake: <strong>Lightmaps</strong>, <strong>Reflection Probes</strong> or <strong>Irradiance Probes</strong>.</p>
+</li>
+</ol>
+<p>Progress is shown in an overlay while the bake runs.</p>
+<h2 id="what-gets-baked">What gets baked</h2>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lightmaps</td>
+<td>Light bouncing around your static geometry, saved into textures. Lightmap UVs are generated for you.</td>
+</tr>
+<tr>
+<td>Reflection probes</td>
+<td>What the world looks like from a point, for shiny surfaces.</td>
+</tr>
+<tr>
+<td>Irradiance probes</td>
+<td>How much light reaches a point, for lighting things that move.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Baking runs on the GPU. It uses hardware ray tracing when available, and compute shaders otherwise.</p>
+<h2 id="settings">Settings</h2>
+<p>Bake settings live in the <code>&quot;Baker&quot;</code> section of <code>Config/EngineConfig.json</code>:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NumSamples</td>
+<td>More samples, less noise, longer bakes.</td>
+</tr>
+<tr>
+<td>MaxRayDistance</td>
+<td>How far rays travel looking for light.</td>
+</tr>
+<tr>
+<td>ForceComputeTracing</td>
+<td>Use the compute path even when hardware ray tracing is available.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="docs-note">
+<p>Each <a href="/docs/world/swatches.html">swatch</a> has its own bake.</p>
+</div>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/rendering/materials.html"><span>Previous</span>Materials</a><a class="next" href="/docs/rendering/global-illumination.html"><span>Next</span>Global illumination</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/rendering/baking.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#how-to-bake">How to bake</a></li>
+        <li><a href="#what-gets-baked">What gets baked</a></li>
+        <li><a href="#settings">Settings</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

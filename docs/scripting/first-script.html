@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your first script · Hyperion Docs</title>
+  <meta name="description" content="Create your first Strata script in the Hyperion editor, attach it to an entity, and learn the script lifecycle and live reload.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/scripting/first-script.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Your first script · Hyperion Docs">
+  <meta property="og:description" content="Create your first Strata script in the Hyperion editor, attach it to an entity, and learn the script lifecycle and live reload.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/scripting/first-script.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Scripting","item":"https://hyperionengine.dev/docs/scripting/"},{"@type":"ListItem","position":3,"name":"Your first script","item":"https://hyperionengine.dev/docs/scripting/first-script.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a>
+          <ul>
+            <li><a href="/docs/scripting/first-script.html" aria-current="page">Your first script</a></li>
+            <li><a href="/docs/scripting/engine-bindings.html">Calling engine code</a></li>
+            <li><a href="/docs/scripting/csharp-samples.html">C# samples</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/scripting/">Scripting</a></li><li><span aria-current="page">Your first script</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Your first script</h1>
+        <p class="lede">Create a Strata script, attach it to an entity, and make the entity move.</p>
+
+<h2 id="create-a-script">Create a script</h2>
+<ol class="steps">
+<li>
+<p>Select an entity in the <strong>Scene</strong> panel.</p>
+</li>
+<li>
+<p>In the <strong>Inspector</strong>, find the <strong>Script</strong> section and hit <strong>New</strong>.</p>
+</li>
+<li>
+<p>Choose <strong>Strata</strong> and give it a name.</p>
+</li>
+</ol>
+<p>The editor adds a <code>ScriptComponent</code> to the entity for you, and saves the file to <code>Scripts/&lt;Name&gt;.strata</code> in your project. The new script looks like this:</p>
+<pre><code class="language-strata">import Engine;
+
+Entity g_entity;
+
+void OnAdded(const Entity entity)
+{
+    g_entity = entity;
+}
+
+void Update(float delta)
+{
+}
+
+void Destroy()
+{
+}
+</code></pre>
+<h2 id="lifecycle">Lifecycle</h2>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Function</th>
+<th>When it's called</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnAdded</td>
+<td>When play starts. Receives the entity the script is attached to.</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>Every frame while the game is running. <code>delta</code> is the time since the last frame.</td>
+</tr>
+<tr>
+<td>Destroy</td>
+<td>When the entity goes away, or you stop playing.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All three are optional. A missing one logs a warning once.</p>
+<p>Each entity gets its own copy of the script's globals, so entities sharing a script don't share state.</p>
+<h2 id="moving-the-entity">Moving the entity</h2>
+<p>Fill in <code>Update</code>:</p>
+<pre><code class="language-strata">void Update(float delta)
+{
+    g_entity.Translate(float3(0.0, delta, 0.0));
+}
+</code></pre>
+<p>Press <strong>Play</strong> and the entity moves upward.</p>
+<h2 id="live-reload">Live reload</h2>
+<p>Saving the file recompiles it in the editor. Entities using the script get <code>Destroy</code>, the new code is loaded, and <code>OnAdded</code> runs again.</p>
+<p>Globals are reset on reload.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/"><span>Previous</span>Scripting</a><a class="next" href="/docs/scripting/engine-bindings.html"><span>Next</span>Calling engine code</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/scripting/first-script.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#create-a-script">Create a script</a></li>
+        <li><a href="#lifecycle">Lifecycle</a></li>
+        <li><a href="#moving-the-entity">Moving the entity</a></li>
+        <li><a href="#live-reload">Live reload</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

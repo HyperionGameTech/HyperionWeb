@@ -1,0 +1,13 @@
+{
+  "name": "hyperion-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build-docs.mjs",
+    "watch": "node tools/build-docs.mjs --watch"
+  },
+  "devDependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-deflist": "^3.0.0"
+  }
+}

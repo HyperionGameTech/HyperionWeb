@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entities &amp; components · Hyperion Docs</title>
+  <meta name="description" content="Create entities in Hyperion Engine, add and remove components, move them around, and declare your own component types.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/world/entities.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Entities &amp; components · Hyperion Docs">
+  <meta property="og:description" content="Create entities in Hyperion Engine, add and remove components, move them around, and declare your own component types.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/world/entities.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Scenes & worlds","item":"https://hyperionengine.dev/docs/world/"},{"@type":"ListItem","position":3,"name":"Entities & components","item":"https://hyperionengine.dev/docs/world/entities.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a>
+          <ul>
+            <li><a href="/docs/world/entities.html" aria-current="page">Entities &amp; components</a></li>
+            <li><a href="/docs/world/systems.html">Writing a system</a></li>
+            <li><a href="/docs/world/streaming.html">World streaming</a></li>
+            <li><a href="/docs/world/swatches.html">Swatches</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/world/">Scenes &amp; worlds</a></li><li><span aria-current="page">Entities &amp; components</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Entities &amp; components</h1>
+        <p class="lede">Entities are the objects in your scenes. Components hold their data, such as meshes, physics bodies and scripts.</p>
+
+<h2 id="making-an-entity">Making an entity</h2>
+<p>An entity is a node you can attach components to, so it lives in the scene tree like any other node. Make one, then add it to your scene:</p>
+<pre><code class="language-cpp">Handle&lt;Entity&gt; crate = MakeHandle&lt;Entity&gt;();
+crate-&gt;SetName(NAME(&quot;Crate&quot;));
+
+scene-&gt;GetRoot()-&gt;AddChild(crate);
+</code></pre>
+<p>Once it's in a scene, it automatically gets a <code>TransformComponent</code>, a <code>BoundingBoxComponent</code> and a <code>VisibilityStateComponent</code>.</p>
+<h2 id="adding-components">Adding components</h2>
+<p>Components are plain structs:</p>
+<pre><code class="language-cpp">MeshComponent meshComponent;
+meshComponent.mesh = crateMesh;
+meshComponent.material = crateMaterial;
+
+crate-&gt;AddComponent&lt;MeshComponent&gt;(meshComponent);
+crate-&gt;SetLocalBounds(crateMesh-&gt;GetAABB());
+</code></pre>
+<p>The last line sets the entity's bounds, which culling uses. The other component methods:</p>
+<ul>
+<li><code>GetComponent&lt;T&gt;()</code> returns a reference. The component must exist.</li>
+<li><code>TryGetComponent&lt;T&gt;()</code> returns a pointer, or <code>nullptr</code> if it's missing.</li>
+<li><code>HasComponent&lt;T&gt;()</code> checks for one.</li>
+<li><code>RemoveComponent&lt;T&gt;()</code> removes it.</li>
+</ul>
+<p>An entity can only have one of each component type. Adding a second will trip an assert.</p>
+<h2 id="transforms">Transforms</h2>
+<p>Entities are nodes, so they've got a transform. The <code>Local</code> setters are relative to the parent, the <code>World</code> ones aren't:</p>
+<pre><code class="language-cpp">crate-&gt;SetLocalTranslation(Vec3f(0.0f, 2.0f, 0.0f));
+crate-&gt;SetWorldScale(Vec3f(2.0f, 2.0f, 2.0f));
+crate-&gt;Translate(Vec3f(1.0f, 0.0f, 0.0f)); // relative to where it is now
+</code></pre>
+<p>To look a node up by name: <code>scene-&gt;FindNodeByName(&quot;Crate&quot;_sh)</code>.</p>
+<h2 id="built-in-components">Built-in components</h2>
+<p>Common ones:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Component</th>
+<th>What it's for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MeshComponent</td>
+<td>The mesh, material and skeleton to draw.</td>
+</tr>
+<tr>
+<td>TransformComponent</td>
+<td>Position, rotation and scale.</td>
+</tr>
+<tr>
+<td>RigidBodyComponent</td>
+<td>Makes it a physics body.</td>
+</tr>
+<tr>
+<td>CharacterControllerComponent</td>
+<td>Player-style movement: walking, jumping and collision.</td>
+</tr>
+<tr>
+<td>ScriptComponent</td>
+<td>Attaches a script. See <a href="/docs/scripting/first-script.html">your first script</a>.</td>
+</tr>
+<tr>
+<td>AnimationComponent</td>
+<td>Animation playback.</td>
+</tr>
+<tr>
+<td>AudioComponent</td>
+<td>Plays sounds from the entity's position.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="making-your-own">Making your own</h2>
+<p>Declare a struct with <code>HYP_STRUCT(Component)</code>, and mark up the fields you want saved and shown in the editor:</p>
+<pre><code class="language-cpp">HYP_STRUCT(Component, Label = &quot;Health Component&quot;)
+struct HealthComponent
+{
+    HYP_STRUCT_BODY(HealthComponent);
+
+    HYP_FIELD(Property = &quot;Health&quot;, Serialize, Editor)
+    float health = 100.0f;
+};
+</code></pre>
+<p>Then include the generated file in your <code>.cpp</code>:</p>
+<pre><code class="language-cpp">#include &lt;HealthComponent.generated.inl&gt;
+</code></pre>
+<p>Re-run CodeGen (reconfiguring CMake runs it) to register the component. To process it every frame, write a <a href="/docs/world/systems.html">system</a>.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/world/"><span>Previous</span>Scenes &amp; worlds</a><a class="next" href="/docs/world/systems.html"><span>Next</span>Writing a system</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/world/entities.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#making-an-entity">Making an entity</a></li>
+        <li><a href="#adding-components">Adding components</a></li>
+        <li><a href="#transforms">Transforms</a></li>
+        <li><a href="#built-in-components">Built-in components</a></li>
+        <li><a href="#making-your-own">Making your own</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

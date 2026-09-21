@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Android · Hyperion Docs</title>
+  <meta name="description" content="Build Hyperion Engine for Android: requirements, building the native libraries, packaging content and making an APK with Gradle.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/platforms/android.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Android · Hyperion Docs">
+  <meta property="og:description" content="Build Hyperion Engine for Android: requirements, building the native libraries, packaging content and making an APK with Gradle.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/platforms/android.html">
+  <meta property="og:image" content="/assets/terrain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Docs","item":"https://hyperionengine.dev/docs/"},{"@type":"ListItem","position":2,"name":"Platforms","item":"https://hyperionengine.dev/docs/platforms/"},{"@type":"ListItem","position":3,"name":"Android","item":"https://hyperionengine.dev/docs/platforms/android.html"}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="button button-small" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <p class="docs-nav-label">Documentation</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scenes &amp; worlds</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a>
+          <ul>
+            <li><a href="/docs/platforms/packaging.html">Packaging a build</a></li>
+            <li><a href="/docs/platforms/android.html" aria-current="page">Android</a></li>
+            <li><a href="/docs/platforms/ios.html">iOS</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/">Docs</a></li><li><a href="/docs/platforms/">Platforms</a></li><li><span aria-current="page">Android</span></li></ol></nav>
+      <article class="docs-article">
+        <h1>Android</h1>
+        <p class="lede">Hyperion runs on Android phones and tablets. Support works, but isn't stable yet.</p>
+
+<h2 id="what-you-ll-need">What you'll need</h2>
+<ul>
+<li>The <strong>Android NDK</strong>. We test with NDK 29. Point <code>ANDROID_NDK_HOME</code> at it.</li>
+<li><strong>Ninja</strong>, on your PATH or installed with Visual Studio or the Android SDK.</li>
+<li>The <strong>Android SDK</strong> and <strong>Java 17</strong>, for Gradle. Android Studio installs both.</li>
+</ul>
+<p>We build for 64-bit ARM (<code>arm64-v8a</code>), and you'll need Android 9 (API 28) or newer.</p>
+<h2 id="build-it">Build it</h2>
+<ol class="steps">
+<li>
+<p>Build the engine for Android. The libraries end up in <code>Binaries/Android/Release/</code>.</p>
+<pre><code class="language-shell">build.bat Android Release
+</code></pre>
+</li>
+<li>
+<p>Package it with your project's content:</p>
+<pre><code class="language-shell">Tools\Scripts\PackageBuildAndroid.bat --cook --project MyGame
+</code></pre>
+<p>Without <code>--cook</code>, only engine content is included.</p>
+</li>
+<li>
+<p>Build and install the APK with Gradle, from <code>Source/PlatformSpecific/Android/</code>:</p>
+<pre><code class="language-shell">gradlew.bat installDebug
+</code></pre>
+<p>You can also open that folder in Android Studio and run it from there.</p>
+</li>
+</ol>
+<h2 id="settings">Settings</h2>
+<p>Android uses <code>Config/EngineConfig.Android.json</code> instead of the regular config with platform-specific overrides for targeting lower end devices than the typical desktop experience</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/platforms/packaging.html"><span>Previous</span>Packaging a build</a><a class="next" href="/docs/platforms/ios.html"><span>Next</span>iOS</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/platforms/android.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">On this page</p>
+      <ul>
+        <li><a href="#what-you-ll-need">What you'll need</a></li>
+        <li><a href="#build-it">Build it</a></li>
+        <li><a href="#settings">Settings</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/strata.html">Strata</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
