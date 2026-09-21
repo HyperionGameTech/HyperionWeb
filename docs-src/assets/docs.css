@@ -366,6 +366,7 @@
 }
 
 .docs-table th {
+  white-space: nowrap;
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
@@ -487,6 +488,7 @@
   .js .docs-sidebar.is-open .docs-nav { display: block; }
   .docs-main { padding-top: 20px; }
   .docs-article h1 { font-size: 28px; }
+  .docs-table th,
   .docs-table td:first-child { white-space: normal; }
   .docs-article .steps > li { grid-template-columns: 36px minmax(0, 1fr); }
   .docs-hero img { aspect-ratio: 16 / 9; }

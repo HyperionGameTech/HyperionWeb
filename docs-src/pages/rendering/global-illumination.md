@@ -7,14 +7,14 @@ summary: The GI options, and how to toggle them.
 
 ## Options
 
-| What | What it does | Needs |
-|---|---|---|
-| Lightmaps | Baked bounce light for static geometry. See [baking](/docs/rendering/baking.html). | Anything |
-| SSGI | Bounce light worked out from what's on screen. | Anything |
-| SSR | Reflections from what's on screen. | Anything |
-| HBAO | Soft shadows in corners and crevices. | Anything |
-| DDGI | Realtime bounce light from ray-traced probes. | Ray tracing GPU |
-| RT reflections | Ray-traced reflections, including things that are off screen. | Ray tracing GPU |
+| What | What it does | Needs HWRT? |
+|---|---|:---:|
+| Lightmaps | Baked bounce light for static geometry. See [baking](/docs/rendering/baking.html). | |
+| SSGI | Bounce light worked out from what's on screen. | |
+| SSR | Reflections from what's on screen. | |
+| HBAO | Soft shadows in corners and crevices. | |
+| DDGI | Realtime bounce light from ray-traced probes. | ✓ |
+| RT reflections | Ray-traced reflections, including things that are off screen. | ✓ |
 
 These can be combined. A typical setup is baked lightmaps and probes, with SSR and HBAO on top.
 
