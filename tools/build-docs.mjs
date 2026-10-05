@@ -22,6 +22,16 @@ md.renderer.rules.link_open = (tokens, i, options, env, self) => {
   return self.renderToken(tokens, i, options);
 };
 
+// ![alt](/assets/shot.png) is a screenshot, sized from the file so the page doesn't jump as it loads
+md.renderer.rules.image = (tokens, i, options, env) => {
+  const src = tokens[i].attrGet('src') || '';
+  const file = path.join(ROOT, src);
+  if (!src.startsWith('/') || !fs.existsSync(file)) fail(`${env.source || 'docs'}: image ${src} doesn't exist (use a path from the site root, like /assets/shot.png)`);
+  const size = imageSize(file);
+  const dims = size ? ` width="${size.width}" height="${size.height}"` : '';
+  return `<img class="docs-shot" src="${esc(src)}" alt="${esc(tokens[i].content)}"${dims} loading="lazy">`;
+};
+
 // :icon[name] inlines docs-src/icons/<name>.svg (the editor's icons; refresh with npm run sync-icons)
 let icons = new Map();
 md.inline.ruler.before('text', 'docs_icon', (state, silent) => {

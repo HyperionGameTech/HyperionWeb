@@ -85,8 +85,14 @@
 <p>Run the game executable with <code>--host</code> and <code>--autoconnect=true</code> cli args to automatically connect to a host at that address. If you don't pass <code>autoconnect</code> or pass it as <code>false</code>, a prompt screen will be shown that will allow your to change it before connecting or select Single Player instead (NOTE: to be changed - will automatically connect if --host is passed)</p>
 <pre><code class="language-shell">hyperion-sample --host=127.0.0.1 --autoconnect=true --gameport=9192
 </code></pre>
+<h2 id="your-own-game">Your own game</h2>
+<p>A game <a href="/docs/editor/build-game.html">built from the editor</a> takes the same flags. It starts in single player by default, unless <code>--singleplayer=false</code> is passed.</p>
+<p>For example:</p>
+<pre><code class="language-shell">MyGame --server # start standalone a server
+MyGame --singleplayer=false --host=127.0.0.1 # connect to a server
+</code></pre>
 <h2 id="from-the-editor">From the editor</h2>
-<p>The editor can start a local server and connect to it for you. See <a href="/docs/editor/play-in-editor.html">play-in-editor</a> for info</p>
+<p>The editor can start a local server and connect to it for play-in-editor with networking. See <a href="/docs/editor/play-in-editor.html">play-in-editor</a> for info</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/multiplayer/"><span>Previous</span>Multiplayer</a><a class="next" href="/docs/multiplayer/replication.html"><span>Next</span>Replication &amp; prediction</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/multiplayer/server.md" rel="noopener">Improve this page on GitHub</a></p>
@@ -97,6 +103,7 @@
       <ul>
         <li><a href="#start-a-server">Start a server</a></li>
         <li><a href="#connect-a-client">Connect a client</a></li>
+        <li><a href="#your-own-game">Your own game</a></li>
         <li><a href="#from-the-editor">From the editor</a></li>
       </ul>
     </aside>

@@ -15,16 +15,36 @@ Play saves your project first, and Stop restores that saved state, so changes ma
 
 ## Network modes
 
-The :icon[chevron-down] arrow next to **Play** picks how you play:
+Pick a mode from the :icon[chevron-down] arrow next to **Play**. The option you select will be saved as the default play mode for next time.
 
-| Mode | What it does |
+| Mode | Play button action |
 |---|---|
-| Standalone | Single player. No networking. |
-| Play As Client | Connects to a server. If the host is your own machine and auto-launch is on, the editor starts a local server in the background. |
-| Play As Dedicated Server | The editor itself is the server. |
+| Standalone | The game runs in the editor in single player |
+| Play As Client | The editor connects to the server at **Host**:**Port**. If the host is this machine (`127.0.0.1`, `localhost` or `::1`) and **Auto-launch local server** is on, the editor first starts a headless server running your saved project. Otherwise the server must already be running separately. |
+| Play As Dedicated Server | The editor hosts the game on **Port**. It has no player of its own; players spawn for clients that connect. |
 
-Host, port and the auto-launch option live under **Network Settings...**. The defaults are `127.0.0.1` on port `9192`.
+**Stop** disconnects or stops hosting, and shuts down an auto-launched server
 
-::: note
-The editor runs one client at a time. To test with more players, start extra clients yourself. See [running a server](/docs/multiplayer/server.html).
+:::note
+Nothing is replicated unless the game's world has the `IsReplicated` flag (on by default).
+But it is something to look into if you're having issues in this area. On your filesystem, open your project's Worlds/MainWorld.hmf file and look for that flag.
 :::
+
+### Network Settings
+
+Open **Network Settings...** from the same menu.
+
+| Setting | Default | Used for |
+|---|---|---|
+| Host | `127.0.0.1` | The server Play As Client connects to |
+| Port | `9192` | The game server port, in both networked modes |
+| Cache Server Port | `8081` | Serves your saved project to the auto-launched server and to extra clients |
+| Auto-launch local server | On | Starting a server for Play As Client when Host is this machine |
+
+### More players
+
+The editor is one client. To add more, run the game against the same server, syncing content from the editor's cache server:
+
+```shell
+hyperion-sample --host=127.0.0.1 --gameport=9192 --cacheserver=http://127.0.0.1:8081
+```

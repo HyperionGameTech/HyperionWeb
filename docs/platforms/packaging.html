@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Packaging a build · Hyperion Docs</title>
-  <meta name="description" content="Package a Hyperion Engine project into a standalone shipping build: build, precompile shaders, cook content and copy it all into one folder.">
+  <meta name="description" content="Package a Hyperion Engine project into a standalone build: from the editor with Package Game, or as a shipping build with the packaging scripts.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/platforms/packaging.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Packaging a build · Hyperion Docs">
-  <meta property="og:description" content="Package a Hyperion Engine project into a standalone shipping build: build, precompile shaders, cook content and copy it all into one folder.">
+  <meta property="og:description" content="Package a Hyperion Engine project into a standalone build: from the editor with Package Game, or as a shipping build with the packaging scripts.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/platforms/packaging.html">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -78,14 +78,68 @@
         <p class="lede">Packaging turns your project into a standalone build you can distribute.</p>
 
 <h2 id="what-packaging-does">What packaging does</h2>
-<p>The packaging scripts:</p>
 <ul>
-<li>Make a <strong>shipping</strong> build: optimized, no editor, no debug checks.</li>
-<li><strong>Precompile shaders</strong> for the target platform.</li>
-<li><strong>Cook</strong> your project's content into a compact cache.</li>
-<li>Copy the executable, content and config into one folder.</li>
+<li><strong>Cooks</strong> your project's content, and the engine's, into a compact cache.</li>
+<li>Includes <strong>compiled shaders</strong>, so the game doesn't need shader source.</li>
+<li>Copies the executable, content and config into one folder that runs by itself.</li>
 </ul>
-<h2 id="packaging-on-windows">Packaging on Windows</h2>
+<p>There are two ways to do it: from the editor, or with the packaging scripts in the engine repo.</p>
+<h2 id="from-the-editor">From the editor</h2>
+<p>This packages the game you built with <a href="/docs/editor/build-game.html">Build Game</a>, so do that first.</p>
+<ol class="steps">
+<li>
+<p>Choose <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6 8.63998C5.934 8.63998 5.867 8.62698 5.803 8.59898L3.303 7.52898C3.049 7.42098 2.931 7.12698 3.04 6.87298C3.149 6.61998 3.444 6.50098 3.696 6.60998L6.196 7.67998C6.45 7.78798 6.568 8.08198 6.459 8.33598C6.378 8.52498 6.193 8.63898 6 8.63898V8.63998Z"/><path d="M4.80397 10.17C4.86797 10.197 4.93397 10.21 4.99997 10.21C5.19397 10.21 5.37897 10.096 5.45997 9.90599C5.56797 9.65199 5.44997 9.35799 5.19597 9.24999L3.69597 8.60999C3.44397 8.50199 3.14797 8.61999 3.03997 8.87399C2.93197 9.12799 3.04997 9.42199 3.30397 9.52999L4.80397 10.17Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.039 3.28598L9.077 1.37798C8.384 1.11098 7.616 1.11098 6.923 1.37798L1.962 3.28598C1.383 3.50898 1 4.06498 1 4.68598V11.312C1 11.933 1.382 12.489 1.962 12.712L6.923 14.62C7.616 14.887 8.384 14.887 9.077 14.62L14.039 12.712C14.618 12.489 15 11.933 15 11.312V4.68598C15 4.06498 14.618 3.50898 14.039 3.28598ZM7.5 13.757C7.426 13.738 7.354 13.715 7.282 13.687L2.32 11.779C2.127 11.705 2 11.519 2 11.312V4.97098L7.5 7.32798V13.757ZM2.564 4.12598L7.282 2.31098C7.744 2.13298 8.256 2.13298 8.718 2.31098L13.436 4.12598L8 6.45598L2.564 4.12598ZM14 11.313C14 11.52 13.873 11.705 13.68 11.78L8.718 13.688C8.646 13.716 8.574 13.739 8.5 13.758V7.32998L14 4.97298V11.313Z"/></svg> <strong>Build › Package Game...</strong> in the toolbar.</p>
+</li>
+<li>
+<p>Pick a folder to put the package in.</p>
+</li>
+</ol>
+<p>The editor saves your project and will begin packaging your game.</p>
+<p><img class="docs-shot" src="/assets/docs-package-progress.png" alt="The Packaging Game progress box" width="450" height="216" loading="lazy"></p>
+<p>When it's done, your file browser will open at the output directory.</p>
+<p>Example structure:</p>
+<pre><code>MyGame/
+  MyGame.exe
+  MyGameGame.dll
+  hyperion.dll
+  Cache/
+  Content/
+  Config/
+</code></pre>
+<p>Run <code>MyGame.exe</code> to start your game.</p>
+<p><img class="docs-shot" src="/assets/docs-packaged-game.jpg" alt="The packaged game running in its own window" width="1280" height="750" loading="lazy"></p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Folder</th>
+<th>What's in it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cache</td>
+<td>Cooked asset data and compiled shaders</td>
+</tr>
+<tr>
+<td>Content</td>
+<td>Asset manifests, for your project and for the engine (<code>Content/Engine</code>)</td>
+</tr>
+<tr>
+<td>Config</td>
+<td>Engine settings, and the game's launch arguments in <code>GlobalConfig.json</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The game starts in the world you had open when you packaged it, in single player. Both are set in <code>Config/GlobalConfig.json</code>.</p>
+<h3 id="multiplayer">Multiplayer</h3>
+<p>The packaged game hosts and joins games with the same flags as the <a href="/docs/editor/build-game.html#run-it">built one</a>:</p>
+<pre><code class="language-shell">MyGame --server # start a standalone server
+MyGame --singleplayer=false --host=127.0.0.1 # connect to a server
+</code></pre>
+<h2 id="with-the-packaging-scripts">With the packaging scripts</h2>
+<p>The scripts in the engine repo make a <strong>shipping</strong> build (optimized, no editor, no debug checks) and package the sample game with your project's content.</p>
 <ol class="steps">
 <li>
 <p>Build <strong>Release</strong> first. Packaging uses the shader and cooking tools from the Release build.</p>
@@ -105,7 +159,7 @@
 <div class="docs-note">
 <p>The Windows package includes Steam's test app files (app ID 480) so Steam features work while you're developing. Swap in your own app ID before you ship.</p>
 </div>
-<h2 id="other-platforms">Other platforms</h2>
+<h3 id="other-platforms">Other platforms</h3>
 <p>There are matching scripts for macOS, iOS and Android in <code>Tools/Scripts/</code>. Android has its own page: <a href="/docs/platforms/android.html">Android</a>. The macOS and iOS scripts are still a work in progress.</p>
 <h2 id="about-shipping-builds">About shipping builds</h2>
 <p>To make a shipping build without packaging it:</p>
@@ -121,8 +175,8 @@
       <p class="docs-toc-title">Table of contents</p>
       <ul>
         <li><a href="#what-packaging-does">What packaging does</a></li>
-        <li><a href="#packaging-on-windows">Packaging on Windows</a></li>
-        <li><a href="#other-platforms">Other platforms</a></li>
+        <li><a href="#from-the-editor">From the editor</a></li>
+        <li><a href="#with-the-packaging-scripts">With the packaging scripts</a></li>
         <li><a href="#about-shipping-builds">About shipping builds</a></li>
       </ul>
     </aside>

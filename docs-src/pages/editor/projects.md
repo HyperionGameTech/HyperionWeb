@@ -31,6 +31,8 @@ Projects/MyGame/
 
 The `.hypproject` file is the project itself, and the folders hold your assets, sorted by type. Assets are saved as `.hmf` files, a readable text format, with larger binary data in `.blob` files next to them.
 
+A project with C++ code also has `Source`, `Build` and `Binaries` folders. See [Building your game](/docs/editor/build-game.html).
+
 ## Saving
 
 There's no separate "save scene". Saving the project saves everything that's changed, scenes included. The editor camera position is saved with the project too.

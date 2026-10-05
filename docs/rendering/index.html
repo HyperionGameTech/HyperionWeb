@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rendering &amp; lighting · Hyperion Docs</title>
-  <meta name="description" content="An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, ray-traced GI and HLSL shaders.">
+  <meta name="description" content="An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, realtime GI and HLSL shaders.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/rendering/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Rendering &amp; lighting · Hyperion Docs">
-  <meta property="og:description" content="An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, ray-traced GI and HLSL shaders.">
+  <meta property="og:description" content="An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, realtime GI and HLSL shaders.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/rendering/">
   <meta property="og:image" content="/assets/terrain.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -84,8 +84,8 @@
 <li><strong>Vulkan</strong> is the main backend. DirectX 12 is available on Windows as an experimental backend.</li>
 <li><strong>Clustered deferred shading</strong> supports large numbers of dynamic lights. Translucent materials use a forward clustered pass.</li>
 <li><strong>Baked lighting</strong> comes from the lightmapper built into the editor, along with reflection and irradiance probes for moving objects.</li>
-<li><strong>Realtime GI &amp; reflections</strong>: In addition to our baked lighting, we <em>do</em> support realtime GI for HWRT-supported devices.
-(DDGI and ray traced reflections). For non-HWRT we have screen space reflections. <em>Screen space global illumination deprecatation is planned so it is not recommended to use</em></li>
+<li><strong>Realtime GI &amp; reflections</strong>: In addition to our baked lighting, <strong>Glimmer</strong> gives you realtime GI on desktop (Windows and macOS, Vulkan and DirectX 12), no ray tracing hardware needed. It's on by default.
+HWRT-supported devices can also use DDGI and ray traced reflections. For non-HWRT we have screen space reflections. <em>Screen space global illumination deprecatation is planned so it is not recommended to use</em></li>
 <li><strong>Shaders</strong> are written in HLSL, compiled with DXC, and reload live in the editor on save</li>
 </ul>
 <h2 id="in-this-section">In this section</h2>

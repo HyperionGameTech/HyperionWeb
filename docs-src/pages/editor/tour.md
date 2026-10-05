@@ -27,6 +27,7 @@ There's no menu bar. Everything lives in the toolbar, roughly left to right:
 - :icon[add] **Add**, for putting new things in your scene: lights, probes, volumes and more.
 - :icon[heat] **Bake**, for [baking lighting](/docs/rendering/baking.html).
 - :icon[move] **Translate**, :icon[refresh] **Rotate** and :icon[screen-full] **Scale**, to pick what the gizmo does, plus :icon[magnet] grid snapping.
+- :icon[package] **Build**, for [building](/docs/editor/build-game.html) and [packaging](/docs/platforms/packaging.html) your game.
 - The :icon[settings-gear] gear menu, with **World Settings**, stats and layout options.
 - :icon[play] **Play**, :icon[debug-pause] **Pause** and :icon[debug-stop] **Stop**. More in [play-in-editor](/docs/editor/play-in-editor.html).
 

@@ -14,7 +14,7 @@
   },
   "nav": [
     { "section": "get-started", "pages": ["get-the-code", "building", "project-layout", "glossary"] },
-    { "section": "editor", "pages": ["tour", "projects", "prefabs", "play-in-editor", "console"] },
+    { "section": "editor", "pages": ["tour", "projects", "prefabs", "play-in-editor", "build-game", "console"] },
     { "section": "world", "pages": ["entities", "systems", "streaming", "swatches"] },
     { "section": "scripting", "pages": ["first-script", "engine-bindings", "samples"] },
     { "section": "rendering", "pages": ["materials", "baking", "global-illumination", "shaders", "post-processing"] },

@@ -61,6 +61,7 @@
             <li><a href="/docs/editor/projects.html" aria-current="page">Working with projects</a></li>
             <li><a href="/docs/editor/prefabs.html">Prefabs</a></li>
             <li><a href="/docs/editor/play-in-editor.html">Play-in-editor</a></li>
+            <li><a href="/docs/editor/build-game.html">Building your game</a></li>
             <li><a href="/docs/editor/console.html">Console &amp; CVars</a></li>
           </ul>
         </li>
@@ -96,6 +97,7 @@
   Textures/
 </code></pre>
 <p>The <code>.hypproject</code> file is the project itself, and the folders hold your assets, sorted by type. Assets are saved as <code>.hmf</code> files, a readable text format, with larger binary data in <code>.blob</code> files next to them.</p>
+<p>A project with C++ code also has <code>Source</code>, <code>Build</code> and <code>Binaries</code> folders. See <a href="/docs/editor/build-game.html">Building your game</a>.</p>
 <h2 id="saving">Saving</h2>
 <p>There's no separate &quot;save scene&quot;. Saving the project saves everything that's changed, scenes included. The editor camera position is saved with the project too.</p>
 <p>Close with unsaved changes, and the editor will ask whether to save, discard, or cancel.</p>

@@ -23,6 +23,17 @@ Run the game executable with `--host` and `--autoconnect=true` cli args to autom
 hyperion-sample --host=127.0.0.1 --autoconnect=true --gameport=9192
 ```
 
+## Your own game
+
+A game [built from the editor](/docs/editor/build-game.html) takes the same flags. It starts in single player by default, unless `--singleplayer=false` is passed.
+
+For example:
+
+```shell
+MyGame --server # start standalone a server
+MyGame --singleplayer=false --host=127.0.0.1 # connect to a server
+```
+
 ## From the editor
 
-The editor can start a local server and connect to it for you. See [play-in-editor](/docs/editor/play-in-editor.html) for info
+The editor can start a local server and connect to it for play-in-editor with networking. See [play-in-editor](/docs/editor/play-in-editor.html) for info
