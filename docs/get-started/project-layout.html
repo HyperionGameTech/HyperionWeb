@@ -50,6 +50,7 @@
   <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
   <div class="docs-layout">
     <aside class="docs-sidebar" aria-label="Documentation">
+      <button type="button" class="docs-search-open">Search<kbd>/</kbd></button>
       <p class="docs-nav-label">Docs</p>
       <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
       <ul class="docs-nav" id="docs-nav">
@@ -173,6 +174,14 @@
       </ul>
     </aside>
   </div>
+
+  <dialog class="docs-search" aria-label="Search the docs">
+    <div class="docs-search-box">
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false">
+      <p class="docs-search-status" role="status"></p>
+      <ul class="docs-search-results"></ul>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">

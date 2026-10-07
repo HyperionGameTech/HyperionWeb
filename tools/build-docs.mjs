@@ -277,9 +277,33 @@ function renderBody(page, ctx) {
   return { html, toc };
 }
 
+function htmlText(html) {
+  const entities = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" };
+  return html
+    .replace(/<svg[\s\S]*?<\/svg>|<div class="docs-tabs-bar"[\s\S]*?<\/div>/g, ' ')
+    .replace(/<\/?(code|strong|em|kbd|a)\b[^>]*>/g, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&(amp|lt|gt|quot|#39);/g, (_, name) => entities[name])
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Search index: one entry for the page, then one per h2/h3 so a result can link straight to a heading.
+// Written to docs/search-index.json and searched in the browser by docs.js.
+function searchEntries(page, html) {
+  const parts = html.split(/<h[23] id="([^"]+)">([\s\S]*?)<\/h[23]>/);
+  const lede = page.lede ? md.renderInline(page.lede, { source: page.source }) : '';
+  const entries = [{ url: page.url, title: page.headTitle, heading: '', text: htmlText(`${lede} ${parts[0]}`) }];
+  for (let i = 1; i < parts.length; i += 3) {
+    entries.push({ url: `${page.url}#${parts[i]}`, title: page.headTitle, heading: htmlText(parts[i + 1]), text: htmlText(parts[i + 2]) });
+  }
+  return entries;
+}
+
 function renderSidebar(page, ctx) {
   const link = (target) => `<a href="${target.url}"${target.slug === page.navSlug ? ' aria-current="page"' : ''}>${esc(target.navTitle)}</a>`;
   const lines = [
+    '      <button type="button" class="docs-search-open">Search<kbd>/</kbd></button>',
     '      <p class="docs-nav-label">Docs</p>',
     '      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>',
     '      <ul class="docs-nav" id="docs-nav">',
@@ -376,6 +400,7 @@ function renderHero(page) {
 
 function renderPage(page, ctx) {
   const { html, toc } = renderBody(page, ctx);
+  ctx.search.push(...searchEntries(page, html));
   const values = {
     source: page.source,
     headTitle: esc(page.headTitle),
@@ -472,13 +497,14 @@ function build({ sitemap }) {
   icons = loadIcons();
   const pages = loadPages(site);
   const { order, renderOrder, childrenOf } = buildNav(site, pages);
-  const ctx = { site, template, pages, order, renderOrder, childrenOf, tabGroups: 0 };
+  const ctx = { site, template, pages, order, renderOrder, childrenOf, tabGroups: 0, search: [] };
 
   const rendered = new Map(renderOrder.map((slug) => [slug, renderPage(pages.get(slug), ctx)]));
   checkLinks(ctx, rendered);
 
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.cpSync(ASSETS_DIR, OUT, { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'search-index.json'), JSON.stringify(ctx.search));
   for (const [slug, html] of rendered) {
     const { outFile } = pages.get(slug);
     fs.mkdirSync(path.dirname(outFile), { recursive: true });
