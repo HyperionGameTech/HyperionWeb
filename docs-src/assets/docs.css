@@ -81,6 +81,33 @@
 
 .docs-article .lede { margin-bottom: 28px; }
 
+/* Versions of the same page (say, C++ and C#), switched under the title */
+
+.docs-variants {
+  display: inline-flex;
+  gap: 2px;
+  margin: 0 0 18px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+.docs-variants a {
+  padding: 4px 12px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.docs-variants a:hover { color: var(--text); }
+
+.docs-variants a[aria-current="page"] {
+  background: var(--accent);
+  color: #fff;
+}
+
 .docs-article h2 {
   font-size: 22px;
   font-weight: 700;

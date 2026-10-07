@@ -1,8 +1,9 @@
 ---
 title: Building your game
+variant: C++
 description: Generate a C++ game project from the Hyperion editor, build it, and run your game as its own executable, in single player or multiplayer.
 lede: Give your project its own C++ code, and build it into a game you can run outside the editor.
-summary: Generate a C++ project, build it, and run your game outside the editor.
+summary: Generate a C++ or C# project, build it, and run your game outside the editor.
 ---
 
 ## The Build menu
@@ -13,9 +14,11 @@ summary: Generate a C++ project, build it, and run your game outside the editor.
 
 | Item | What it does |
 |---|---|
-| Generate C++ Project | Adds a C++ project to your project folder. Once it exists, this becomes **Open C++ Project Folder**. |
-| Build Game | Compiles that C++ project into a game executable. |
-| Package Game... | Makes a standalone copy of the game to share. See [Packaging a build](/docs/platforms/packaging.html). |
+| Generate Game Project... | Adds a C# or C++ project to your project folder. Once it exists, this becomes **Open C# Project Folder** or **Open C++ Project Folder**. |
+| Build Game | Compiles that project into a game executable. |
+| Package Game | Makes a standalone copy of the game to share. See [Packaging a build](/docs/platforms/packaging.html). |
+
+This page covers C++; switch to C# at the top of the page.
 
 ::: note
 Building from the editor is Windows-only for now.
@@ -23,7 +26,7 @@ Building from the editor is Windows-only for now.
 
 ## Generate the C++ project
 
-Save your project first, then choose **Build › Generate C++ Project**. The editor adds a `Source` folder to your project and opens it:
+Save your project first, then choose **Build › Generate Game Project...** and pick **C++**. The editor adds a `Source` folder to your project and opens it (or opens it in Visual Studio, if **Open in Visual Studio** is ticked):
 
 ```
 Projects/MyGame/
@@ -124,7 +127,9 @@ The single player default comes from `Binaries/Windows/Config/GlobalConfig.json`
 
 Once the game is built, the editor loads `MyGameGame.dll` when it opens your project, and [play-in-editor](/docs/editor/play-in-editor.html) runs your `Game` class.
 
+:::note
 There's no hot reload for C++. You can rebuild while the project is open, but the editor keeps using the build it loaded until you restart it.
+:::
 
 ::: note
 A project that's been saved with your `Game` class needs its built game to open. If the editor reports that the game module isn't built, run `Build/Windows/Build.bat` in the project folder, then open the project again.

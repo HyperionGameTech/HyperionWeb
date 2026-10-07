@@ -120,7 +120,9 @@ function loadPages(site) {
       isIndex,
       title: data.title,
       navTitle: data.nav_title || data.title,
-      headTitle: data.head_title || data.title,
+      headTitle: data.head_title || (data.variant ? `${data.title} (${data.variant})` : data.title),
+      variant: data.variant || '',
+      variantOf: data.variant_of || '',
       description: data.description,
       lede: data.lede || '',
       summary: data.summary || '',
@@ -152,11 +154,27 @@ function buildNav(site, pages) {
     if (!pages.has(slug)) fail(`site.json lists "${slug}", but there's no docs-src/pages/${slug}.md (or ${slug}/index.md)`);
   }
   if (new Set(order).size !== order.length) fail('site.json lists the same page twice');
+  // A variant is another version of a page (say, the same guide for another language). It isn't listed
+  // in site.json: it takes its place in the nav from the page it's a variant of, and each links to the others.
+  const variantsOf = new Map();
   for (const page of pages.values()) {
-    if (!sectionOf.has(page.slug)) fail(`${page.source} isn't in the nav. Add it to site.json`);
-    page.section = sectionOf.get(page.slug);
+    if (!page.variantOf) continue;
+    const base = pages.get(page.variantOf);
+    if (!base || base.variantOf) fail(`${page.source}: variant_of should be the slug of a page in the nav, like "editor/build-game"`);
+    if (!page.variant || !base.variant) fail(`${page.source}: a page with variant_of and the page it points at both need "variant" (the label, like C#)`);
+    if (sectionOf.has(page.slug)) fail(`${page.source}: a variant page shouldn't be listed in site.json`);
+    if (!variantsOf.has(base.slug)) variantsOf.set(base.slug, [base]);
+    variantsOf.get(base.slug).push(page);
   }
-  return { order, childrenOf };
+  for (const page of pages.values()) {
+    const navSlug = page.variantOf || page.slug;
+    if (!sectionOf.has(navSlug)) fail(`${page.source} isn't in the nav. Add it to site.json`);
+    page.navSlug = navSlug;
+    page.section = sectionOf.get(navSlug);
+    page.variants = variantsOf.get(navSlug) || [];
+  }
+  const renderOrder = order.flatMap((slug) => (variantsOf.get(slug) || [pages.get(slug)]).map((page) => page.slug));
+  return { order, renderOrder, childrenOf };
 }
 
 // ---------------------------------------------------------------- Rendering
@@ -260,7 +278,7 @@ function renderBody(page, ctx) {
 }
 
 function renderSidebar(page, ctx) {
-  const link = (target) => `<a href="${target.url}"${target === page ? ' aria-current="page"' : ''}>${esc(target.navTitle)}</a>`;
+  const link = (target) => `<a href="${target.url}"${target.slug === page.navSlug ? ' aria-current="page"' : ''}>${esc(target.navTitle)}</a>`;
   const lines = [
     '      <p class="docs-nav-label">Docs</p>',
     '      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>',
@@ -292,11 +310,17 @@ function renderToc(toc) {
 }
 
 function renderPager(page, ctx) {
-  const i = ctx.order.indexOf(page.slug);
+  const i = ctx.order.indexOf(page.navSlug);
   const prev = ctx.pages.get(ctx.order[i - 1]);
   const next = ctx.pages.get(ctx.order[i + 1]);
   const link = (target, cls, label) => `<a class="${cls}" href="${target.url}"><span>${label}</span>${esc(target.navTitle)}</a>`;
   return `      <nav class="docs-pager" aria-label="Previous and next">${prev ? link(prev, 'prev', 'Previous') : ''}${next ? link(next, 'next', 'Next') : ''}</nav>`;
+}
+
+function renderVariants(page) {
+  if (!page.variants.length) return '';
+  const links = page.variants.map((target) => `<a href="${target.url}"${target === page ? ' aria-current="page"' : ''}>${esc(target.variant)}</a>`);
+  return `        <nav class="docs-variants" aria-label="Versions of this page">${links.join('')}</nav>`;
 }
 
 function imageSize(file) {
@@ -364,7 +388,10 @@ function renderPage(page, ctx) {
     notice: ctx.site.notice
       ? `  <div class="docs-notice"><p>${md.renderInline(substituteVars(ctx.site.notice, ctx.site.vars, 'site.json'), { source: 'site.json' })}</p></div>`
       : '',
-    lede: page.lede?.length ? `        <p class="lede">${md.renderInline(page.lede, { source: page.source })}</p>` : '',
+    lede: [
+      renderVariants(page),
+      page.lede?.length ? `        <p class="lede">${md.renderInline(page.lede, { source: page.source })}</p>` : '',
+    ].filter(Boolean).join('\n'),
     hero: renderHero(page),
     content: html.trimEnd(),
     toc: renderToc(toc),
@@ -420,7 +447,7 @@ function lastModified(file) {
 function updateSitemap(ctx) {
   const original = fs.readFileSync(SITEMAP, 'utf8');
   const nl = original.includes('\r\n') ? '\r\n' : '\n';
-  const entries = ctx.order.map((slug) => {
+  const entries = ctx.renderOrder.map((slug) => {
     const page = ctx.pages.get(slug);
     return [
       '  <url>',
@@ -444,10 +471,10 @@ function build({ sitemap }) {
   const template = fs.readFileSync(path.join(SRC, 'template.html'), 'utf8').replace(/\r\n/g, '\n');
   icons = loadIcons();
   const pages = loadPages(site);
-  const { order, childrenOf } = buildNav(site, pages);
-  const ctx = { site, template, pages, order, childrenOf, tabGroups: 0 };
+  const { order, renderOrder, childrenOf } = buildNav(site, pages);
+  const ctx = { site, template, pages, order, renderOrder, childrenOf, tabGroups: 0 };
 
-  const rendered = new Map(order.map((slug) => [slug, renderPage(pages.get(slug), ctx)]));
+  const rendered = new Map(renderOrder.map((slug) => [slug, renderPage(pages.get(slug), ctx)]));
   checkLinks(ctx, rendered);
 
   fs.rmSync(OUT, { recursive: true, force: true });
