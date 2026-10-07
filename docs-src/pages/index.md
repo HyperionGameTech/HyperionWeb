@@ -4,9 +4,9 @@ nav_title: Overview
 head_title: Docs
 description: Hyperion Engine documentation
 lede: How to build the engine from source and get started making your first Hyperion game
-hero: /assets/terrain.png
-hero_alt: Hyperion Editor viewport
-hero_crop: 280 120 1615 650
+hero: /assets/terrain-glimmer.jpg
+hero_alt: Grassy hills, pine trees and distant mountains at dusk, rendered in Hyperion
+hero_crop: 0 0 1418 656
 ---
 
 ## Where to start
